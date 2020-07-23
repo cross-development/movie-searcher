@@ -7,7 +7,7 @@ import routes from '../../routes';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
-	const { home, movies } = routes;
+	const { home, movies, persons } = routes;
 
 	return (
 		<ul className={styles.navigationList}>
@@ -25,6 +25,15 @@ const Navigation = () => {
 			<li className={styles.navigationListItem}>
 				<NavLink
 					to={movies}
+					className={styles.navigationLink}
+					activeClassName={styles.navigationLinkActive}
+				>
+					Movies
+				</NavLink>
+			</li>
+			<li className={styles.navigationListItem}>
+				<NavLink
+					to={persons}
 					className={styles.navigationLink}
 					activeClassName={styles.navigationLinkActive}
 				>
