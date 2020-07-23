@@ -53,7 +53,7 @@ export default class MoviesPage extends Component {
 
 		return (
 			<>
-				<SearchForm onSubmit={this.handleChangeByQuery} />
+				<SearchForm onSubmit={this.handleChangeByQuery} placeholder='Search movie...'/>
 
 				{error && <Notification message={error.message} />}
 

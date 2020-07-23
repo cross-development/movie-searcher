@@ -6,5 +6,5 @@ export default {
 	movieReview: '/movies/:movieId/reviews',
 	// actors: '/person/popular',
 	persons: '/person',
-	personDetails: '/person/:person_id',
+	personDetails: '/person/:personId',
 };

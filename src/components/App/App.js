@@ -7,6 +7,7 @@ import NotFoundPage from '../../view/NotFoundPage';
 import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
 import Loader from '../Loader/Loader';
+import Footer from '../Footer/Footer';
 //Routes
 import routes from '../../routes';
 //AsyncComponents
@@ -27,16 +28,19 @@ const App = () => {
 		<>
 			<Layout>
 				<Header />
+
 				<Suspense fallback={<Loader onLoad={true} />}>
 					<Switch>
 						<Route path={routes.home} exact component={HomePage} />
 						<Route path={routes.movieDetails} component={MovieDetailsPage} />
 						<Route path={routes.movies} component={MoviesPage} />
-						<Route path={routes.persons} component={PersonsPage} />
 						<Route path={routes.personDetails} component={PersonsDetailsPage} />
+						<Route path={routes.persons} component={PersonsPage} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</Suspense>
+				
+				<Footer />
 			</Layout>
 		</>
 	);

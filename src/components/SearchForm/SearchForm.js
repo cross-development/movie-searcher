@@ -8,7 +8,12 @@ import styles from './SearchForm.module.css';
 
 export default class SearchForm extends Component {
 	static propTypes = {
+		placeholder: PropTypes.string,
 		onSubmit: PropTypes.func.isRequired,
+	};
+
+	static defaultProps = {
+		placeholder: 'Search',
 	};
 
 	state = {
@@ -34,6 +39,7 @@ export default class SearchForm extends Component {
 
 	render() {
 		const { value, error } = this.state;
+		const { placeholder } = this.props;
 
 		return (
 			<>
@@ -46,7 +52,7 @@ export default class SearchForm extends Component {
 							autoComplete="off"
 							autoFocus
 							onChange={this.handleChange}
-							placeholder="Search movie..."
+							placeholder={placeholder}
 						/>
 
 						<button type="submit" className={styles.searchFormButton}>

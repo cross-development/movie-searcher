@@ -37,7 +37,7 @@ const Navigation = () => {
 					className={styles.navigationLink}
 					activeClassName={styles.navigationLinkActive}
 				>
-					Movies
+					Actors
 				</NavLink>
 			</li>
 		</ul>

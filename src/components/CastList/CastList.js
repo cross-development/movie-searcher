@@ -14,12 +14,12 @@ import styles from './CastList.module.css';
 const CastList = ({ castsData, onLocation }) => {
 	return (
 		<ul className={styles.castsList}>
-			{castsData.map(({ cast_id, name, profile_path }) => (
-				<li key={cast_id} className={styles.castsListItem}>
+			{castsData.map(({ id, name, profile_path }) => (
+				<li key={id} className={styles.castsListItem}>
 					<Link
-						className={styles.movieItemLink}
+						className={styles.castsItemLink}
 						to={{
-							pathname: `${routes.movies}/${cast_id}`,
+							pathname: `${routes.persons}/${id}`,
 							state: { from: onLocation },
 						}}
 					>
