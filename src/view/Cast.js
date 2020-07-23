@@ -28,6 +28,7 @@ export default class Cast extends Component {
 
 	render() {
 		const { casts, error, loading } = this.state;
+		const { location } = this.props;
 
 		return (
 			<>
@@ -39,7 +40,7 @@ export default class Cast extends Component {
 					<Notification message="We don't have any actors for this movie." />
 				)}
 
-				{casts.length > 0 && <CastList castsData={casts} />}
+				{casts.length > 0 && <CastList castsData={casts} onLocation={location} />}
 			</>
 		);
 	}

@@ -12,7 +12,7 @@ const fetchTrendMovies = () => {
 //Получает фильм по запросу в строке поиска
 const fetchMoviesByQuery = searchQuery => {
 	return fetch(
-		`${baseURL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=1&include_adult=false`,
+		`${baseURL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=1&include_adult=false`,
 	)
 		.then(response => response.json())
 		.then(data => data.results);
@@ -20,7 +20,7 @@ const fetchMoviesByQuery = searchQuery => {
 
 //Получает детали выбранного фильма. Если в ответ не пришел статус из диапазона 200 - 299, возвращает nall. Иначе страница крешится
 const fetchMoviesDetails = movieId => {
-	return fetch(`${baseURL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`).then(response =>
+	return fetch(`${baseURL}/movie/${movieId}?api_key=${API_KEY}`).then(response =>
 		response.ok ? response.json() : null,
 	);
 };
@@ -34,9 +34,33 @@ const fetchMoviesByCast = movieId => {
 
 //Получает информацию о ревью выбранного фильма
 const fetchMoviesReviews = movieId => {
-	return fetch(`${baseURL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`)
+	return fetch(`${baseURL}/movie/${movieId}/reviews?api_key=${API_KEY}&page=1`)
 		.then(response => response.json())
 		.then(data => data.results);
+};
+
+//TODO: проверить ответы по запросам актеров
+//Получает всех популярных актеров
+const fetchTrendPersons = () => {
+	return fetch(`${baseURL}/person/popular?api_key=${API_KEY}&language=en-US&page=1`)
+		.then(response => response.json())
+		.then(data => data.results);
+};
+
+//Получает актера по запросу в строке поиска
+const fetchPersonsByQuery = searchQuery => {
+	return fetch(
+		`${baseURL}/search/person?api_key=${API_KEY}&query=${searchQuery}&page=1&include_adult=false`,
+	)
+		.then(response => response.json())
+		.then(data => data.results);
+};
+
+//Получает детали выбранного актера. Если в ответ не пришел статус из диапазона 200 - 299, возвращает nall. Без проверки страница крешится
+const fetchPersonDetails = personId => {
+	return fetch(`${baseURL}/person/${personId}?api_key=${API_KEY}`).then(response =>
+		response.ok ? response.json() : null,
+	);
 };
 
 export default {
@@ -45,4 +69,7 @@ export default {
 	fetchMoviesDetails,
 	fetchMoviesByCast,
 	fetchMoviesReviews,
+	fetchTrendPersons,
+	fetchPersonsByQuery,
+	fetchPersonDetails,
 };

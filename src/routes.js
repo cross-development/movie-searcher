@@ -4,4 +4,7 @@ export default {
 	movieDetails: '/movies/:movieId',
 	movieCast: '/movies/:movieId/cast',
 	movieReview: '/movies/:movieId/reviews',
+	// actors: '/person/popular',
+	persons: '/person',
+	personDetails: '/person/:person_id',
 };
