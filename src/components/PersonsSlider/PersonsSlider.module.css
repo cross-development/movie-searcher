@@ -1,0 +1,4 @@
+.actorsList {
+	max-width: calc(100vw - 100px);
+	margin: 20px auto 40px;
+}

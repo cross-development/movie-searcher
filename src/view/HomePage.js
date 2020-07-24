@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 //Components
 import Loader from '../components/Loader/Loader';
+import TrendPersons from '../components/TrendPersons/TrendPersons';
 import MoviesList from '../components/MoviesList/MoviesList';
 import Notification from '../components/Notification/Notification';
 //Services
@@ -10,6 +11,7 @@ import movieApi from '../services/movieApi';
 export default class HomePage extends Component {
 	state = {
 		movies: [],
+		actors: [],
 		error: null,
 		loading: false,
 	};
@@ -22,14 +24,21 @@ export default class HomePage extends Component {
 			.then(movies => this.setState({ movies }))
 			.catch(error => this.setState({ error }))
 			.finally(() => this.setState({ loading: false }));
+
+		movieApi
+			.fetchTrendPersons()
+			.then(actors => this.setState({ actors }))
+			.catch(error => this.setState({ error }));
 	}
 
 	render() {
-		const { movies, error, loading } = this.state;
+		const { movies, actors, error, loading } = this.state;
 		const { location } = this.props;
 
 		return (
 			<>
+				{actors.length > 0 && <TrendPersons actorsData={actors} onLocation={location} />}
+
 				{error && <Notification message={error.message} />}
 
 				{loading && <Loader onLoad={loading} />}

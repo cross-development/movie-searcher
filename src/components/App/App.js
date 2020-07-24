@@ -7,7 +7,7 @@ import NotFoundPage from '../../view/NotFoundPage';
 import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
 import Loader from '../Loader/Loader';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 //Routes
 import routes from '../../routes';
 //AsyncComponents
@@ -40,7 +40,7 @@ const App = () => {
 					</Switch>
 				</Suspense>
 				
-				<Footer />
+				{/* <Footer /> */}
 			</Layout>
 		</>
 	);

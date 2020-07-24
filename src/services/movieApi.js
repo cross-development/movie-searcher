@@ -39,7 +39,6 @@ const fetchMoviesReviews = movieId => {
 		.then(data => data.results);
 };
 
-//TODO: проверить ответы по запросам актеров
 //Получает всех популярных актеров
 const fetchTrendPersons = () => {
 	return fetch(`${baseURL}/person/popular?api_key=${API_KEY}&language=en-US&page=1`)
