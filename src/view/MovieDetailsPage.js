@@ -12,16 +12,24 @@ import AdditionInfo from '../components/AdditionInfo/AdditionInfo';
 import movieApi from '../services/movieApi';
 //Routes
 import routes from '../routes';
-//TODO: исправить загрузку кастов и ревьюх, т.к. при фетче инфо сразу выдает нотификацию, потом дает инфо
+
 export default class MovieDetailsPage extends Component {
 	state = {
 		movie: '',
 		error: null,
 		loading: false,
+		isFavorite: false,
+		favMovies: [],
 	};
 
 	componentDidMount() {
 		const { match } = this.props;
+
+		const existFavList = localStorage.getItem('favorite_movies');
+
+		if (existFavList) {
+			this.setState({ favMovies: JSON.parse(existFavList) });
+		}
 
 		this.setState({ loading: true });
 
@@ -32,6 +40,30 @@ export default class MovieDetailsPage extends Component {
 			.finally(() => this.setState({ loading: false }));
 	}
 
+	componentDidUpdate(prevState) {
+		if (this.state.favMovies) {
+			localStorage.setItem('favorite_movies', JSON.stringify(this.state.favMovies));
+		}
+	}
+
+	setMovieToLocalStorage = () => {
+		this.setState(prevState => {
+			return {
+				favMovies: [...prevState.favMovies, this.state.movie],
+				isFavorite: true,
+			};
+		});
+	};
+
+	removeContact = movieId => {
+		this.setState(prevState => {
+			return {
+				favMovies: prevState.favMovies.filter(({ id }) => id !== movieId),
+				isFavorite: false,
+			};
+		});
+	};
+
 	handleGoBack = () => {
 		const { location, history } = this.props;
 
@@ -41,7 +73,7 @@ export default class MovieDetailsPage extends Component {
 	};
 
 	render() {
-		const { movie, error, loading } = this.state;
+		const { movie, error, loading, isFavorite } = this.state;
 		const { match, location } = this.props;
 
 		return (
@@ -57,7 +89,12 @@ export default class MovieDetailsPage extends Component {
 						<>
 							<ButtonGoBack onChangeClick={this.handleGoBack} />
 
-							<MovieDetails movieData={movie} />
+							<MovieDetails
+								movieData={movie}
+								isFavorite={isFavorite}
+								onAddMovie={this.setMovieToLocalStorage}
+								onRemoveMovie={this.removeContact}
+							/>
 
 							<AdditionInfo onMatch={match} onLoading={loading} onLocation={location} />
 						</>

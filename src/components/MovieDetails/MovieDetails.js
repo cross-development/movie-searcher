@@ -10,8 +10,8 @@ import getDefaultPoster from '../../assets/default_poster.jpg';
 //Styles
 import styles from './MovieDetails.module.css';
 
-const MovieDetails = ({ movieData }) => {
-	const { poster_path, title, name, release_date, vote_average, overview, genres } = movieData;
+const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
+	const { id, poster_path, title, name, release_date, vote_average, overview, genres } = movieData;
 
 	const moviePoster = poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster;
 	const movieGenres = genres.map(({ name }) => `${name}, `);
@@ -33,9 +33,16 @@ const MovieDetails = ({ movieData }) => {
 				<p>{overview}</p>
 				<h3>Genres</h3>
 				<p>{movieGenres}</p>
-				<button type="button" className={styles.addToFavorites}>
-					Add to favorites
-				</button>
+
+				{!isFavorite ? (
+					<button type="button" className={styles.addToFavorites} onClick={onAddMovie}>
+						Add to favorites
+					</button>
+				) : (
+					<button type="button" className={styles.addToFavorites} onClick={() => onRemoveMovie(id)}>
+						Remove at favorites
+					</button>
+				)}
 			</div>
 		</div>
 	);
@@ -43,6 +50,8 @@ const MovieDetails = ({ movieData }) => {
 
 MovieDetails.propTypes = {
 	movieData: PropTypes.object.isRequired,
+	isFavorite: PropTypes.bool.isRequired,
+	onAddMovie: PropTypes.func.isRequired,
 };
 
 export default MovieDetails;
