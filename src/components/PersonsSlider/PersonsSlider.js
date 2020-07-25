@@ -17,6 +17,7 @@ const settings = {
 	autoplay: true,
 	autoplaySpeed: 3000,
 	className: `${styles.actorsList}`,
+	// style: { background: 'black' },
 	responsive: [
 		{
 			breakpoint: 1024,
@@ -28,14 +29,14 @@ const settings = {
 		{
 			breakpoint: 600,
 			settings: {
-				slidesToShow: 2,
-				slidesToScroll: 2,
+				slidesToShow: 4,
+				slidesToScroll: 1,
 			},
 		},
 		{
 			breakpoint: 480,
 			settings: {
-				slidesToShow: 1,
+				slidesToShow: 4,
 				slidesToScroll: 1,
 			},
 		},

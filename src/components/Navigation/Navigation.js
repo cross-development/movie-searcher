@@ -7,7 +7,7 @@ import routes from '../../routes';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
-	const { home, movies, persons } = routes;
+	const { home, movies, persons, favoriteMovies } = routes;
 
 	return (
 		<ul className={styles.navigationList}>
@@ -38,6 +38,15 @@ const Navigation = () => {
 					activeClassName={styles.navigationLinkActive}
 				>
 					Actors
+				</NavLink>
+			</li>
+			<li className={styles.navigationListItem}>
+				<NavLink
+					to={favoriteMovies}
+					className={styles.navigationLink}
+					activeClassName={styles.navigationLinkActive}
+				>
+					Favorite Movies
 				</NavLink>
 			</li>
 		</ul>

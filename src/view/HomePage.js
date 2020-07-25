@@ -37,13 +37,17 @@ export default class HomePage extends Component {
 
 		return (
 			<>
-				{actors.length > 0 && <TrendPersons actorsData={actors} onLocation={location} />}
+				{!loading && actors.length > 0 && (
+					<TrendPersons title="Trending actors" actorsData={actors} onLocation={location} />
+				)}
 
 				{error && <Notification message={error.message} />}
 
 				{loading && <Loader onLoad={loading} />}
 
-				{!loading && movies.length > 0 && <MoviesList moviesData={movies} onLocation={location} />}
+				{!loading && movies.length > 0 && (
+					<MoviesList title="Trending movies" moviesData={movies} onLocation={location} />
+				)}
 			</>
 		);
 	}

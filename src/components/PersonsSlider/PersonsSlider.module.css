@@ -1,4 +1,10 @@
 .actorsList {
 	max-width: calc(100vw - 100px);
-	margin: 20px auto 40px;
+	margin: 20px auto;
+	/* overflow: hidden; */
+	/* height: 1204px; */
 }
+
+/* .actorsList:hover .actorsListItem {
+	overflow: visible;
+} */

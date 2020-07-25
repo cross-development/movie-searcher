@@ -33,6 +33,9 @@ const MovieDetails = ({ movieData }) => {
 				<p>{overview}</p>
 				<h3>Genres</h3>
 				<p>{movieGenres}</p>
+				<button type="button" className={styles.addToFavorites}>
+					Add to favorites
+				</button>
 			</div>
 		</div>
 	);

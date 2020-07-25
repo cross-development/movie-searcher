@@ -22,6 +22,9 @@ const PersonsPage = lazy(() =>
 const PersonsDetailsPage = lazy(() =>
 	import('../../view/PersonDetailsPage' /* webpackChunkName: "persons-details-view" */),
 );
+const FavoriteMovies = lazy(() =>
+	import('../../view/FavoriteMovies' /* webpackChunkName: "favorite-movies-view" */),
+);
 
 const App = () => {
 	return (
@@ -36,10 +39,11 @@ const App = () => {
 						<Route path={routes.movies} component={MoviesPage} />
 						<Route path={routes.personDetails} component={PersonsDetailsPage} />
 						<Route path={routes.persons} component={PersonsPage} />
+						<Route path={routes.favoriteMovies} component={FavoriteMovies} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</Suspense>
-				
+
 				{/* <Footer /> */}
 			</Layout>
 		</>
