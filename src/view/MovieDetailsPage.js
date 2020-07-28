@@ -19,7 +19,6 @@ export default class MovieDetailsPage extends Component {
 		error: null,
 		loading: false,
 		isFavorite: false,
-		favMovies: [],
 	};
 
 	componentDidMount() {
@@ -28,10 +27,14 @@ export default class MovieDetailsPage extends Component {
 		const existFavList = localStorage.getItem('favorite_movies');
 
 		if (existFavList) {
-			this.setState({ favMovies: JSON.parse(existFavList) });
-		}
+			const favMovies = [...JSON.parse(existFavList)];
 
-		this.setState({ loading: true });
+			favMovies.find(({ id }) => {
+				if (id === Number(match.params.movieId)) {
+					this.setFavoriteMovie();
+				}
+			});
+		}
 
 		movieApi
 			.fetchMoviesDetails(match.params.movieId)
@@ -40,29 +43,35 @@ export default class MovieDetailsPage extends Component {
 			.finally(() => this.setState({ loading: false }));
 	}
 
-	componentDidUpdate(prevState) {
-		if (this.state.favMovies) {
-			localStorage.setItem('favorite_movies', JSON.stringify(this.state.favMovies));
-		}
-	}
-
 	setMovieToLocalStorage = () => {
-		this.setState(prevState => {
-			return {
-				favMovies: [...prevState.favMovies, this.state.movie],
-				isFavorite: true,
-			};
-		});
+		const existFavList = localStorage.getItem('favorite_movies');
+
+		if (!existFavList) {
+			localStorage.setItem('favorite_movies', JSON.stringify([this.state.movie]));
+			this.setFavoriteMovie();
+			return;
+		}
+
+		const favMovies = [...JSON.parse(existFavList), this.state.movie];
+		localStorage.setItem('favorite_movies', JSON.stringify(favMovies));
+		this.setFavoriteMovie();
 	};
 
 	removeContact = movieId => {
-		this.setState(prevState => {
-			return {
-				favMovies: prevState.favMovies.filter(({ id }) => id !== movieId),
-				isFavorite: false,
-			};
-		});
+		const existFavList = localStorage.getItem('favorite_movies');
+
+		if (!existFavList) {
+			return this.setFavoriteMovie();
+		}
+
+		const favMovies = [...JSON.parse(existFavList)];
+		const filteredFavMovies = favMovies.filter(({ id }) => id !== movieId);
+
+		localStorage.setItem('favorite_movies', JSON.stringify(filteredFavMovies));
+		this.setFavoriteMovie();
 	};
+
+	setFavoriteMovie = () => this.setState(prevState => ({ isFavorite: !prevState.isFavorite }));
 
 	handleGoBack = () => {
 		const { location, history } = this.props;

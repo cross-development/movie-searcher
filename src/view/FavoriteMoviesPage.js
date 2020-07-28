@@ -17,12 +17,6 @@ export default class FavoriteMovies extends Component {
 		}
 	}
 
-	// componentDidUpdate(prevState) {
-	// 	if (prevState.favorites !== this.state.favorites) {
-	// 		localStorage.setItem('favorite_movies', JSON.stringify(this.state.favorites));
-	// 	}
-	// }
-
 	render() {
 		const { favorites } = this.state;
 		const { location } = this.props;

@@ -15,6 +15,7 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
 
 	const moviePoster = poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster;
 	const movieGenres = genres.map(({ name }) => `${name}, `);
+	const releaseDate = release_date.substring(0, 4);
 
 	return (
 		<div className={styles.movieWrapper}>
@@ -24,7 +25,7 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
 
 			<div className={styles.detailsWrapper}>
 				<h1>
-					{title || name} ({release_date.substring(0, 4)})
+					{title || name} ({releaseDate})
 				</h1>
 
 				<Rating name="customized-10" defaultValue={vote_average} max={10} readOnly />
@@ -35,12 +36,12 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
 				<p>{movieGenres}</p>
 
 				{!isFavorite ? (
-					<button type="button" className={styles.addToFavorites} onClick={onAddMovie}>
+					<button type="button" className={styles.favoriteButton} onClick={onAddMovie}>
 						Add to favorites
 					</button>
 				) : (
-					<button type="button" className={styles.addToFavorites} onClick={() => onRemoveMovie(id)}>
-						Remove at favorites
+					<button type="button" className={styles.favoriteButton} onClick={() => onRemoveMovie(id)}>
+						Remove from favorites
 					</button>
 				)}
 			</div>
