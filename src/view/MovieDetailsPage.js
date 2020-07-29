@@ -17,7 +17,7 @@ export default class MovieDetailsPage extends Component {
 	state = {
 		movie: '',
 		error: null,
-		loading: false,
+		isLoading: false,
 		isFavorite: false,
 	};
 
@@ -36,11 +36,13 @@ export default class MovieDetailsPage extends Component {
 			});
 		}
 
+		this.setState({ isLoading: true });
+
 		movieApi
 			.fetchMoviesDetails(match.params.movieId)
 			.then(movie => this.setState({ movie }))
 			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ loading: false }));
+			.finally(() => this.setState({ isLoading: false }));
 	}
 
 	setMovieToLocalStorage = () => {
@@ -82,19 +84,19 @@ export default class MovieDetailsPage extends Component {
 	};
 
 	render() {
-		const { movie, error, loading, isFavorite } = this.state;
+		const { movie, error, isLoading, isFavorite } = this.state;
 		const { match, location } = this.props;
 
 		return (
 			<>
 				{error && <Notification message={error.message} />}
 
-				{loading && <Loader onLoad={loading} />}
+				{isLoading && <Loader onLoad={isLoading} />}
 
 				{movie === null && <NotFoundPage />}
 
 				<div>
-					{!loading && movie && (
+					{!isLoading && movie && (
 						<>
 							<ButtonGoBack onChangeClick={this.handleGoBack} />
 
@@ -105,7 +107,7 @@ export default class MovieDetailsPage extends Component {
 								onRemoveMovie={this.removeContact}
 							/>
 
-							<AdditionInfo onMatch={match} onLoading={loading} onLocation={location} />
+							<AdditionInfo onMatch={match} onLoading={isLoading} onLocation={location} />
 						</>
 					)}
 				</div>

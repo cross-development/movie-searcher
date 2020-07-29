@@ -26,3 +26,48 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+
+/*
+* Variables for global style: using for app color theme
+*/
+
+/* Header variables */
+@value link-color: #fff;
+@value link-active-color: #fff;
+@value header-bg: #0984e3;
+
+/* Person Item variables*/
+@value person-item-bg: #f0f0f0;
+@value person-vote-bg: #74b9ff;
+
+/* Movie Item variables*/
+@value movie-item-bg: #f0f0f0;
+@value movie-vote-bg: #74b9ff;
+
+/* Form variables*/
+@value form-bg: #74b9ff;
+
+/* Button variables*/
+@value back-btn-wrap-bg: #74b9ff;
+@value back-btn-bg: #fff;
+@value back-btn-text-color: #000000;
+@value back-btn-text-hover-color: #000000;
+
+/* Favorite button variables */
+@value fav-btn-bg: #74b9ff;
+@value fav-btn-text-color: #000;
+
+/* Additional info variables */
+@value add-link-color: #74b9ff;
+@value add-link-active-color: #0984e3;
+
+/* Reviews list variables */
+@value review-item-bg: #f5f6fa;
+
+/* Notification variables*/
+@value notification-bg: #74b9ff;
+
+/* Loader variables*/
+@value loader-bg: #74b9ff;
+
+/* Footer variables*/

@@ -13,17 +13,17 @@ export default class HomePage extends Component {
 		movies: [],
 		actors: [],
 		error: null,
-		loading: false,
+		isLoading: false,
 	};
 
 	componentDidMount() {
-		this.setState({ loading: true });
+		this.setState({ isLoading: true });
 
 		movieApi
 			.fetchTrendMovies()
 			.then(movies => this.setState({ movies }))
 			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ loading: false }));
+			.finally(() => this.setState({ isLoading: false }));
 
 		movieApi
 			.fetchTrendPersons()
@@ -32,20 +32,20 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { movies, actors, error, loading } = this.state;
+		const { movies, actors, error, isLoading } = this.state;
 		const { location } = this.props;
 
 		return (
 			<>
-				{!loading && actors.length > 0 && (
+				{!isLoading && actors.length > 0 && (
 					<TrendPersons title="Trending actors" actorsData={actors} onLocation={location} />
 				)}
 
 				{error && <Notification message={error.message} />}
 
-				{loading && <Loader onLoad={loading} />}
+				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!loading && movies.length > 0 && (
+				{!isLoading && movies.length > 0 && (
 					<MoviesList title="Trending movies" moviesData={movies} onLocation={location} />
 				)}
 			</>

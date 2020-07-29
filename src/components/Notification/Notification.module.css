@@ -1,10 +1,12 @@
+@value notification-bg from '../../index.css';
+
 .errorWrapper {
 	display: block;
 	width: 70%;
 	margin: 5em auto;
 	padding: 10px;
 	text-align: center;
-	background: #f39c12;
+	background: notification-bg;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 4px;
 }

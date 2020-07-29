@@ -1,9 +1,15 @@
+@value header-bg from '../../index.css';
+
 .header {
+	top: -1px;
+	left: 0;
+	position: sticky;
+	z-index: 1100;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	background: #fff;
+	background: header-bg;
 	margin-bottom: 10px;
 	padding: 0 16px 0 16px;
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),

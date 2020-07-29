@@ -11,38 +11,36 @@ import routes from '../../routes';
 //Styles
 import styles from './CastList.module.css';
 
-const CastList = ({ castsData, onLocation }) => {
-	return (
-		<ul className={styles.castsList}>
-			{castsData.map(({ id, name, profile_path }) => (
-				<li key={id} className={styles.castsListItem}>
-					<Link
-						className={styles.castsItemLink}
-						to={{
-							pathname: `${routes.persons}/${id}`,
-							state: { from: onLocation },
-						}}
-					>
-						<img
-							src={profile_path ? `${getPosterUrl}${profile_path}` : getDefaultAvatar}
-							alt={name}
-							className={styles.actorAvatar}
-						/>
-						<span className={styles.actorName}>{name}</span>
-					</Link>
-				</li>
-			))}
-		</ul>
-	);
-};
+const CastList = ({ castsData, onLocation }) => (
+	<ul className={styles.castsList}>
+		{castsData.map(({ id, name, profile_path }) => (
+			<li key={id} className={styles.castsListItem}>
+				<Link
+					className={styles.castsItemLink}
+					to={{
+						pathname: `${routes.persons}/${id}`,
+						state: { from: onLocation },
+					}}
+				>
+					<img
+						src={profile_path ? `${getPosterUrl}${profile_path}` : getDefaultAvatar}
+						alt={name}
+						className={styles.actorAvatar}
+					/>
+					<span className={styles.actorName}>{name}</span>
+				</Link>
+			</li>
+		))}
+	</ul>
+);
 
 CastList.defaultProps = {
 	onLocation: {},
 };
 
 CastList.propTypes = {
-	castsData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 	onLocation: PropTypes.object,
+	castsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CastList;

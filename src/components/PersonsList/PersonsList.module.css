@@ -1,3 +1,6 @@
+@value person-item-bg from '../../index.css';
+@value person-vote-bg from '../../index.css';
+
 .personList {
 	display: grid;
 	max-width: calc(100vw - 77px);
@@ -13,7 +16,7 @@
 	border-radius: 2px;
 	text-align: center;
 	padding: 2px 2px 10px;
-	background: #f7efe3;
+	background: person-item-bg;
 	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
@@ -50,7 +53,7 @@
 	font-size: 14px;
 	line-height: 14px;
 	font-weight: bold;
-	background-color: #fdcb6e;
+	background-color: person-vote-bg;
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;

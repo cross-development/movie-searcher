@@ -3,8 +3,6 @@ import React from 'react';
 //Components
 import NotFound from '../components/NotFound/NotFound';
 
-const NotFoundPage = () => {
-	return <NotFound />;
-};
+const NotFoundPage = () => <NotFound />;
 
 export default NotFoundPage;

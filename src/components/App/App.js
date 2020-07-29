@@ -26,28 +26,26 @@ const FavoriteMoviesPage = lazy(() =>
 	import('../../view/FavoriteMoviesPage' /* webpackChunkName: "favorite-movies-view" */),
 );
 
-const App = () => {
-	return (
-		<>
-			<Layout>
-				<Header />
+const App = () => (
+	<>
+		<Layout>
+			<Header />
 
-				<Suspense fallback={<Loader onLoad={true} />}>
-					<Switch>
-						<Route path={routes.home} exact component={HomePage} />
-						<Route path={routes.movieDetails} component={MovieDetailsPage} />
-						<Route path={routes.movies} component={MoviesPage} />
-						<Route path={routes.personDetails} component={PersonsDetailsPage} />
-						<Route path={routes.persons} component={PersonsPage} />
-						<Route path={routes.favoriteMovies} component={FavoriteMoviesPage} />
-						<Route component={NotFoundPage} />
-					</Switch>
-				</Suspense>
+			<Suspense fallback={<Loader onLoad={true} />}>
+				<Switch>
+					<Route path={routes.home} exact component={HomePage} />
+					<Route path={routes.movieDetails} component={MovieDetailsPage} />
+					<Route path={routes.movies} component={MoviesPage} />
+					<Route path={routes.personDetails} component={PersonsDetailsPage} />
+					<Route path={routes.persons} component={PersonsPage} />
+					<Route path={routes.favoriteMovies} component={FavoriteMoviesPage} />
+					<Route component={NotFoundPage} />
+				</Switch>
+			</Suspense>
 
-				{/* <Footer /> */}
-			</Layout>
-		</>
-	);
-};
+			{/* <Footer /> */}
+		</Layout>
+	</>
+);
 
 export default App;

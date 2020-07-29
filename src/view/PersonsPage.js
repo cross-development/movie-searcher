@@ -14,7 +14,7 @@ export default class PersonsPage extends Component {
 	state = {
 		persons: [],
 		error: null,
-		loading: false,
+		isLoading: false,
 	};
 
 	componentDidMount() {
@@ -31,13 +31,13 @@ export default class PersonsPage extends Component {
 	}
 
 	fetchPersons = query => {
-		this.setState({ loading: true });
+		this.setState({ isLoading: true });
 
 		movieApi
 			.fetchPersonsByQuery(query)
 			.then(persons => this.setState({ persons }))
 			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ loading: false }));
+			.finally(() => this.setState({ isLoading: false }));
 	};
 
 	handleChangeByQuery = query => {
@@ -48,7 +48,7 @@ export default class PersonsPage extends Component {
 	};
 
 	render() {
-		const { persons, error, loading } = this.state;
+		const { persons, error, isLoading } = this.state;
 		const { location } = this.props;
 
 		return (
@@ -57,9 +57,9 @@ export default class PersonsPage extends Component {
 
 				{error && <Notification message={error.message} />}
 
-				{loading && <Loader onLoad={loading} />}
+				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!loading && persons.length > 0 && (
+				{!isLoading && persons.length > 0 && (
 					<PersonsList personsData={persons} onLocation={location} />
 				)}
 			</>

@@ -16,19 +16,19 @@ export default class PersonDetailsPage extends Component {
 	state = {
 		person: '',
 		error: null,
-		loading: false,
+		isLoading: false,
 	};
 
 	componentDidMount() {
 		const { match } = this.props;
 
-		this.setState({ loading: true });
+		this.setState({ isLoading: true });
 
 		movieApi
 			.fetchPersonDetails(match.params.personId)
 			.then(person => this.setState({ person }))
 			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ loading: false }));
+			.finally(() => this.setState({ isLoading: false }));
 	}
 
 	handleGoBack = () => {
@@ -40,19 +40,18 @@ export default class PersonDetailsPage extends Component {
 	};
 
 	render() {
-		const { person, error, loading } = this.state;
-		// const { match, location } = this.props;
+		const { person, error, isLoading } = this.state;
 
 		return (
 			<>
 				{error && <Notification message={error.message} />}
 
-				{loading && <Loader onLoad={loading} />}
+				{isLoading && <Loader onLoad={isLoading} />}
 
 				{person === null && <NotFoundPage />}
 
 				<div>
-					{!loading && person && (
+					{!isLoading && person && (
 						<>
 							<ButtonGoBack onChangeClick={this.handleGoBack} />
 

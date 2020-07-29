@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 //Styles
 import { css } from '@emotion/core';
+import styles from './Loader.module.css';
 
 //Custom css
 const customCss = css`
@@ -24,9 +25,9 @@ const customCss = css`
 	}
 `;
 
-const Loader = ({ onLoad }) => {
-	return <PacmanLoader size={50} color={'#f39c12'} loading={onLoad} css={customCss} />;
-};
+const Loader = ({ onLoad }) => (
+	<PacmanLoader size={50} color={styles['loader-bg']} loading={onLoad} css={customCss} />
+);
 
 Loader.defaultProps = {
 	onLoad: false,

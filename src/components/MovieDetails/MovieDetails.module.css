@@ -1,3 +1,6 @@
+@value fav-btn-bg from '../../index.css';
+@value fav-btn-text-color from '../../index.css';
+
 .movieWrapper {
 	display: flex;
 	flex-wrap: nowrap;
@@ -35,17 +38,17 @@
 	padding: 2px 0;
 	text-transform: uppercase;
 	line-height: 2em;
+	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
 	cursor: pointer;
-	text-shadow: 0 -1px 1px #777;
-	color: #fff;
+	color: fav-btn-text-color;
 	outline: none;
 	border: none;
 	border-radius: 5px;
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.7), 0px 1px 1px 0px rgba(0, 0, 0, 0.24),
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-	background: #e67e22;
+	background: fav-btn-bg;
 }
 
 .favoriteButton:hover {

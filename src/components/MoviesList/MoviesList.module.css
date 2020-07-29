@@ -1,3 +1,7 @@
+@value movie-item-bg from '../../index.css';
+@value movie-vote-bg from '../../index.css';
+
+
 .title {
 	text-transform: uppercase;
 	text-align: center;
@@ -18,7 +22,7 @@
 	border-radius: 2px;
 	text-align: center;
 	padding: 2px 2px 10px;
-	background: #f7efe3;
+	background: movie-item-bg;
 	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
@@ -55,7 +59,7 @@
 	font-size: 14px;
 	line-height: 14px;
 	font-weight: bold;
-	background-color: #fdcb6e;
+	background-color: movie-vote-bg;
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
