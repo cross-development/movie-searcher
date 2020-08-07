@@ -11,7 +11,7 @@ import routes from '../../routes';
 //Style
 import styles from './MoviesList.module.css';
 
-const MoviesList = ({ title, moviesData, onLocation }) => (
+const MoviesList = ({ title, moviesData, location }) => (
 	<>
 		{title && <h2 className={styles.title}>{title}</h2>}
 
@@ -22,7 +22,7 @@ const MoviesList = ({ title, moviesData, onLocation }) => (
 						className={styles.movieItemLink}
 						to={{
 							pathname: `${routes.movies}/${id}`,
-							state: { from: onLocation },
+							state: { from: location },
 						}}
 					>
 						<img
@@ -41,13 +41,13 @@ const MoviesList = ({ title, moviesData, onLocation }) => (
 
 MoviesList.defaultProps = {
 	title: '',
-	onLocation: {},
+	location: {},
 };
 
 MoviesList.propTypes = {
 	title: PropTypes.string,
-	onLocation: PropTypes.object,
-	moviesData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	location: PropTypes.object,
+	moviesData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default MoviesList;

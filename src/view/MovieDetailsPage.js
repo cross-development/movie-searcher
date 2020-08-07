@@ -1,13 +1,12 @@
 //Core
 import React, { Component } from 'react';
-//Views
-import NotFoundPage from './NotFoundPage';
 //Components
-import Loader from '../components/Loader/Loader';
-import Notification from '../components/Notification/Notification';
-import ButtonGoBack from '../components/ButtonGoBack/ButtonGoBack';
-import MovieDetails from '../components/MovieDetails/MovieDetails';
-import AdditionInfo from '../components/AdditionInfo/AdditionInfo';
+import Loader from '../components/Loader';
+import NotFound from '../components/NotFound';
+import Notification from '../components/Notification';
+import ButtonGoBack from '../components/ButtonGoBack';
+import MovieDetails from '../components/MovieDetails';
+import AdditionInfo from '../components/AdditionInfo';
 //Services
 import movieApi from '../services/movieApi';
 //Routes
@@ -31,8 +30,10 @@ export default class MovieDetailsPage extends Component {
 
 			favMovies.find(({ id }) => {
 				if (id === Number(match.params.movieId)) {
-					this.setFavoriteMovie();
+					return this.setFavoriteMovie();
 				}
+
+				return false;
 			});
 		}
 
@@ -59,6 +60,8 @@ export default class MovieDetailsPage extends Component {
 		this.setFavoriteMovie();
 	};
 
+	setFavoriteMovie = () => this.setState(prevState => ({ isFavorite: !prevState.isFavorite }));
+
 	removeContact = movieId => {
 		const existFavList = localStorage.getItem('favorite_movies');
 
@@ -73,19 +76,16 @@ export default class MovieDetailsPage extends Component {
 		this.setFavoriteMovie();
 	};
 
-	setFavoriteMovie = () => this.setState(prevState => ({ isFavorite: !prevState.isFavorite }));
-
 	handleGoBack = () => {
 		const { location, history } = this.props;
 
-		return location.state && location.state.from
+		location.state && location.state.from
 			? history.push(location.state.from)
 			: history.push(routes.home);
 	};
 
 	render() {
 		const { movie, error, isLoading, isFavorite } = this.state;
-		const { match, location } = this.props;
 
 		return (
 			<>
@@ -93,7 +93,7 @@ export default class MovieDetailsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{movie === null && <NotFoundPage />}
+				{movie === null && <NotFound />}
 
 				<div>
 					{!isLoading && movie && (
@@ -107,7 +107,7 @@ export default class MovieDetailsPage extends Component {
 								onRemoveMovie={this.removeContact}
 							/>
 
-							<AdditionInfo onMatch={match} onLoading={isLoading} onLocation={location} />
+							<AdditionInfo {...this.props} onLoading={isLoading} />
 						</>
 					)}
 				</div>

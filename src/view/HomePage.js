@@ -1,10 +1,10 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader/Loader';
-import TrendPersons from '../components/TrendPersons/TrendPersons';
-import MoviesList from '../components/MoviesList/MoviesList';
-import Notification from '../components/Notification/Notification';
+import Loader from '../components/Loader';
+import TrendPersons from '../components/TrendPersons';
+import MoviesList from '../components/MoviesList';
+import Notification from '../components/Notification';
 //Services
 import movieApi from '../services/movieApi';
 
@@ -33,12 +33,11 @@ export default class HomePage extends Component {
 
 	render() {
 		const { movies, actors, error, isLoading } = this.state;
-		const { location } = this.props;
 
 		return (
 			<>
 				{!isLoading && actors.length > 0 && (
-					<TrendPersons title="Trending actors" actorsData={actors} onLocation={location} />
+					<TrendPersons {...this.props} title="Trending actors" actorsData={actors} />
 				)}
 
 				{error && <Notification message={error.message} />}
@@ -46,7 +45,7 @@ export default class HomePage extends Component {
 				{isLoading && <Loader onLoad={isLoading} />}
 
 				{!isLoading && movies.length > 0 && (
-					<MoviesList title="Trending movies" moviesData={movies} onLocation={location} />
+					<MoviesList {...this.props} title="Trending movies" moviesData={movies} />
 				)}
 			</>
 		);

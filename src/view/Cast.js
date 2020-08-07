@@ -1,9 +1,9 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader/Loader';
-import CastList from '../components/CastList/CastList';
-import Notification from '../components/Notification/Notification';
+import Loader from '../components/Loader';
+import CastList from '../components/CastList';
+import Notification from '../components/Notification';
 //Services
 import movieApi from '../services/movieApi';
 
@@ -16,7 +16,7 @@ export default class Cast extends Component {
 
 	componentDidMount() {
 		const { match } = this.props;
-		
+
 		this.setState({ isLoading: true });
 
 		movieApi
@@ -28,7 +28,6 @@ export default class Cast extends Component {
 
 	render() {
 		const { casts, error, isLoading } = this.state;
-		const { location } = this.props;
 
 		return (
 			<>
@@ -40,7 +39,7 @@ export default class Cast extends Component {
 					<Notification message="We don't have any actors for this movie." />
 				)}
 
-				{casts.length > 0 && <CastList castsData={casts} onLocation={location} />}
+				{casts.length > 0 && <CastList {...this.props} castsData={casts} />}
 			</>
 		);
 	}

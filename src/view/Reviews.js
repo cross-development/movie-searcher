@@ -1,9 +1,9 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader/Loader';
-import ReviewsList from '../components/ReviewsList/ReviewsList';
-import Notification from '../components/Notification/Notification';
+import Loader from '../components/Loader';
+import ReviewsList from '../components/ReviewsList';
+import Notification from '../components/Notification';
 //Services
 import movieApi from '../services/movieApi';
 
@@ -16,7 +16,7 @@ export default class Reviews extends Component {
 
 	componentDidMount() {
 		const { match } = this.props;
-		
+
 		this.setState({ isLoading: true });
 
 		movieApi

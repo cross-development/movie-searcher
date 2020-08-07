@@ -2,18 +2,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //Components
-import Notification from '../Notification/Notification';
+import Notification from '../Notification';
 //Styles
 import styles from './SearchForm.module.css';
 
 export default class SearchForm extends Component {
 	static propTypes = {
-		placeholder: PropTypes.string,
 		onSubmit: PropTypes.func.isRequired,
-	};
-
-	static defaultProps = {
-		placeholder: 'Search',
 	};
 
 	state = {
@@ -47,12 +42,12 @@ export default class SearchForm extends Component {
 					<form onSubmit={this.handleSubmit} className={styles.searchForm}>
 						<input
 							className={styles.searchFormInput}
-							type="text"
-							value={value}
-							autoComplete="off"
 							autoFocus
-							onChange={this.handleChange}
+							type="text"
+							autoComplete="off"
 							placeholder={placeholder}
+							value={value}
+							onChange={this.handleChange}
 						/>
 
 						<button type="submit" className={styles.searchFormButton}>

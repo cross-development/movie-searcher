@@ -31,6 +31,7 @@ const Navigation = () => {
 					Movies
 				</NavLink>
 			</li>
+
 			<li className={styles.navigationListItem}>
 				<NavLink
 					to={persons}
@@ -40,6 +41,7 @@ const Navigation = () => {
 					Actors
 				</NavLink>
 			</li>
+
 			<li className={styles.navigationListItem}>
 				<NavLink
 					to={favoriteMovies}

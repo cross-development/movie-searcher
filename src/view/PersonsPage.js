@@ -1,10 +1,10 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader/Loader';
-import PersonsList from '../components/PersonsList/PersonsList';
-import SearchForm from '../components/SearchForm/SearchForm';
-import Notification from '../components/Notification/Notification';
+import Loader from '../components/Loader';
+import PersonsList from '../components/PersonsList';
+import SearchForm from '../components/SearchForm';
+import Notification from '../components/Notification';
 //Services
 import movieApi from '../services/movieApi';
 //Utils
@@ -49,7 +49,6 @@ export default class PersonsPage extends Component {
 
 	render() {
 		const { persons, error, isLoading } = this.state;
-		const { location } = this.props;
 
 		return (
 			<>
@@ -59,9 +58,7 @@ export default class PersonsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && persons.length > 0 && (
-					<PersonsList personsData={persons} onLocation={location} />
-				)}
+				{!isLoading && persons.length > 0 && <PersonsList {...this.props} personsData={persons} />}
 			</>
 		);
 	}

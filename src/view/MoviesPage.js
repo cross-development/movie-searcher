@@ -1,10 +1,10 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader/Loader';
-import MoviesList from '../components/MoviesList/MoviesList';
-import SearchForm from '../components/SearchForm/SearchForm';
-import Notification from '../components/Notification/Notification';
+import Loader from '../components/Loader';
+import MoviesList from '../components/MoviesList';
+import SearchForm from '../components/SearchForm';
+import Notification from '../components/Notification';
 //Services
 import movieApi from '../services/movieApi';
 //Utils
@@ -49,17 +49,16 @@ export default class MoviesPage extends Component {
 
 	render() {
 		const { movies, error, isLoading } = this.state;
-		const { location } = this.props;
 
 		return (
 			<>
-				<SearchForm onSubmit={this.handleChangeByQuery} placeholder='Search movie...'/>
+				<SearchForm onSubmit={this.handleChangeByQuery} placeholder="Search movie..." />
 
 				{error && <Notification message={error.message} />}
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList moviesData={movies} onLocation={location} />}
+				{!isLoading && movies.length > 0 && <MoviesList {...this.props} moviesData={movies} />}
 			</>
 		);
 	}

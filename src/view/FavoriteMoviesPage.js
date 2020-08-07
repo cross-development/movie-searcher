@@ -1,8 +1,8 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Notification from '../components/Notification/Notification';
-import MoviesList from '../components/MoviesList/MoviesList';
+import Notification from '../components/Notification';
+import MoviesList from '../components/MoviesList';
 
 export default class FavoriteMovies extends Component {
 	state = {
@@ -19,14 +19,13 @@ export default class FavoriteMovies extends Component {
 
 	render() {
 		const { favorites } = this.state;
-		const { location } = this.props;
 
 		return (
 			<>
 				{favorites.length < 1 && <Notification message="We don't have any favorite movie." />}
 
 				{favorites.length > 0 && (
-					<MoviesList title="My favorite movies" moviesData={favorites} onLocation={location} />
+					<MoviesList {...this.props} title="My favorite movies" moviesData={favorites} />
 				)}
 			</>
 		);

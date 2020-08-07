@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 //Components
-import PersonsSlider from '../PersonsSlider/PersonsSlider';
+import PersonsSlider from '../PersonsSlider';
 //Utils
 import getPosterUrl from '../../utils/getPosterUrl';
 //Assets
@@ -15,7 +15,7 @@ import styles from './TrendPersons.module.css';
 
 //TODO: добавить css чтобы при ховере на айтем показывалось имя актера
 
-const TrendPersons = ({ title, actorsData, onLocation }) => (
+const TrendPersons = ({ title, actorsData, location }) => (
 	<>
 		{title && <h2 className={styles.title}>{title}</h2>}
 
@@ -26,7 +26,7 @@ const TrendPersons = ({ title, actorsData, onLocation }) => (
 						className={styles.actorsItemLink}
 						to={{
 							pathname: `${routes.persons}/${id}`,
-							state: { from: onLocation },
+							state: { from: location },
 						}}
 					>
 						<img
@@ -44,13 +44,13 @@ const TrendPersons = ({ title, actorsData, onLocation }) => (
 
 TrendPersons.defaultProps = {
 	title: '',
-	onLocation: {},
+	location: {},
 };
 
 TrendPersons.propTypes = {
 	title: PropTypes.string,
-	onLocation: PropTypes.object,
-	actorsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	location: PropTypes.object,
+	actorsData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default TrendPersons;

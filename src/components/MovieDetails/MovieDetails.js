@@ -50,9 +50,10 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
 };
 
 MovieDetails.propTypes = {
-	movieData: PropTypes.object.isRequired,
 	isFavorite: PropTypes.bool.isRequired,
 	onAddMovie: PropTypes.func.isRequired,
+	onRemoveMovie: PropTypes.func.isRequired,
+	movieData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default MovieDetails;

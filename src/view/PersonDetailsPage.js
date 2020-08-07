@@ -1,12 +1,11 @@
 //Core
 import React, { Component } from 'react';
-//Views
-import NotFoundPage from './NotFoundPage';
 //Components
-import Loader from '../components/Loader/Loader';
-import Notification from '../components/Notification/Notification';
-import ButtonGoBack from '../components/ButtonGoBack/ButtonGoBack';
-import PersonDetails from '../components/PersonDetails/PersonDetails';
+import Loader from '../components/Loader';
+import NotFound from '../components/NotFound';
+import Notification from '../components/Notification';
+import ButtonGoBack from '../components/ButtonGoBack';
+import PersonDetails from '../components/PersonDetails';
 //Services
 import movieApi from '../services/movieApi';
 //Routes
@@ -34,7 +33,7 @@ export default class PersonDetailsPage extends Component {
 	handleGoBack = () => {
 		const { location, history } = this.props;
 
-		return location.state && location.state.from
+		location.state && location.state.from
 			? history.push(location.state.from)
 			: history.push(routes.home);
 	};
@@ -48,7 +47,7 @@ export default class PersonDetailsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{person === null && <NotFoundPage />}
+				{person === null && <NotFound />}
 
 				<div>
 					{!isLoading && person && (

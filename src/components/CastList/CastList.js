@@ -11,7 +11,7 @@ import routes from '../../routes';
 //Styles
 import styles from './CastList.module.css';
 
-const CastList = ({ castsData, onLocation }) => (
+const CastList = ({ castsData, location }) => (
 	<ul className={styles.castsList}>
 		{castsData.map(({ id, name, profile_path }) => (
 			<li key={id} className={styles.castsListItem}>
@@ -19,7 +19,7 @@ const CastList = ({ castsData, onLocation }) => (
 					className={styles.castsItemLink}
 					to={{
 						pathname: `${routes.persons}/${id}`,
-						state: { from: onLocation },
+						state: { from: location },
 					}}
 				>
 					<img
@@ -35,12 +35,12 @@ const CastList = ({ castsData, onLocation }) => (
 );
 
 CastList.defaultProps = {
-	onLocation: {},
+	location: {},
 };
 
 CastList.propTypes = {
-	onLocation: PropTypes.object,
-	castsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	location: PropTypes.object,
+	castsData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default CastList;

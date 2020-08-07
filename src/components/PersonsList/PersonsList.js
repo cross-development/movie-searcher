@@ -11,7 +11,7 @@ import routes from '../../routes';
 //Style
 import styles from './PersonsList.module.css';
 
-const PersonsList = ({ personsData, onLocation }) => (
+const PersonsList = ({ personsData, location }) => (
 	<ul className={styles.personList}>
 		{personsData.map(({ id, profile_path, name, popularity }) => (
 			<li className={styles.personItem} key={id}>
@@ -19,7 +19,7 @@ const PersonsList = ({ personsData, onLocation }) => (
 					className={styles.personItemLink}
 					to={{
 						pathname: `${routes.persons}/${id}`,
-						state: { from: onLocation },
+						state: { from: location },
 					}}
 				>
 					<img
@@ -36,12 +36,12 @@ const PersonsList = ({ personsData, onLocation }) => (
 );
 
 PersonsList.defaultProps = {
-	onLocation: {},
+	location: {},
 };
 
 PersonsList.propTypes = {
-	onLocation: PropTypes.object,
-	personsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	location: PropTypes.object,
+	personsData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default PersonsList;

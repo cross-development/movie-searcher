@@ -1,8 +1,8 @@
 //Core
 import React from 'react';
 //Components
-import Logo from '../Logo/Logo';
-import Navigation from '../Navigation/Navigation';
+import Logo from '../Logo';
+import Navigation from '../Navigation';
 //Styles
 import styles from './Header.module.css';
 
