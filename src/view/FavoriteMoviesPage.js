@@ -1,8 +1,8 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Notification from '../components/Notification';
-import MoviesList from '../components/MoviesList';
+import Notification from 'components/Notification';
+import MoviesList from 'components/MoviesList';
 
 export default class FavoriteMovies extends Component {
 	state = {

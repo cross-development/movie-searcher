@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 //Additional components
 import Rating from '@material-ui/lab/Rating';
 //Utils
-import getPosterUrl from '../../utils/getPosterUrl';
+import getPosterUrl from 'utils/getPosterUrl';
 //Assets
-import getDefaultPoster from '../../assets/default_poster.jpg';
+import getDefaultPoster from 'assets/default_poster.jpg';
 //Styles
 import styles from './MovieDetails.module.css';
 

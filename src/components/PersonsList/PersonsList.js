@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 //Utils
-import getPosterUrl from '../../utils/getPosterUrl';
+import getPosterUrl from 'utils/getPosterUrl';
 //Assets
-import getDefaultPoster from '../../assets/default_poster.jpg';
+import getDefaultPoster from 'assets/default_poster.jpg';
 //Routes
-import routes from '../../routes';
+import routes from 'router';
 //Style
 import styles from './PersonsList.module.css';
 

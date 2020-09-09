@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //Additional components
 import Slider from 'react-slick';
 //Utils
-import { settings } from '../../utils/getSliderSettings';
+import { settings } from 'utils/getSliderSettings';
 //Styles
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

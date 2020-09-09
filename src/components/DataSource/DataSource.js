@@ -1,7 +1,7 @@
 //Core
 import React from 'react';
 //Assets
-import sourceLogoPath from '../../assets/logo.svg';
+import sourceLogoPath from 'assets/logo.svg';
 //Styles
 import styles from './DataSource.module.css';
 

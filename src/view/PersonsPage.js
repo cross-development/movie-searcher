@@ -1,14 +1,14 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader';
-import PersonsList from '../components/PersonsList';
-import SearchForm from '../components/SearchForm';
-import Notification from '../components/Notification';
+import Loader from 'components/Loader';
+import PersonsList from 'components/PersonsList';
+import SearchForm from 'components/SearchForm';
+import Notification from 'components/Notification';
 //Services
-import movieApi from '../services/movieApi';
+import movieApi from 'services/movieApi';
 //Utils
-import getQueryString from '../utils/getQueryString';
+import getQueryString from 'utils/getQueryString';
 
 export default class PersonsPage extends Component {
 	state = {

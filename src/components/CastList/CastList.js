@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 //Utils
-import getPosterUrl from '../../utils/getPosterUrl';
+import getPosterUrl from 'utils/getPosterUrl';
 //Assets
-import getDefaultAvatar from '../../assets/unnamed.jpg';
+import getDefaultAvatar from 'assets/unnamed.jpg';
 //Routes
-import routes from '../../routes';
+import routes from 'router';
 //Styles
 import styles from './CastList.module.css';
 

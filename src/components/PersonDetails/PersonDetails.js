@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //Utils
-import getPosterUrl from '../../utils/getPosterUrl';
-import getReversDate from '../../utils/getReversDate';
+import getPosterUrl from 'utils/getPosterUrl';
+import getReversDate from 'utils/getReversDate';
 //Assets
-import getDefaultAvatar from '../../assets/unnamed.jpg';
+import getDefaultAvatar from 'assets/unnamed.jpg';
 //Styles
 import styles from './PersonDetails.module.css';
 

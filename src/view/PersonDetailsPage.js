@@ -1,15 +1,15 @@
 //Core
 import React, { Component } from 'react';
 //Components
-import Loader from '../components/Loader';
-import NotFound from '../components/NotFound';
-import Notification from '../components/Notification';
-import ButtonGoBack from '../components/ButtonGoBack';
-import PersonDetails from '../components/PersonDetails';
+import Loader from 'components/Loader';
+import NotFound from 'components/NotFound';
+import Notification from 'components/Notification';
+import ButtonGoBack from 'components/ButtonGoBack';
+import PersonDetails from 'components/PersonDetails';
 //Services
-import movieApi from '../services/movieApi';
+import movieApi from 'services/movieApi';
 //Routes
-import routes from '../routes';
+import routes from 'router';
 
 export default class PersonDetailsPage extends Component {
 	state = {

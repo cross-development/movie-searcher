@@ -7,9 +7,9 @@ import Header from '../Header';
 import Loader from '../Loader';
 // import Footer from '../Footer';
 //Routes
-import routes from '../../routes';
+import routes from 'router';
 //Services
-import asyncComponents from '../../services/asyncComponents';
+import asyncComponents from 'services/asyncComponents';
 
 const App = () => (
 	<>

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 //Components
 import PersonsSlider from '../PersonsSlider';
 //Utils
-import getPosterUrl from '../../utils/getPosterUrl';
+import getPosterUrl from 'utils/getPosterUrl';
 //Assets
-import getDefaultAvatar from '../../assets/unnamed.jpg';
+import getDefaultAvatar from 'assets/unnamed.jpg';
 //Routes
-import routes from '../../routes';
+import routes from 'router';
 //Styles
 import styles from './TrendPersons.module.css';
 
