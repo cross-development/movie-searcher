@@ -1,6 +1,7 @@
 //Core
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 //Components
 import Layout from '../Layout';
 import Header from '../Header';
@@ -12,7 +13,7 @@ import routes from 'router';
 import asyncComponents from 'services/asyncComponents';
 
 const App = () => (
-	<>
+	<BrowserRouter>
 		<Layout>
 			<Header />
 
@@ -30,7 +31,7 @@ const App = () => (
 
 			{/* <Footer /> */}
 		</Layout>
-	</>
+	</BrowserRouter>
 );
 
 export default App;
