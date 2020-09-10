@@ -17,12 +17,12 @@ const fetchTrendActors = () => dispatch => {
 };
 
 const fetchActorsByQuery = query => dispatch => {
-	dispatch(actorsActions.getActorsByQueryRequest());
+	dispatch(actorsActions.searchActorsRequest());
 
 	axios
 		.get(`/search/person?api_key=${API_KEY}&query=${query}`)
-		.then(({ results }) => dispatch(actorsActions.getActorsByQuerySuccess(results)))
-		.catch(error => dispatch(actorsActions.getActorsByQueryFailure(error)));
+		.then(({ results }) => dispatch(actorsActions.searchActorsSuccess(results)))
+		.catch(error => dispatch(actorsActions.searchActorsFailure(error)));
 };
 
 const fetchActorDetails = actorId => dispatch => {

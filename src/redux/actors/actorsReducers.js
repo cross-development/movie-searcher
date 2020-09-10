@@ -7,7 +7,7 @@ import actorsActions from './actorsActions';
 //Items reducer
 const items = createReducer([], {
 	[actorsActions.getActorsSuccess]: (state, { payload }) => payload,
-	[actorsActions.getActorsByQuerySuccess]: (state, { payload }) => payload,
+	[actorsActions.searchActorsSuccess]: (state, { payload }) => payload,
 	[actorsActions.getActorDetailsSuccess]: (state, { payload }) => payload,
 });
 
@@ -17,9 +17,9 @@ const loading = createReducer(false, {
 	[actorsActions.getActorsSuccess]: () => false,
 	[actorsActions.getActorsFailure]: () => false,
 
-	[actorsActions.getActorsByQueryRequest]: () => true,
-	[actorsActions.getActorsByQuerySuccess]: () => false,
-	[actorsActions.getActorsByQueryFailure]: () => false,
+	[actorsActions.searchActorsRequest]: () => true,
+	[actorsActions.searchActorsSuccess]: () => false,
+	[actorsActions.searchActorsFailure]: () => false,
 
 	[actorsActions.getActorDetailsRequest]: () => true,
 	[actorsActions.getActorDetailsSuccess]: () => false,
@@ -29,7 +29,7 @@ const loading = createReducer(false, {
 //Error reducer
 const error = createReducer(null, {
 	[actorsActions.getActorsFailure]: (state, { payload }) => payload,
-	[actorsActions.getActorsByQueryFailure]: (state, { payload }) => payload,
+	[actorsActions.searchActorsFailure]: (state, { payload }) => payload,
 	[actorsActions.getActorDetailsFailure]: (state, { payload }) => payload,
 });
 
