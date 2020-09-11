@@ -12,7 +12,7 @@ const fetchTrendActors = () => dispatch => {
 
 	axios
 		.get(`/person/popular?api_key=${API_KEY}`)
-		.then(({ results }) => dispatch(actorsActions.getActorsSuccess(results)))
+		.then(({ data: { results } }) => dispatch(actorsActions.getActorsSuccess(results)))
 		.catch(error => dispatch(actorsActions.getActorsFailure(error)));
 };
 
@@ -21,7 +21,7 @@ const fetchActorsByQuery = query => dispatch => {
 
 	axios
 		.get(`/search/person?api_key=${API_KEY}&query=${query}`)
-		.then(({ results }) => dispatch(actorsActions.searchActorsSuccess(results)))
+		.then(({ data: { results } }) => dispatch(actorsActions.searchActorsSuccess(results)))
 		.catch(error => dispatch(actorsActions.searchActorsFailure(error)));
 };
 
@@ -30,7 +30,7 @@ const fetchActorDetails = actorId => dispatch => {
 
 	axios
 		.get(`/person/${actorId}?api_key=${API_KEY}`)
-		.then(data => dispatch(actorsActions.getActorDetailsSuccess(data)))
+		.then(({ data }) => dispatch(actorsActions.getActorDetailsSuccess(data)))
 		.catch(error => dispatch(actorsActions.getActorDetailsFailure(error)));
 };
 

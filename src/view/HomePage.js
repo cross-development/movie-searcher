@@ -1,53 +1,52 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { moviesOperations, moviesSelectors } from 'redux/movies';
+import { actorsOperations, actorsSelectors } from 'redux/actors';
 //Components
 import Loader from 'components/Loader';
 import TrendPersons from 'components/TrendPersons';
 import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
-//Services
-import movieApi from 'services/movieApi';
 
-export default class HomePage extends Component {
-	state = {
-		movies: [],
-		actors: [],
-		error: null,
-		isLoading: false,
-	};
-
+class HomePage extends Component {
 	componentDidMount() {
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchTrendMovies()
-			.then(movies => this.setState({ movies }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
-
-		movieApi
-			.fetchTrendPersons()
-			.then(actors => this.setState({ actors }))
-			.catch(error => this.setState({ error }));
+		this.props.onFetchTrendMovies();
+		this.props.onFetchTrendActors();
 	}
 
 	render() {
-		const { movies, actors, error, isLoading } = this.state;
+		const { movies, actors, loadingMovies, loadingActors } = this.props;
 
 		return (
 			<>
-				{!isLoading && actors.length > 0 && (
+				{!loadingActors && actors.length > 0 && (
 					<TrendPersons {...this.props} title="Trending actors" actorsData={actors} />
 				)}
 
-				{error && <Notification message={error.message} />}
+				{/* {error && <Notification message={error.message} />} */}
 
-				{isLoading && <Loader onLoad={isLoading} />}
+				{/* {isLoading && <Loader onLoad={isLoading} />} */}
 
-				{!isLoading && movies.length > 0 && (
+				{!loadingMovies && movies.length > 0 && (
 					<MoviesList {...this.props} title="Trending movies" moviesData={movies} />
 				)}
 			</>
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	movies: moviesSelectors.getMovies(state),
+	actors: actorsSelectors.getActors(state),
+	loadingMovies: moviesSelectors.getLoading(state),
+	loadingActors: actorsSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchTrendMovies: moviesOperations.fetchTrendMovies,
+	onFetchTrendActors: actorsOperations.fetchTrendActors,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

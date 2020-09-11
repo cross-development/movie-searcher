@@ -1,33 +1,22 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { actorsOperations, actorsSelectors } from 'redux/actors';
 //Components
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
 import Notification from 'components/Notification';
 import ButtonGoBack from 'components/ButtonGoBack';
 import PersonDetails from 'components/PersonDetails';
-//Services
-import movieApi from 'services/movieApi';
 //Routes
 import routes from 'router';
 
-export default class PersonDetailsPage extends Component {
-	state = {
-		person: '',
-		error: null,
-		isLoading: false,
-	};
-
+class PersonDetailsPage extends Component {
 	componentDidMount() {
-		const { match } = this.props;
+		const { match, onFetchActorDetails } = this.props;
 
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchPersonDetails(match.params.personId)
-			.then(person => this.setState({ person }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
+		onFetchActorDetails(match.params.personId);
 	}
 
 	handleGoBack = () => {
@@ -39,7 +28,7 @@ export default class PersonDetailsPage extends Component {
 	};
 
 	render() {
-		const { person, error, isLoading } = this.state;
+		const { actor, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -47,14 +36,14 @@ export default class PersonDetailsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{person === null && <NotFound />}
+				{actor === null && <NotFound />}
 
 				<div>
-					{!isLoading && person && (
+					{!isLoading && actor && (
 						<>
 							<ButtonGoBack onChangeClick={this.handleGoBack} />
 
-							<PersonDetails personData={person} />
+							<PersonDetails personData={actor} />
 						</>
 					)}
 				</div>
@@ -62,3 +51,15 @@ export default class PersonDetailsPage extends Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	actor: actorsSelectors.getActor(state),
+	error: actorsSelectors.getError(state),
+	isLoading: actorsSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchActorDetails: actorsOperations.fetchActorDetails,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonDetailsPage);

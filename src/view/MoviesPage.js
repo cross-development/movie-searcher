@@ -1,44 +1,31 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { moviesOperations, moviesSelectors } from 'redux/movies';
 //Components
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
 import SearchForm from 'components/SearchForm';
 import Notification from 'components/Notification';
-//Services
-import movieApi from 'services/movieApi';
 //Utils
 import getQueryString from 'utils/getQueryString';
 
-export default class MoviesPage extends Component {
-	state = {
-		movies: [],
-		error: null,
-		isLoading: false,
-	};
-
+class MoviesPage extends Component {
 	componentDidMount() {
-		const { query } = getQueryString(this.props.location.search);
+		const { location, onFetchMoviesByQuery } = this.props;
+		const { query } = getQueryString(location.search);
 
-		return query ? this.fetchMovies(query) : '';
+		return query ? onFetchMoviesByQuery(query) : null;
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+		const { location, onFetchMoviesByQuery } = this.props;
 		const { query: prevQuery } = getQueryString(prevProps.location.search);
-		const { query: nextQuery } = getQueryString(this.props.location.search);
+		const { query: nextQuery } = getQueryString(location.search);
 
-		return prevQuery !== nextQuery ? this.fetchMovies(nextQuery) : '';
+		return prevQuery !== nextQuery ? onFetchMoviesByQuery(nextQuery) : null;
 	}
-
-	fetchMovies = query => {
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchMoviesByQuery(query)
-			.then(movies => this.setState({ movies }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
-	};
 
 	handleChangeByQuery = query => {
 		this.props.history.push({
@@ -48,7 +35,7 @@ export default class MoviesPage extends Component {
 	};
 
 	render() {
-		const { movies, error, isLoading } = this.state;
+		const { movies, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -63,3 +50,15 @@ export default class MoviesPage extends Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	error: moviesSelectors.getError(state),
+	movies: moviesSelectors.getMovies(state),
+	isLoading: moviesSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchMoviesByQuery: moviesOperations.fetchMoviesByQuery,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);

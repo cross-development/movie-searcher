@@ -1,33 +1,24 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { moviesOperations, moviesSelectors } from 'redux/movies';
 //Components
 import Loader from 'components/Loader';
 import CastList from 'components/CastList';
 import Notification from 'components/Notification';
-//Services
-import movieApi from 'services/movieApi';
 
-export default class Cast extends Component {
-	state = {
-		casts: [],
-		error: null,
-		isLoading: false,
-	};
+class Cast extends Component {
+	componentDidUpdate(prevProps, prevState) {
+		const { match, onFetchMovieCast } = this.props;
 
-	componentDidMount() {
-		const { match } = this.props;
-
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchMoviesByCast(match.params.movieId)
-			.then(casts => this.setState({ casts }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
+		if (prevProps !== this.props) {
+			onFetchMovieCast(match.params.movieId);
+		}
 	}
 
 	render() {
-		const { casts, error, isLoading } = this.state;
+		const { cast, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -35,12 +26,24 @@ export default class Cast extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && !error && casts.length < 1 && (
+				{!isLoading && !error && cast.length < 1 && (
 					<Notification message="We don't have any actors for this movie." />
 				)}
 
-				{casts.length > 0 && <CastList {...this.props} castsData={casts} />}
+				{cast.length > 0 && <CastList {...this.props} castData={cast} />}
 			</>
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	cast: moviesSelectors.getCast(state),
+	error: moviesSelectors.getError(state),
+	isLoading: moviesSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchMovieCast: moviesOperations.fetchMovieCast,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cast);

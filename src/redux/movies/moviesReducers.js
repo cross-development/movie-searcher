@@ -8,6 +8,9 @@ import moviesActions from './moviesActions';
 const items = createReducer([], {
 	[moviesActions.getMoviesSuccess]: (state, { payload }) => payload,
 	[moviesActions.searchMoviesSuccess]: (state, { payload }) => payload,
+});
+
+const item = createReducer('', {
 	[moviesActions.getMovieDetailsSuccess]: (state, { payload }) => payload,
 });
 
@@ -21,6 +24,7 @@ const reviews = createReducer([], {
 	[moviesActions.getMovieReviewsSuccess]: (state, { payload }) => payload,
 });
 
+//TODO: переписать на addMatcher для общей загрузки https://redux-toolkit.js.org/api/createReducer
 //Loading reducer
 const loading = createReducer(false, {
 	[moviesActions.getMoviesRequest]: () => true,
@@ -55,6 +59,7 @@ const error = createReducer(null, {
 
 export default combineReducers({
 	cast,
+	item,
 	items,
 	error,
 	loading,

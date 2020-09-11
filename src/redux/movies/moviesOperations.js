@@ -12,7 +12,7 @@ const fetchTrendMovies = () => dispatch => {
 
 	axios
 		.get(`/trending/all/day?api_key=${API_KEY}`)
-		.then(({ results }) => dispatch(moviesActions.getMoviesSuccess(results)))
+		.then(({ data: { results } }) => dispatch(moviesActions.getMoviesSuccess(results)))
 		.catch(error => dispatch(moviesActions.getMoviesFailure(error)));
 };
 
@@ -21,7 +21,7 @@ const fetchMoviesByQuery = query => dispatch => {
 
 	axios
 		.get(`/search/movie?api_key=${API_KEY}&query=${query}`)
-		.then(({ results }) => dispatch(moviesActions.searchMoviesSuccess(results)))
+		.then(({ data: { results } }) => dispatch(moviesActions.searchMoviesSuccess(results)))
 		.catch(error => dispatch(moviesActions.searchMoviesFailure(error)));
 };
 
@@ -30,7 +30,7 @@ const fetchMovieDetails = movieId => dispatch => {
 
 	axios
 		.get(`/movie/${movieId}?api_key=${API_KEY}`)
-		.then(data => dispatch(moviesActions.getMovieDetailsSuccess(data)))
+		.then(({ data }) => dispatch(moviesActions.getMovieDetailsSuccess(data)))
 		.catch(error => dispatch(moviesActions.getMovieDetailsFailure(error)));
 };
 
@@ -39,7 +39,7 @@ const fetchMovieCast = movieId => dispatch => {
 
 	axios
 		.get(`/movie/${movieId}/credits?api_key=${API_KEY}`)
-		.then(({ results }) => dispatch(moviesActions.getMovieCastSuccess(results)))
+		.then(({ data: { cast } }) => dispatch(moviesActions.getMovieCastSuccess(cast)))
 		.catch(error => dispatch(moviesActions.getMovieCastFailure(error)));
 };
 
@@ -48,7 +48,7 @@ const fetchMovieReviews = movieId => dispatch => {
 
 	axios
 		.get(`/movie/${movieId}/reviews?api_key=${API_KEY}`)
-		.then(({ results }) => dispatch(moviesActions.getMovieReviewsSuccess(results)))
+		.then(({ data: { results } }) => dispatch(moviesActions.getMovieReviewsSuccess(results)))
 		.catch(error => dispatch(moviesActions.getMovieReviewsFailure(error)));
 };
 

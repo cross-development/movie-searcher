@@ -1,5 +1,8 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { moviesOperations, moviesSelectors } from 'redux/movies';
 //Components
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
@@ -7,21 +10,16 @@ import Notification from 'components/Notification';
 import ButtonGoBack from 'components/ButtonGoBack';
 import MovieDetails from 'components/MovieDetails';
 import AdditionInfo from 'components/AdditionInfo';
-//Services
-import movieApi from 'services/movieApi';
 //Routes
 import routes from 'router';
 
-export default class MovieDetailsPage extends Component {
+class MovieDetailsPage extends Component {
 	state = {
-		movie: '',
-		error: null,
-		isLoading: false,
 		isFavorite: false,
 	};
 
 	componentDidMount() {
-		const { match } = this.props;
+		const { match, onFetchMovieDetails } = this.props;
 
 		const existFavList = localStorage.getItem('favorite_movies');
 
@@ -37,32 +35,26 @@ export default class MovieDetailsPage extends Component {
 			});
 		}
 
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchMoviesDetails(match.params.movieId)
-			.then(movie => this.setState({ movie }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
+		onFetchMovieDetails(match.params.movieId);
 	}
 
 	setMovieToLocalStorage = () => {
 		const existFavList = localStorage.getItem('favorite_movies');
 
 		if (!existFavList) {
-			localStorage.setItem('favorite_movies', JSON.stringify([this.state.movie]));
+			localStorage.setItem('favorite_movies', JSON.stringify([this.props.movie]));
 			this.setFavoriteMovie();
 			return;
 		}
 
-		const favMovies = [...JSON.parse(existFavList), this.state.movie];
+		const favMovies = [...JSON.parse(existFavList), this.props.movie];
 		localStorage.setItem('favorite_movies', JSON.stringify(favMovies));
 		this.setFavoriteMovie();
 	};
 
 	setFavoriteMovie = () => this.setState(prevState => ({ isFavorite: !prevState.isFavorite }));
 
-	removeContact = movieId => {
+	removeMovie = movieId => {
 		const existFavList = localStorage.getItem('favorite_movies');
 
 		if (!existFavList) {
@@ -84,8 +76,9 @@ export default class MovieDetailsPage extends Component {
 			: history.push(routes.home);
 	};
 
+	//TODO: проверить на null
 	render() {
-		const { movie, error, isLoading, isFavorite } = this.state;
+		const { movie, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -94,7 +87,6 @@ export default class MovieDetailsPage extends Component {
 				{isLoading && <Loader onLoad={isLoading} />}
 
 				{movie === null && <NotFound />}
-
 				<div>
 					{!isLoading && movie && (
 						<>
@@ -102,9 +94,9 @@ export default class MovieDetailsPage extends Component {
 
 							<MovieDetails
 								movieData={movie}
-								isFavorite={isFavorite}
+								isFavorite={this.state.isFavorite}
 								onAddMovie={this.setMovieToLocalStorage}
-								onRemoveMovie={this.removeContact}
+								onRemoveMovie={this.removeMovie}
 							/>
 
 							<AdditionInfo {...this.props} onLoading={isLoading} />
@@ -115,3 +107,15 @@ export default class MovieDetailsPage extends Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	movie: moviesSelectors.getMovie(state),
+	error: moviesSelectors.getError(state),
+	isLoading: moviesSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchMovieDetails: moviesOperations.fetchMovieDetails,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage);

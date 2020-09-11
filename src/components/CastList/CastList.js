@@ -11,9 +11,9 @@ import routes from 'router';
 //Styles
 import styles from './CastList.module.css';
 
-const CastList = ({ castsData, location }) => (
+const CastList = ({ castData, location }) => (
 	<ul className={styles.castsList}>
-		{castsData.map(({ id, name, profile_path }) => (
+		{castData.map(({ id, name, profile_path }) => (
 			<li key={id} className={styles.castsListItem}>
 				<Link
 					className={styles.castsItemLink}
@@ -40,7 +40,7 @@ CastList.defaultProps = {
 
 CastList.propTypes = {
 	location: PropTypes.object,
-	castsData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
+	castData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default CastList;

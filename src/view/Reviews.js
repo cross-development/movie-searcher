@@ -1,5 +1,8 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { moviesOperations, moviesSelectors } from 'redux/movies';
 //Components
 import Loader from 'components/Loader';
 import ReviewsList from 'components/ReviewsList';
@@ -7,27 +10,16 @@ import Notification from 'components/Notification';
 //Services
 import movieApi from 'services/movieApi';
 
-export default class Reviews extends Component {
-	state = {
-		reviews: [],
-		error: null,
-		isLoading: false,
-	};
-
-	componentDidMount() {
-		const { match } = this.props;
-
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchMoviesReviews(match.params.movieId)
-			.then(reviews => this.setState({ reviews }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
+class Reviews extends Component {
+	componentDidUpdate(prevProps, prevState) {
+		const { match, onFetchMovieReviews } = this.props;
+		if (prevProps !== this.props) {
+			onFetchMovieReviews(match.params.movieId);
+		}
 	}
 
 	render() {
-		const { reviews, error, isLoading } = this.state;
+		const { reviews, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -44,3 +36,15 @@ export default class Reviews extends Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	error: moviesSelectors.getError(state),
+	reviews: moviesSelectors.getReviews(state),
+	isLoading: moviesSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchMovieReviews: moviesOperations.fetchMovieReviews,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reviews);

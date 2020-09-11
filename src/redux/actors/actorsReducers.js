@@ -8,6 +8,9 @@ import actorsActions from './actorsActions';
 const items = createReducer([], {
 	[actorsActions.getActorsSuccess]: (state, { payload }) => payload,
 	[actorsActions.searchActorsSuccess]: (state, { payload }) => payload,
+});
+
+const item = createReducer('', {
 	[actorsActions.getActorDetailsSuccess]: (state, { payload }) => payload,
 });
 
@@ -35,6 +38,7 @@ const error = createReducer(null, {
 
 export default combineReducers({
 	items,
+	item,
 	loading,
 	error,
 });

@@ -1,5 +1,8 @@
 //Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+//Redux
+import { actorsOperations, actorsSelectors } from 'redux/actors';
 //Components
 import Loader from 'components/Loader';
 import PersonsList from 'components/PersonsList';
@@ -10,35 +13,21 @@ import movieApi from 'services/movieApi';
 //Utils
 import getQueryString from 'utils/getQueryString';
 
-export default class PersonsPage extends Component {
-	state = {
-		persons: [],
-		error: null,
-		isLoading: false,
-	};
-
+class PersonsPage extends Component {
 	componentDidMount() {
-		const { query } = getQueryString(this.props.location.search);
+		const { location, onFetchActorsByQuery } = this.props;
+		const { query } = getQueryString(location.search);
 
-		return query ? this.fetchPersons(query) : '';
+		return query ? onFetchActorsByQuery(query) : null;
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+		const { location, onFetchActorsByQuery } = this.props;
 		const { query: prevQuery } = getQueryString(prevProps.location.search);
-		const { query: nextQuery } = getQueryString(this.props.location.search);
+		const { query: nextQuery } = getQueryString(location.search);
 
-		return prevQuery !== nextQuery ? this.fetchPersons(nextQuery) : '';
+		return prevQuery !== nextQuery ? onFetchActorsByQuery(nextQuery) : null;
 	}
-
-	fetchPersons = query => {
-		this.setState({ isLoading: true });
-
-		movieApi
-			.fetchPersonsByQuery(query)
-			.then(persons => this.setState({ persons }))
-			.catch(error => this.setState({ error }))
-			.finally(() => this.setState({ isLoading: false }));
-	};
 
 	handleChangeByQuery = query => {
 		this.props.history.push({
@@ -48,7 +37,7 @@ export default class PersonsPage extends Component {
 	};
 
 	render() {
-		const { persons, error, isLoading } = this.state;
+		const { actors, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -58,8 +47,20 @@ export default class PersonsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && persons.length > 0 && <PersonsList {...this.props} personsData={persons} />}
+				{!isLoading && actors.length > 0 && <PersonsList {...this.props} personsData={actors} />}
 			</>
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	error: actorsSelectors.getError(state),
+	actors: actorsSelectors.getActors(state),
+	isLoading: actorsSelectors.getLoading(state),
+});
+
+const mapDispatchToProps = {
+	onFetchActorsByQuery: actorsOperations.fetchActorsByQuery,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonsPage);
