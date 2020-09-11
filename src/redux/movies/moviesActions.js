@@ -9,9 +9,9 @@ const searchMoviesRequest = createAction('movie/searchMoviesRequest');
 const searchMoviesSuccess = createAction('movie/searchMoviesSuccess');
 const searchMoviesFailure = createAction('movie/searchMoviesFailure');
 
-const getMovieCastsRequest = createAction('movie/getMovieCastsRequest');
-const getMovieCastsSuccess = createAction('movie/getMovieCastsSuccess');
-const getMovieCastsFailure = createAction('movie/getMovieCastsFailure');
+const getMovieCastRequest = createAction('movie/getMovieCastRequest');
+const getMovieCastSuccess = createAction('movie/getMovieCastSuccess');
+const getMovieCastFailure = createAction('movie/getMovieCastFailure');
 
 const getMovieReviewsRequest = createAction('movie/getMovieReviewsRequest');
 const getMovieReviewsSuccess = createAction('movie/getMovieReviewsSuccess');
@@ -30,9 +30,9 @@ export default {
 	searchMoviesSuccess,
 	searchMoviesFailure,
 
-	getMovieCastsRequest,
-	getMovieCastsSuccess,
-	getMovieCastsFailure,
+	getMovieCastRequest,
+	getMovieCastSuccess,
+	getMovieCastFailure,
 
 	getMovieReviewsRequest,
 	getMovieReviewsSuccess,
