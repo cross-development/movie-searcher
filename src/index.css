@@ -1,7 +1,9 @@
 html {
 	box-sizing: border-box;
-	width: 100vw;
+	/* width: 100vw; */
 	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
 }
 
 *,
@@ -18,7 +20,28 @@ body {
 	background-color: #fff;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* padding-bottom: 20px; */
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	gap: 1px 1px;
+	grid-template-areas: 'root';
+}
+/* STOOOOP */
+#root {
+	display: grid;
+	grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 0.7fr 1fr 1fr 1fr 1fr 1fr 1fr 0.6fr;
+	gap: 10px 10px;
+	grid-template-areas:
+		'appBar header header header header header header header'
+		'appBar section section section section section section section'
+		'appBar section section section section section section section'
+		'appBar section section section section section section section'
+		'appBar section section section section section section section'
+		'appBar section section section section section section section'
+		'appBar section section section section section section section'
+		'appBar footer footer footer footer footer footer footer';
+	grid-area: root;
 }
 
 img {
@@ -32,42 +55,42 @@ img {
 */
 
 /* Header variables */
-@value link-color: #fff;
-@value link-active-color: #fff;
-@value header-bg: #0984e3;
+@value link-color: #fb5c00;
+@value link-active-color: #fb5c00;
+@value header-bg: #fb5c00;
 
 /* Person Item variables*/
 @value person-item-bg: #f0f0f0;
-@value person-vote-bg: #74b9ff;
+@value person-vote-bg: #e67e22;
 
 /* Movie Item variables*/
 @value movie-item-bg: #f0f0f0;
-@value movie-vote-bg: #74b9ff;
+@value movie-vote-bg: #e67e22;
 
 /* Form variables*/
-@value form-bg: #74b9ff;
+@value form-bg: #fb5c00;
 
 /* Button variables*/
-@value back-btn-wrap-bg: #74b9ff;
+@value back-btn-wrap-bg: #fb5c00;
 @value back-btn-bg: #fff;
 @value back-btn-text-color: #000000;
 @value back-btn-text-hover-color: #000000;
 
 /* Favorite button variables */
-@value fav-btn-bg: #74b9ff;
+@value fav-btn-bg: #fb5c00;
 @value fav-btn-text-color: #000;
 
 /* Additional info variables */
-@value add-link-color: #74b9ff;
-@value add-link-active-color: #0984e3;
+@value add-link-color: #fb5c00;
+@value add-link-active-color: #fb5c00;
 
 /* Reviews list variables */
 @value review-item-bg: #f5f6fa;
 
 /* Notification variables*/
-@value notification-bg: #74b9ff;
+@value notification-bg: #fb5c00;
 
 /* Loader variables*/
-@value loader-bg: #74b9ff;
+@value loader-bg: #fb5c00;
 
 /* Footer variables*/

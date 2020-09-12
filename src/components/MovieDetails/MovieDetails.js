@@ -1,6 +1,9 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+//Redux
+import { authSelectors } from 'redux/auth';
 //Additional components
 import Rating from '@material-ui/lab/Rating';
 //Utils
@@ -10,7 +13,7 @@ import getDefaultPoster from 'assets/default_poster.jpg';
 //Styles
 import styles from './MovieDetails.module.css';
 
-const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
+const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie, isAuthenticated }) => {
 	const { id, poster_path, title, name, release_date, vote_average, overview, genres } = movieData;
 
 	const moviePoster = poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster;
@@ -35,25 +38,39 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie }) => {
 				<h3>Genres</h3>
 				<p>{movieGenres}</p>
 
-				{!isFavorite ? (
-					<button type="button" className={styles.favoriteButton} onClick={onAddMovie}>
-						Add to favorites
-					</button>
-				) : (
-					<button type="button" className={styles.favoriteButton} onClick={() => onRemoveMovie(id)}>
-						Remove from favorites
-					</button>
-				)}
+				{isAuthenticated &&
+					(!isFavorite ? (
+						<button type="button" className={styles.favoriteButton} onClick={onAddMovie}>
+							Add to favorites
+						</button>
+					) : (
+						<button
+							type="button"
+							className={styles.favoriteButton}
+							onClick={() => onRemoveMovie(id)}
+						>
+							Remove from favorites
+						</button>
+					))}
 			</div>
 		</div>
 	);
 };
 
 MovieDetails.propTypes = {
+	isAuthenticated: PropTypes.string,
 	isFavorite: PropTypes.bool.isRequired,
 	onAddMovie: PropTypes.func.isRequired,
 	onRemoveMovie: PropTypes.func.isRequired,
 	movieData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default MovieDetails;
+MovieDetails.defaultProps = {
+	isAuthenticated: null,
+};
+
+const mapStateToProps = state => ({
+	isAuthenticated: authSelectors.isAuthenticated(state),
+});
+
+export default connect(mapStateToProps)(MovieDetails);

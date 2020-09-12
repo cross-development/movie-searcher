@@ -11,10 +11,8 @@ import routes from 'router';
 //Style
 import styles from './MoviesList.module.css';
 
-const MoviesList = ({ title, moviesData, location }) => (
+const MoviesList = ({ moviesData, location }) => (
 	<>
-		{title && <h2 className={styles.title}>{title}</h2>}
-
 		<ul className={styles.movieList}>
 			{moviesData.map(({ id, poster_path, name, title, vote_average }) => (
 				<li className={styles.movieItem} key={id}>
@@ -30,11 +28,19 @@ const MoviesList = ({ title, moviesData, location }) => (
 							src={poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster}
 							alt={name || title}
 						/>
-						<span>{name || title}</span>
+						{/* <span>{name || title}</span> */}
 					</Link>
 					<span className={styles.movieVote}>{vote_average}</span>
 				</li>
 			))}
+			<li className={styles.pagination}>
+				<button type="submit" className={styles.button}>
+					&larr;
+				</button>
+				<button type="submit" className={styles.button}>
+					&rarr;
+				</button>
+			</li>
 		</ul>
 	</>
 );

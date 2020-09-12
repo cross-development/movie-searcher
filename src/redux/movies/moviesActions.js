@@ -21,6 +21,10 @@ const getMovieDetailsRequest = createAction('movie/getMovieDetailsRequest');
 const getMovieDetailsSuccess = createAction('movie/getMovieDetailsSuccess');
 const getMovieDetailsFailure = createAction('movie/getMovieDetailsFailure');
 
+const getUpcomingMoviesRequest = createAction('movies/getUpcomingMoviesRequest');
+const getUpcomingMoviesSuccess = createAction('movies/getUpcomingMoviesSuccess');
+const getUpcomingMoviesFailure = createAction('movies/getUpcomingMoviesFailure');
+
 export default {
 	getMoviesRequest,
 	getMoviesSuccess,
@@ -41,4 +45,8 @@ export default {
 	getMovieDetailsRequest,
 	getMovieDetailsSuccess,
 	getMovieDetailsFailure,
+
+	getUpcomingMoviesRequest,
+	getUpcomingMoviesSuccess,
+	getUpcomingMoviesFailure,
 };

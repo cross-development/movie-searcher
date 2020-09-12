@@ -27,11 +27,19 @@ const PersonsList = ({ personsData, location }) => (
 						src={profile_path ? `${getPosterUrl}${profile_path}` : getDefaultPoster}
 						alt={name}
 					/>
-					<span>{name}</span>
+					{/* <span>{name}</span> */}
 				</Link>
 				<span className={styles.personVote}>{Math.round(popularity)}</span>
 			</li>
 		))}
+		<li className={styles.pagination}>
+			<button type="submit" className={styles.button}>
+				&larr;
+			</button>
+			<button type="submit" className={styles.button}>
+				&rarr;
+			</button>
+		</li>
 	</ul>
 );
 

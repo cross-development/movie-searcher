@@ -7,7 +7,6 @@ import { actorsOperations, actorsSelectors } from 'redux/actors';
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
 import Notification from 'components/Notification';
-import ButtonGoBack from 'components/ButtonGoBack';
 import PersonDetails from 'components/PersonDetails';
 //Routes
 import routes from 'router';
@@ -38,15 +37,7 @@ class PersonDetailsPage extends Component {
 
 				{actor === null && <NotFound />}
 
-				<div>
-					{!isLoading && actor && (
-						<>
-							<ButtonGoBack onChangeClick={this.handleGoBack} />
-
-							<PersonDetails personData={actor} />
-						</>
-					)}
-				</div>
+				<div>{!isLoading && actor && <PersonDetails personData={actor} />}</div>
 			</>
 		);
 	}

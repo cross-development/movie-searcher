@@ -1,11 +1,4 @@
 .section {
-	display: block;
-	width: 100%;
-	padding: 0 16px 5px 16px;
-}
-
-@media (min-width: 1440px) {
-	.section {
-		padding: 0 30px 10px 16px;
-	}
+	padding-right: 10px;
+	grid-area: section;
 }

@@ -1,20 +1,49 @@
 .logoWrapper {
-	display: none;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	grid-area: logo;
 }
 
-@media (min-width: 768px) {
-	.logoWrapper {
-		display: block;
-		width: 30%;
-	}
-
-	.logo {
-		width: 100%;
-	}
+.logoWrapper::after {
+	content: '';
+	width: 76%;
+	height: 1px;
+	background: #d3d3d3;
+	position: absolute;
+	bottom: 0;
 }
 
-@media (min-width: 1440px) {
-	.logoWrapper {
-		width: 16%;
-	}
+.logoLink {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 24px;
+	color: #fb5c00;
+}
+
+.logo {
+	margin-right: 20px;
+}
+
+.button {
+	background: #fb5c00;
+	border: none;
+	color: #fff;
+	border-radius: 50px;
+	padding: 6px 24px;
+	cursor: pointer;
+	transition: all 250ms linear;
+	box-shadow: 0 0 8px 0.2px #fb5c00;
+	outline: none;
+}
+
+.button:hover {
+	box-shadow: 0 0 14px #fb5c00;
 }

@@ -10,19 +10,7 @@ import styles from './Loader.module.css';
 //Custom css
 const customCss = css`
 	display: block;
-	margin: 60% 38%;
-
-	@media (min-width: 768px) {
-		margin: 10% 45%;
-	}
-
-	@media (min-width: 1024px) {
-		margin: 25% 45%;
-	}
-
-	@media (min-width: 1440px) {
-		margin: 15% auto;
-	}
+	margin: 20% auto;
 `;
 
 const Loader = ({ onLoad }) => (

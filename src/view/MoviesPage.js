@@ -6,17 +6,13 @@ import { moviesOperations, moviesSelectors } from 'redux/movies';
 //Components
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
-import SearchForm from 'components/SearchForm';
 import Notification from 'components/Notification';
 //Utils
 import getQueryString from 'utils/getQueryString';
 
 class MoviesPage extends Component {
 	componentDidMount() {
-		const { location, onFetchMoviesByQuery } = this.props;
-		const { query } = getQueryString(location.search);
-
-		return query ? onFetchMoviesByQuery(query) : null;
+		this.props.onFetchTrendMovies();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -27,20 +23,11 @@ class MoviesPage extends Component {
 		return prevQuery !== nextQuery ? onFetchMoviesByQuery(nextQuery) : null;
 	}
 
-	handleChangeByQuery = query => {
-		this.props.history.push({
-			pathname: this.props.location.pathname,
-			search: `query=${query}`,
-		});
-	};
-
 	render() {
 		const { movies, error, isLoading } = this.props;
 
 		return (
 			<>
-				<SearchForm onSubmit={this.handleChangeByQuery} placeholder="Search movie..." />
-
 				{error && <Notification message={error.message} />}
 
 				{isLoading && <Loader onLoad={isLoading} />}
@@ -58,6 +45,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+	onFetchTrendMovies: moviesOperations.fetchTrendMovies,
 	onFetchMoviesByQuery: moviesOperations.fetchMoviesByQuery,
 };
 

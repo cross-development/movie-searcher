@@ -7,11 +7,8 @@ import { moviesOperations, moviesSelectors } from 'redux/movies';
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
 import Notification from 'components/Notification';
-import ButtonGoBack from 'components/ButtonGoBack';
 import MovieDetails from 'components/MovieDetails';
 import AdditionInfo from 'components/AdditionInfo';
-//Routes
-import routes from 'router';
 
 class MovieDetailsPage extends Component {
 	state = {
@@ -68,14 +65,6 @@ class MovieDetailsPage extends Component {
 		this.setFavoriteMovie();
 	};
 
-	handleGoBack = () => {
-		const { location, history } = this.props;
-
-		location.state && location.state.from
-			? history.push(location.state.from)
-			: history.push(routes.home);
-	};
-
 	//TODO: проверить на null
 	render() {
 		const { movie, error, isLoading } = this.props;
@@ -90,8 +79,6 @@ class MovieDetailsPage extends Component {
 				<div>
 					{!isLoading && movie && (
 						<>
-							<ButtonGoBack onChangeClick={this.handleGoBack} />
-
 							<MovieDetails
 								movieData={movie}
 								isFavorite={this.state.isFavorite}

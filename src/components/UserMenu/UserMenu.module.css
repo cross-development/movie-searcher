@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	align-items: center;
+	grid-area: userMenu;
+	justify-content: space-evenly;
+}
+
+.ringWrapper {
+	position: relative;
+	background-image: url('../../assets/svg/ring.svg');
+	width: 24px;
+	height: 24px;
+	background-size: contain;
+}
+
+.ring {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	background: #fb5c00;
+	width: 16px;
+	height: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	font-size: 12px;
+	line-height: 12px;
+	color: #fff;
+}
+
+.avatarWrapper {
+	position: relative;
+	width: 46px;
+	height: 46px;
+}
+
+.avatar {
+	margin-right: 4;
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.name {
+	font-weight: 400;
+	margin-right: 12;
+	color: #515465;
+	font-size: 20px;
+}
+
+.status {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #b2bec3;
+}

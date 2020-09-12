@@ -2,39 +2,38 @@
 @value link-active-color from '../../index.css';
 
 .navigationList {
+	position: relative;
 	display: flex;
-	width: 100%;
-	justify-content: space-between;
+	/* width: 100%; */
+	flex-direction: column;
+	justify-content: space-evenly;
 	align-items: center;
 	list-style: none;
 	padding: 0;
+	margin: 0;
+	grid-area: nav;
+}
+
+.navigationList::after {
+	content: '';
+	width: 76%;
+	height: 1px;
+	background: #d3d3d3;
+	position: absolute;
+	bottom: 0;
 }
 
 .navigationListItem {
 	position: relative;
-}
-
-/* .navigationListItem::after {
-	content: '';
-	position: absolute;
-	bottom: -5px;
-	left: 0;
 	display: block;
-	background: link-color;
-	height: 5px;
 	width: 100%;
-	opacity: 0;
-	transition: opacity 0.2s linear;
+	padding-left: 60px;
 }
-
-.navigationListItem:hover::after {
-	opacity: 1;
-} */
 
 .navigationLink {
 	font-size: 18px;
-	text-transform: uppercase;
-	font-weight: bold;
+	/* text-transform: uppercase; */
+	/* font-weight: bold; */
 	text-decoration: none;
 	color: #000;
 	outline: none;
@@ -45,20 +44,31 @@
 	color: link-color;
 }
 
+.navigationLink::before,
+.navigationLinkActive::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	background: link-color;
+	height: 100%;
+	width: 5px;
+	opacity: 0;
+	transition: all 250ms linear;
+}
+
+.navigationLinkActive::before {
+	opacity: 1;
+}
+
+.navigationLink:hover::before,
+.navigationLinkActive:hover::before {
+	opacity: 1;
+}
+
 .navigationLink:hover,
 .navigationLink:focus,
 .navigationLinkActive:focus {
 	color: link-active-color;
-}
-
-@media (min-width: 768px) {
-	.navigationList {
-		width: 40%;
-	}
-}
-
-@media (min-width: 1440px) {
-	.navigationList {
-		width: 30%;
-	}
 }

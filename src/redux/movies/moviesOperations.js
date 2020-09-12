@@ -11,16 +11,25 @@ const fetchTrendMovies = () => dispatch => {
 	dispatch(moviesActions.getMoviesRequest());
 
 	axios
-		.get(`/trending/all/day?api_key=${API_KEY}`)
+		.get(`/trending/all/day?api_key=${API_KEY}&page=1`)
 		.then(({ data: { results } }) => dispatch(moviesActions.getMoviesSuccess(results)))
 		.catch(error => dispatch(moviesActions.getMoviesFailure(error)));
+};
+
+const fetchUpcomingMovies = () => dispatch => {
+	dispatch(moviesActions.getUpcomingMoviesRequest());
+
+	axios
+		.get(`/movie/upcoming?api_key=${API_KEY}&page=1`)
+		.then(({ data: { results } }) => dispatch(moviesActions.getUpcomingMoviesSuccess(results)))
+		.catch(error => dispatch(moviesActions.getUpcomingMoviesFailure(error)));
 };
 
 const fetchMoviesByQuery = query => dispatch => {
 	dispatch(moviesActions.searchMoviesRequest());
 
 	axios
-		.get(`/search/movie?api_key=${API_KEY}&query=${query}`)
+		.get(`/search/movie?api_key=${API_KEY}&query=${query}&page=1`)
 		.then(({ data: { results } }) => dispatch(moviesActions.searchMoviesSuccess(results)))
 		.catch(error => dispatch(moviesActions.searchMoviesFailure(error)));
 };
@@ -58,4 +67,5 @@ export default {
 	fetchMovieDetails,
 	fetchMovieCast,
 	fetchMovieReviews,
+	fetchUpcomingMovies,
 };

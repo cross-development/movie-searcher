@@ -4,7 +4,7 @@ import axios from 'axios';
 import authActions from './authActions';
 
 //Axios defaults config
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
+const backendBaseURL = 'https://goit-phonebook-api.herokuapp.com';
 
 const token = {
 	set(token) {
@@ -20,7 +20,7 @@ const register = credential => dispatch => {
 	dispatch(authActions.registerRequest());
 
 	axios
-		.post('/users/signup', credential)
+		.post(`${backendBaseURL}/users/signup`, credential)
 		.then(({ data }) => {
 			token.set(data.token);
 			dispatch(authActions.registerSuccess(data));
@@ -32,7 +32,7 @@ const login = credential => dispatch => {
 	dispatch(authActions.loginRequest());
 
 	axios
-		.post('/users/login', credential)
+		.post(`${backendBaseURL}/users/login`, credential)
 		.then(({ data }) => {
 			token.set(data.token);
 			dispatch(authActions.loginSuccess(data));
@@ -44,7 +44,7 @@ const logout = () => dispatch => {
 	dispatch(authActions.logoutRequest());
 
 	axios
-		.post('/users/logout')
+		.post(`${backendBaseURL}/users/logout`)
 		.then(() => {
 			token.unset();
 			dispatch(authActions.logoutSuccess());
@@ -56,13 +56,15 @@ const getCurrentUser = () => (dispatch, getState) => {
 	const state = getState();
 	const { token: existToken } = state.auth;
 
-	if (!existToken) return;
+	if (!existToken) {
+		return;
+	}
 
 	token.set(existToken);
 	dispatch(authActions.getCurrentUserRequest());
 
 	axios
-		.get('/users/current')
+		.get(`${backendBaseURL}/users/current`)
 		.then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
 		.catch(error => dispatch(authActions.getCurrentUserFailure(error)));
 };

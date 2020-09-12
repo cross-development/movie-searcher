@@ -5,6 +5,8 @@ const MoviesPage = lazy(() => import('view/MoviesPage' /* webpackChunkName: "mov
 const PersonsPage = lazy(() => import('view/PersonsPage' /* webpackChunkName: "persons-view"*/));
 const Cast = lazy(() => import('view/Cast' /* webpackChunkName: "cast-view" */));
 const Reviews = lazy(() => import('view/Reviews' /* webpackChunkName: "reviews-view"*/));
+const LoginPage = lazy(() => import('view/LoginPage' /* webpackChunkName: "login-view"*/));
+const RegisterPage = lazy(() => import('view/RegisterPage' /* webpackChunkName: "register-view"*/));
 const MovieDetailsPage = lazy(() =>
 	import('view/MovieDetailsPage' /* webpackChunkName: "movie-details-view" */),
 );
@@ -28,4 +30,6 @@ export default {
 	NotFoundPage,
 	Cast,
 	Reviews,
+	LoginPage,
+	RegisterPage,
 };

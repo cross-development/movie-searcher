@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 //Utils
 import getPosterUrl from 'utils/getPosterUrl';
-//Assets
-import getDefaultAvatar from 'assets/unnamed.jpg';
 //Routes
 import routes from 'router';
 //Styles
@@ -13,24 +11,27 @@ import styles from './CastList.module.css';
 
 const CastList = ({ castData, location }) => (
 	<ul className={styles.castsList}>
-		{castData.map(({ id, name, profile_path }) => (
-			<li key={id} className={styles.castsListItem}>
-				<Link
-					className={styles.castsItemLink}
-					to={{
-						pathname: `${routes.persons}/${id}`,
-						state: { from: location },
-					}}
-				>
-					<img
-						src={profile_path ? `${getPosterUrl}${profile_path}` : getDefaultAvatar}
-						alt={name}
-						className={styles.actorAvatar}
-					/>
-					<span className={styles.actorName}>{name}</span>
-				</Link>
-			</li>
-		))}
+		{castData.map(
+			({ id, name, profile_path }) =>
+				profile_path && (
+					<li key={id} className={styles.castsListItem}>
+						<Link
+							className={styles.castsItemLink}
+							to={{
+								pathname: `${routes.persons}/${id}`,
+								state: { from: location },
+							}}
+						>
+							<span className={styles.actorName}>{name}</span>
+							<img
+								src={`${getPosterUrl}${profile_path}`}
+								alt={name}
+								className={styles.actorAvatar}
+							/>
+						</Link>
+					</li>
+				),
+		)}
 	</ul>
 );
 

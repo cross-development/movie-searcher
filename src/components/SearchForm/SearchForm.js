@@ -16,9 +16,7 @@ export default class SearchForm extends Component {
 		error: false,
 	};
 
-	handleChange = e => {
-		this.setState({ value: e.target.value });
-	};
+	handleChange = ({ target: { value } }) => this.setState({ value });
 
 	handleSubmit = e => {
 		e.preventDefault();
@@ -38,23 +36,22 @@ export default class SearchForm extends Component {
 
 		return (
 			<>
-				<div className={styles.searchbar}>
-					<form onSubmit={this.handleSubmit} className={styles.searchForm}>
+				<form onSubmit={this.handleSubmit} className={styles.searchForm}>
+					<div className={styles.searchbar}>
+						<button type="submit" className={styles.searchFormButton}>
+							<span className={styles.searchFormButtonLabel}>Search</span>
+						</button>
+
 						<input
 							className={styles.searchFormInput}
-							autoFocus
 							type="text"
 							autoComplete="off"
 							placeholder={placeholder}
 							value={value}
 							onChange={this.handleChange}
 						/>
-
-						<button type="submit" className={styles.searchFormButton}>
-							<span className={styles.searchFormButtonLabel}>Search</span>
-						</button>
-					</form>
-				</div>
+					</div>
+				</form>
 
 				{error && <Notification message="Please enter any movie title" />}
 			</>

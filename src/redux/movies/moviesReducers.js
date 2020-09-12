@@ -8,6 +8,7 @@ import moviesActions from './moviesActions';
 const items = createReducer([], {
 	[moviesActions.getMoviesSuccess]: (state, { payload }) => payload,
 	[moviesActions.searchMoviesSuccess]: (state, { payload }) => payload,
+	[moviesActions.getUpcomingMoviesSuccess]: (state, { payload }) => payload,
 });
 
 const item = createReducer('', {
@@ -46,6 +47,10 @@ const loading = createReducer(false, {
 	[moviesActions.getMovieReviewsRequest]: () => true,
 	[moviesActions.getMovieReviewsSuccess]: () => false,
 	[moviesActions.getMovieReviewsFailure]: () => false,
+
+	[moviesActions.getUpcomingMoviesRequest]: () => true,
+	[moviesActions.getUpcomingMoviesSuccess]: () => false,
+	[moviesActions.getUpcomingMoviesFailure]: () => false,
 });
 
 //Error reducer
@@ -55,6 +60,7 @@ const error = createReducer(null, {
 	[moviesActions.getMovieCastFailure]: (state, { payload }) => payload,
 	[moviesActions.getMovieDetailsFailure]: (state, { payload }) => payload,
 	[moviesActions.getMovieReviewsFailure]: (state, { payload }) => payload,
+	[moviesActions.getUpcomingMoviesFailure]: (state, { payload }) => payload,
 });
 
 export default combineReducers({
