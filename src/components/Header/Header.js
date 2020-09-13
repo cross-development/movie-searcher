@@ -20,9 +20,11 @@ class Header extends Component {
 	};
 
 	render() {
+		const { pathname } = this.props.location;
+
 		return (
 			<header className={styles.header}>
-				<MainTitle title="Films" />
+				<MainTitle pathname={pathname} />
 
 				<SearchForm onSubmit={this.handleChangeByQuery} placeholder="Search movie..." />
 

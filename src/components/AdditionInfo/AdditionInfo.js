@@ -9,7 +9,7 @@ import asyncComponents from 'services/asyncComponents';
 //Styles
 import styles from './AdditionInfo.module.css';
 
-const AdditionInfo = ({ onLoading, location, match }) => (
+const AdditionInfo = ({ isLoading, location, match }) => (
 	<div>
 		<h2 className={styles.additionalTitle}>Additional information</h2>
 		<ul className={styles.additionalInfoList}>
@@ -39,7 +39,7 @@ const AdditionInfo = ({ onLoading, location, match }) => (
 			</li>
 		</ul>
 
-		<Suspense fallback={<Loader onLoad={onLoading} />}>
+		<Suspense fallback={<Loader onLoad={isLoading} />}>
 			<Switch>
 				<Route path={`${match.path}/cast`} component={asyncComponents.Cast} />
 				<Route path={`${match.path}/reviews`} component={asyncComponents.Reviews} />
@@ -51,13 +51,13 @@ const AdditionInfo = ({ onLoading, location, match }) => (
 AdditionInfo.defaultProps = {
 	match: {},
 	location: {},
-	onLoading: false,
+	isLoading: false,
 };
 
 AdditionInfo.propTypes = {
 	match: PropTypes.object,
 	location: PropTypes.object,
-	onLoading: PropTypes.bool,
+	isLoading: PropTypes.bool,
 };
 
 export default AdditionInfo;

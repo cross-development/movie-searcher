@@ -86,7 +86,7 @@ class MovieDetailsPage extends Component {
 								onRemoveMovie={this.removeMovie}
 							/>
 
-							<AdditionInfo {...this.props} onLoading={isLoading} />
+							<AdditionInfo {...this.props} />
 						</>
 					)}
 				</div>

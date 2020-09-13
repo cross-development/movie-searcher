@@ -32,7 +32,7 @@ class PersonsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && actors.length > 0 && <PersonsList {...this.props} personsData={actors} />}
+				{!isLoading && actors.length > 0 && <PersonsList {...this.props} />}
 			</>
 		);
 	}

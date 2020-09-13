@@ -12,7 +12,7 @@ const AuthMenu = ({ onLogout }) => (
 		<Link to="/settings" className={styles.settings}>
 			Settings
 		</Link>
-		<Link to="/" onClick={onLogout} className={styles.logout}>
+		<Link to="/home" onClick={onLogout} className={styles.logout}>
 			Log Off
 		</Link>
 	</div>

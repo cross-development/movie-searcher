@@ -34,8 +34,8 @@ class RegisterView extends Component {
 	};
 
 	// defineErrorType = () => {
-	// 	const { hasError } = this.props;
-	// 	return hasError && hasError.config.url.includes('login');
+	// 	const { error } = this.props;
+	// 	return error && error.config.url.includes('login');
 	// };
 
 	render() {
@@ -52,7 +52,7 @@ class RegisterView extends Component {
 }
 
 const mapStateToProps = state => ({
-	hasError: authSelectors.getError(state),
+	error: authSelectors.getError(state),
 });
 
 const mapDispatchToProps = {

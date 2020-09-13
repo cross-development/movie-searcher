@@ -33,8 +33,8 @@ class LoginPage extends Component {
 	};
 
 	// defineErrorType = () => {
-	// 	const { hasError } = this.props;
-	// 	return hasError && hasError.config.url.includes('login');
+	// 	const { error } = this.props;
+	// 	return error && error.config.url.includes('login');
 	// };
 
 	render() {

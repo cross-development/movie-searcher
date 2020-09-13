@@ -72,8 +72,8 @@
 
 .home,
 .movies,
-.actors,
-.favorite,
+.person,
+.favorites,
 .queue {
 	composes: navigationListItem;
 	display: flex;
@@ -83,8 +83,8 @@
 
 .home::before,
 .movies::before,
-.actors::before,
-.favorite::before,
+.person::before,
+.favorites::before,
 .queue::before {
 	content: '';
 	display: inline-block;
@@ -104,11 +104,11 @@
 	background-image: url('../../assets/svg/film.svg');
 }
 
-.actors::before {
+.person::before {
 	background-image: url('../../assets/svg/play-arrow-triangle-outline-pointing-to-right.svg');
 }
 
-.favorite::before {
+.favorites::before {
 	background-image: url('../../assets/svg/heart.svg');
 }
 

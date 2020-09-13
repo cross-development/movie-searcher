@@ -8,8 +8,6 @@ import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
 import Notification from 'components/Notification';
 import PersonDetails from 'components/PersonDetails';
-//Routes
-import routes from 'router';
 
 class PersonDetailsPage extends Component {
 	componentDidMount() {
@@ -17,14 +15,6 @@ class PersonDetailsPage extends Component {
 
 		onFetchActorDetails(match.params.personId);
 	}
-
-	handleGoBack = () => {
-		const { location, history } = this.props;
-
-		location.state && location.state.from
-			? history.push(location.state.from)
-			: history.push(routes.home);
-	};
 
 	render() {
 		const { actor, error, isLoading } = this.props;
@@ -37,7 +27,7 @@ class PersonDetailsPage extends Component {
 
 				{actor === null && <NotFound />}
 
-				<div>{!isLoading && actor && <PersonDetails personData={actor} />}</div>
+				<div>{!isLoading && actor && <PersonDetails {...this.props} />}</div>
 			</>
 		);
 	}

@@ -3,16 +3,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 //Assets
 import logoPath from 'assets/svg/video-camera.svg';
-//Routes
-import routes from 'router';
 //Styles
 import styles from './Logo.module.css';
 
 const Logo = () => (
 	<div className={styles.logoWrapper}>
-		<NavLink exact to={routes.home} className={styles.logoLink}>
+		<NavLink exact to="/home" className={styles.logoLink}>
 			<img src={logoPath} alt="site logo" className={styles.logo} />
-			Forja.tn
+			Derda.vs
 		</NavLink>
 
 		<button className={styles.button} type="button">

@@ -45,9 +45,9 @@ export default class SearchForm extends Component {
 						<input
 							className={styles.searchFormInput}
 							type="text"
+							value={value}
 							autoComplete="off"
 							placeholder={placeholder}
-							value={value}
 							onChange={this.handleChange}
 						/>
 					</div>

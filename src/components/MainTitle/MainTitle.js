@@ -1,13 +1,27 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
+//Routes
+import routes from 'router';
 //Styles
 import styles from './MainTitle.module.css';
 
-const MainTitle = ({ title }) => {
-	return <h1 className={styles.title}>{title}</h1>;
+const MainTitle = ({ pathname }) =>
+	routes.map(
+		({ path, label }) =>
+			path === pathname && (
+				<h1 key={path} className={styles.title}>
+					{label}
+				</h1>
+			),
+	);
+
+MainTitle.propTypes = {
+	pathname: PropTypes.string,
 };
 
-MainTitle.propTypes = {};
+MainTitle.defaultProps = {
+	pathname: '',
+};
 
 export default MainTitle;

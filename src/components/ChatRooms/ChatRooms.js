@@ -46,7 +46,7 @@ const ChatRooms = ({ isAuthenticated }) => {
 						</li>
 					))}
 				</ul>
-				<p>dfsdf</p>
+				<p>Here will be button</p>
 			</div>
 		</div>
 	);

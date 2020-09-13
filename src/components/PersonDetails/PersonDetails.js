@@ -9,8 +9,8 @@ import getDefaultAvatar from 'assets/unnamed.jpg';
 //Styles
 import styles from './PersonDetails.module.css';
 
-const PersonDetails = ({ personData }) => {
-	const { profile_path, name, birthday, deathday, biography, place_of_birth } = personData;
+const PersonDetails = ({ actor }) => {
+	const { profile_path, name, birthday, deathday, biography, place_of_birth } = actor;
 
 	const personPoster = profile_path ? `${getPosterUrl}${profile_path}` : getDefaultAvatar;
 	const personBirthday = birthday ? getReversDate(birthday) : 'No data available';
@@ -43,7 +43,7 @@ const PersonDetails = ({ personData }) => {
 };
 
 PersonDetails.propTypes = {
-	personData: PropTypes.objectOf(PropTypes.any).isRequired,
+	actor: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default PersonDetails;

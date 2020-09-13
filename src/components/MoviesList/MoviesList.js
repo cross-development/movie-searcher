@@ -11,38 +11,39 @@ import routes from 'router';
 //Style
 import styles from './MoviesList.module.css';
 
-const MoviesList = ({ moviesData, location }) => (
-	<>
-		<ul className={styles.movieList}>
-			{moviesData.map(({ id, poster_path, name, title, vote_average }) => (
-				<li className={styles.movieItem} key={id}>
-					<Link
-						className={styles.movieItemLink}
-						to={{
-							pathname: `${routes.movies}/${id}`,
-							state: { from: location },
-						}}
-					>
-						<img
-							className={styles.movieItemImage}
-							src={poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster}
-							alt={name || title}
-						/>
-						{/* <span>{name || title}</span> */}
-					</Link>
-					<span className={styles.movieVote}>{vote_average}</span>
-				</li>
-			))}
-			<li className={styles.pagination}>
-				<button type="submit" className={styles.button}>
-					&larr;
-				</button>
-				<button type="submit" className={styles.button}>
-					&rarr;
-				</button>
+//TODO: откорректировать pathname: `/movies/${id}`, на свойство из роутов
+
+const MoviesList = ({ movies, location }) => (
+	<ul className={styles.movieList}>
+		{movies.map(({ id, poster_path, name, title, vote_average }) => (
+			<li className={styles.movieItem} key={id}>
+				<Link
+					className={styles.movieItemLink}
+					to={{
+						// pathname: `${routes.movies}/${id}`,
+						pathname: `/movies/${id}`,
+						state: { from: location },
+					}}
+				>
+					<img
+						className={styles.movieItemImage}
+						src={poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster}
+						alt={name || title}
+					/>
+					{/* <span>{name || title}</span> */}
+				</Link>
+				<span className={styles.movieVote}>{vote_average}</span>
 			</li>
-		</ul>
-	</>
+		))}
+		<li className={styles.pagination}>
+			<button type="submit" className={styles.button}>
+				&larr;
+			</button>
+			<button type="submit" className={styles.button}>
+				&rarr;
+			</button>
+		</li>
+	</ul>
 );
 
 MoviesList.defaultProps = {
@@ -53,7 +54,7 @@ MoviesList.defaultProps = {
 MoviesList.propTypes = {
 	title: PropTypes.string,
 	location: PropTypes.object,
-	moviesData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
+	movies: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default MoviesList;

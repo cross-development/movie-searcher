@@ -12,18 +12,20 @@ const UserMenu = ({ avatar, name }) => (
 		<div className={styles.ringWrapper}>
 			<span className={styles.ring}>2</span>
 		</div>
+
 		<span className={styles.name}>{name}</span>
+
 		<div className={styles.avatarWrapper}>
-			<img src={avatar} alt="" width="32" className={styles.avatar} />
+			<img src={avatar} alt={name} width="32" className={styles.avatar} />
 			<span className={name ? styles.online : styles.offline}></span>
 		</div>
 	</div>
 );
 
 UserMenu.propTypes = {
-	avatar: PropTypes.string,
 	name: PropTypes.string,
 	onLogout: PropTypes.func,
+	avatar: PropTypes.string,
 };
 
 const mapStateToProps = state => ({

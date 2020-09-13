@@ -11,14 +11,17 @@ import routes from 'router';
 //Style
 import styles from './PersonsList.module.css';
 
-const PersonsList = ({ personsData, location }) => (
+//TODO: откорректировать pathname: `/person/${id}`, на свойство из роутов
+
+const PersonsList = ({ actors, location }) => (
 	<ul className={styles.personList}>
-		{personsData.map(({ id, profile_path, name, popularity }) => (
+		{actors.map(({ id, profile_path, name, popularity }) => (
 			<li className={styles.personItem} key={id}>
 				<Link
 					className={styles.personItemLink}
 					to={{
-						pathname: `${routes.persons}/${id}`,
+						// pathname: `${routes.persons}/${id}`,
+						pathname: `/person/${id}`,
 						state: { from: location },
 					}}
 				>
@@ -49,7 +52,7 @@ PersonsList.defaultProps = {
 
 PersonsList.propTypes = {
 	location: PropTypes.object,
-	personsData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
+	actors: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default PersonsList;

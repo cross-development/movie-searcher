@@ -9,16 +9,19 @@ import routes from 'router';
 //Styles
 import styles from './CastList.module.css';
 
-const CastList = ({ castData, location }) => (
+//TODO: откорректировать pathname: `/person/${id}`, на свойство из роутов
+
+const CastList = ({ cast, location }) => (
 	<ul className={styles.castsList}>
-		{castData.map(
+		{cast.map(
 			({ id, name, profile_path }) =>
 				profile_path && (
 					<li key={id} className={styles.castsListItem}>
 						<Link
 							className={styles.castsItemLink}
 							to={{
-								pathname: `${routes.persons}/${id}`,
+								// pathname: `${routes.persons}/${id}`,
+								pathname: `/person/${id}`,
 								state: { from: location },
 							}}
 						>
@@ -41,7 +44,7 @@ CastList.defaultProps = {
 
 CastList.propTypes = {
 	location: PropTypes.object,
-	castData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
+	cast: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };
 
 export default CastList;

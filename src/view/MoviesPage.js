@@ -32,7 +32,7 @@ class MoviesPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList {...this.props} moviesData={movies} />}
+				{!isLoading && movies.length > 0 && <MoviesList {...this.props} />}
 			</>
 		);
 	}

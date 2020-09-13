@@ -1,5 +1,6 @@
 //Core
 import React, { Component, Suspense } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,12 +12,18 @@ import Layout from '../Layout';
 import Header from '../Header';
 import Loader from '../Loader';
 import Footer from '../Footer';
+import PublicRoute from '../PublicRoute';
+import PrivateRoute from '../PrivateRoute';
 //Routes
 import routes from 'router';
 //Services
 import asyncComponents from 'services/asyncComponents';
 
 class App extends Component {
+	static propTypes = {
+		onGetCurrentUser: PropTypes.func.isRequired,
+	};
+
 	componentDidMount() {
 		this.props.onGetCurrentUser();
 	}
@@ -31,14 +38,13 @@ class App extends Component {
 				<Layout>
 					<Suspense fallback={<Loader onLoad={true} />}>
 						<Switch>
-							<Route path={routes.home} exact component={asyncComponents.HomePage} />
-							<Route path={routes.movieDetails} component={asyncComponents.MovieDetailsPage} />
-							<Route path={routes.movies} component={asyncComponents.MoviesPage} />
-							<Route path={routes.personDetails} component={asyncComponents.PersonsDetailsPage} />
-							<Route path={routes.persons} component={asyncComponents.PersonsPage} />
-							<Route path={routes.favoriteMovies} component={asyncComponents.FavoriteMoviesPage} />
-							<Route path={routes.login} component={asyncComponents.LoginPage} />
-							<Route path={routes.register} component={asyncComponents.RegisterPage} />
+							{routes.map(route =>
+								route.private ? (
+									<PrivateRoute key={route.path} {...route} />
+								) : (
+									<PublicRoute key={route.path} {...route} />
+								),
+							)}
 							<Route component={asyncComponents.NotFoundPage} />
 						</Switch>
 					</Suspense>

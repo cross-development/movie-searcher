@@ -7,12 +7,11 @@ import { moviesOperations, moviesSelectors } from 'redux/movies';
 import Loader from 'components/Loader';
 import ReviewsList from 'components/ReviewsList';
 import Notification from 'components/Notification';
-//Services
-import movieApi from 'services/movieApi';
 
 class Reviews extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const { match, onFetchMovieReviews } = this.props;
+
 		if (prevProps !== this.props) {
 			onFetchMovieReviews(match.params.movieId);
 		}
@@ -31,7 +30,7 @@ class Reviews extends Component {
 					<Notification message="We don't have any reviews for this movie." />
 				)}
 
-				{reviews.length > 0 && <ReviewsList reviewsData={reviews} />}
+				{reviews.length > 0 && <ReviewsList {...this.props} />}
 			</>
 		);
 	}

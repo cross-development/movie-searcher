@@ -25,7 +25,7 @@ export default class FavoriteMovies extends Component {
 				{favorites.length < 1 && <Notification message="We don't have any favorite movie." />}
 
 				{favorites.length > 0 && (
-					<MoviesList {...this.props} title="My favorite movies" moviesData={favorites} />
+					<MoviesList {...this.props} title="My favorite movies" movies={favorites} />
 				)}
 			</>
 		);

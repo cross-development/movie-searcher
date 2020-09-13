@@ -22,16 +22,16 @@ class HomePage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList {...this.props} moviesData={movies} />}
+				{!isLoading && movies.length > 0 && <MoviesList {...this.props} />}
 			</>
 		);
 	}
 }
 
 const mapStateToProps = state => ({
+	error: moviesSelectors.getError(state),
 	movies: moviesSelectors.getMovies(state),
 	isLoading: moviesSelectors.getLoading(state),
-	error: moviesSelectors.getError(state),
 });
 
 const mapDispatchToProps = {

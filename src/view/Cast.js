@@ -30,7 +30,7 @@ class Cast extends Component {
 					<Notification message="We don't have any actors for this movie." />
 				)}
 
-				{cast.length > 0 && <CastList {...this.props} castData={cast} />}
+				{cast.length > 0 && <CastList {...this.props} />}
 			</>
 		);
 	}

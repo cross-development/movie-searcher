@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { authSelectors } from 'redux/auth';
 //Components
 import Logo from '../Logo';
+import AuthMenu from '../AuthMenu';
 import ChatRooms from '../ChatRooms';
 import Navigation from '../Navigation';
-import AuthMenu from '../AuthMenu';
 //Styles
 import styles from './AppBar.module.css';
 
