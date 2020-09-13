@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { authSelectors } from 'redux/auth';
 //Components
 import Logo from '../Logo';
+import ChatRooms from '../ChatRooms';
 import Navigation from '../Navigation';
 import AuthMenu from '../AuthMenu';
 //Styles
@@ -16,6 +17,8 @@ const AppBar = ({ isAuthenticated }) => (
 		<Logo />
 
 		<Navigation />
+
+		<ChatRooms isAuthenticated={isAuthenticated} />
 
 		{isAuthenticated && <AuthMenu />}
 	</aside>

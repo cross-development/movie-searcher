@@ -9,10 +9,10 @@ import styles from './AuthMenu.module.css';
 
 const AuthMenu = ({ onLogout }) => (
 	<div className={styles.authMenu}>
-		<Link to="/settings" className={styles.link}>
+		<Link to="/settings" className={styles.settings}>
 			Settings
 		</Link>
-		<Link to="/" onClick={onLogout} className={styles.link}>
+		<Link to="/" onClick={onLogout} className={styles.logout}>
 			Log Off
 		</Link>
 	</div>

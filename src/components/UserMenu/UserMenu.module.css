@@ -56,5 +56,14 @@
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	background: #b2bec3;
+}
+
+.online {
+	composes: status;
+	background: #3de800;
+}
+
+.offline {
+	composes: status;
+	background: #ff3e3e;
 }

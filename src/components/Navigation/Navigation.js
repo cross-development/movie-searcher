@@ -7,11 +7,11 @@ import routes from 'router';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
-	const { home, movies, persons, favoriteMovies } = routes;
+	const { home, movies, persons, favoriteMovies, queueMovies } = routes;
 
 	return (
 		<ul className={styles.navigationList}>
-			<li className={styles.navigationListItem}>
+			<li className={styles.home}>
 				<NavLink
 					exact
 					to={home}
@@ -22,7 +22,7 @@ const Navigation = () => {
 				</NavLink>
 			</li>
 
-			<li className={styles.navigationListItem}>
+			<li className={styles.movies}>
 				<NavLink
 					to={movies}
 					className={styles.navigationLink}
@@ -32,7 +32,7 @@ const Navigation = () => {
 				</NavLink>
 			</li>
 
-			<li className={styles.navigationListItem}>
+			<li className={styles.actors}>
 				<NavLink
 					to={persons}
 					className={styles.navigationLink}
@@ -42,13 +42,22 @@ const Navigation = () => {
 				</NavLink>
 			</li>
 
-			<li className={styles.navigationListItem}>
+			<li className={styles.favorite}>
 				<NavLink
 					to={favoriteMovies}
 					className={styles.navigationLink}
 					activeClassName={styles.navigationLinkActive}
 				>
-					Favorite Movies
+					My Collection
+				</NavLink>
+			</li>
+			<li className={styles.queue}>
+				<NavLink
+					to={queueMovies}
+					className={styles.navigationLink}
+					activeClassName={styles.navigationLinkActive}
+				>
+					Watch Later
 				</NavLink>
 			</li>
 		</ul>

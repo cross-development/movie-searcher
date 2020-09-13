@@ -1,7 +1,10 @@
 //Core
-import React, { Suspense } from 'react';
+import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+//Redux
+import { authOperations } from 'redux/auth';
 //Components
 import AppBar from '../AppBar';
 import Layout from '../Layout';
@@ -13,30 +16,42 @@ import routes from 'router';
 //Services
 import asyncComponents from 'services/asyncComponents';
 
-const App = () => (
-	<BrowserRouter>
-		<Route component={Header} />
+class App extends Component {
+	componentDidMount() {
+		this.props.onGetCurrentUser();
+	}
 
-		<AppBar />
+	render() {
+		return (
+			<BrowserRouter>
+				<Route component={Header} />
 
-		<Layout>
-			<Suspense fallback={<Loader onLoad={true} />}>
-				<Switch>
-					<Route path={routes.home} exact component={asyncComponents.HomePage} />
-					<Route path={routes.movieDetails} component={asyncComponents.MovieDetailsPage} />
-					<Route path={routes.movies} component={asyncComponents.MoviesPage} />
-					<Route path={routes.personDetails} component={asyncComponents.PersonsDetailsPage} />
-					<Route path={routes.persons} component={asyncComponents.PersonsPage} />
-					<Route path={routes.favoriteMovies} component={asyncComponents.FavoriteMoviesPage} />
-					<Route path={routes.login} component={asyncComponents.LoginPage} />
-					<Route path={routes.register} component={asyncComponents.RegisterPage} />
-					<Route component={asyncComponents.NotFoundPage} />
-				</Switch>
-			</Suspense>
-		</Layout>
+				<AppBar />
 
-		<Footer />
-	</BrowserRouter>
-);
+				<Layout>
+					<Suspense fallback={<Loader onLoad={true} />}>
+						<Switch>
+							<Route path={routes.home} exact component={asyncComponents.HomePage} />
+							<Route path={routes.movieDetails} component={asyncComponents.MovieDetailsPage} />
+							<Route path={routes.movies} component={asyncComponents.MoviesPage} />
+							<Route path={routes.personDetails} component={asyncComponents.PersonsDetailsPage} />
+							<Route path={routes.persons} component={asyncComponents.PersonsPage} />
+							<Route path={routes.favoriteMovies} component={asyncComponents.FavoriteMoviesPage} />
+							<Route path={routes.login} component={asyncComponents.LoginPage} />
+							<Route path={routes.register} component={asyncComponents.RegisterPage} />
+							<Route component={asyncComponents.NotFoundPage} />
+						</Switch>
+					</Suspense>
+				</Layout>
 
-export default App;
+				<Footer />
+			</BrowserRouter>
+		);
+	}
+}
+
+const mapDispatchToProps = {
+	onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);

@@ -7,6 +7,7 @@ export default {
 	persons: '/person',
 	personDetails: '/person/:personId',
 	favoriteMovies: '/favorites',
+	queueMovies: '/queue',
 	login: '/login',
 	register: '/register',
 };

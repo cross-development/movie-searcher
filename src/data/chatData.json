@@ -1,0 +1,71 @@
+[
+	{
+		"chatRoom": 1,
+		"poster": "./images/chatImg/25e12bdb70ae775b07d0e9250828.png",
+		"status": "Private Room",
+		"isPrivate": true,
+		"members": [
+			{
+				"img": "./images/chatImg/Benedict-Cumberbatch.png",
+				"isOnline": true,
+				"room": 1
+			},
+			{
+				"img": "./images/chatImg/Chris-Pratt.png",
+				"isOnline": false,
+				"room": 1
+			},
+			{
+				"img": "./images/chatImg/Lisa_r.png",
+				"isOnline": true,
+				"room": 1
+			}
+		]
+	},
+	{
+		"chatRoom": 2,
+		"poster": "./images/chatImg/322699f120c17c2728457969b59af12c.png",
+		"status": "Public Room",
+		"isPrivate": false,
+		"members": [
+			{
+				"img": "./images/chatImg/MerylStreep.png",
+				"isOnline": false,
+				"room": 2
+			},
+			{
+				"img": "./images/chatImg/Steve-Martin.png",
+				"isOnline": true,
+				"room": 2
+			}
+		]
+	},
+	{
+		"chatRoom": 3,
+		"poster": "./images/chatImg/813hQkSh+KL._SL1500_.png",
+		"status": "Private Room",
+		"isPrivate": true,
+		"members": [
+			{
+				"img": "./images/chatImg/cate_blanchett.png",
+				"isOnline": true,
+				"room": 3
+			},
+			{
+				"img": "./images/chatImg/jake-gyllenhaal.png",
+				"isOnline": false,
+				"room": 3
+			},
+			{
+				"img": "./images/chatImg/jolie99.png",
+				"isOnline": true,
+				"room": 3
+			},
+			{
+				"img": "./images/chatImg/Benedict-Cumberbatch.png",
+				"isOnline": true,
+				"room": 3
+			}
+		]
+	}
+]

@@ -1,0 +1,168 @@
+.chatsWrapper {
+	grid-area: chat;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.chatsWrapper::after {
+	content: '';
+	width: 76%;
+	height: 1px;
+	background: #d3d3d3;
+	position: absolute;
+	bottom: 0;
+}
+
+.chatRooms {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 0 34px;
+}
+
+.titleWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.title {
+	font-weight: 400;
+	font-size: 14px;
+	color: #757575;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.title::before {
+	content: '';
+	display: inline-block;
+	background-image: url('../../assets/svg/group.svg');
+	width: 20px;
+	height: 20px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-right: 6px;
+}
+
+.button {
+	background: #fb5c00;
+	border: none;
+	color: #fff;
+	border-radius: 50px;
+	padding: 4px 6px;
+	cursor: pointer;
+	transition: all 250ms linear;
+	box-shadow: 0 0 8px 0.2px #fb5c00;
+	outline: none;
+}
+
+.button:hover {
+	box-shadow: 0 0 14px #fb5c00;
+}
+
+.chats {
+	margin: 30px 0 0;
+	padding: 0;
+}
+
+.chatItem {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.chatItem:not(:last-of-type) {
+	margin-bottom: 20px;
+}
+
+.movieInfo {
+	margin-left: 10px;
+	width: 100%;
+}
+
+.chatTitle {
+	color: #515465;
+	font-size: 14px;
+	line-height: 17px;
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
+.movieTitle {
+	composes: chatTitle;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.memberCount {
+	color: #757575;
+	font-size: 10px;
+	line-height: 12px;
+	font-weight: 400;
+	margin-bottom: 5px;
+}
+
+.chatStatus {
+	font-size: 10px;
+	line-height: 12px;
+	font-weight: 400;
+	margin-bottom: 5px;
+}
+
+.public {
+	composes: chatStatus;
+	color: #3de800;
+}
+
+.private {
+	composes: chatStatus;
+	color: #ff3e3e;
+}
+
+.members {
+	display: flex;
+	list-style: none;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.membersItem {
+	position: relative;
+}
+
+.chatTitleWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.memberStatus {
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	/* z-index: 1000; */
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+
+.online {
+	composes: memberStatus;
+	background: #3de800;
+}
+
+.offline {
+	composes: memberStatus;
+	background: #ff3e3e;
+}

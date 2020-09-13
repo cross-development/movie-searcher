@@ -6,11 +6,10 @@
 	display: flex;
 	/* width: 100%; */
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: flex-start;
 	align-items: center;
 	list-style: none;
-	padding: 0;
-	margin: 0;
+	padding-top: 20px;
 	grid-area: nav;
 }
 
@@ -25,17 +24,15 @@
 
 .navigationListItem {
 	position: relative;
-	display: block;
 	width: 100%;
-	padding-left: 60px;
+	padding-left: 34px;
+	margin-bottom: 30px;
 }
 
 .navigationLink {
 	font-size: 18px;
-	/* text-transform: uppercase; */
-	/* font-weight: bold; */
 	text-decoration: none;
-	color: #000;
+	color: #757575;
 	outline: none;
 	transition: all 250ms linear;
 }
@@ -71,4 +68,50 @@
 .navigationLink:focus,
 .navigationLinkActive:focus {
 	color: link-active-color;
+}
+
+.home,
+.movies,
+.actors,
+.favorite,
+.queue {
+	composes: navigationListItem;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.home::before,
+.movies::before,
+.actors::before,
+.favorite::before,
+.queue::before {
+	content: '';
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-right: 6px;
+}
+
+.home::before {
+	background-image: url('../../assets/svg/home.svg');
+}
+
+.movies::before {
+	background-image: url('../../assets/svg/film.svg');
+}
+
+.actors::before {
+	background-image: url('../../assets/svg/play-arrow-triangle-outline-pointing-to-right.svg');
+}
+
+.favorite::before {
+	background-image: url('../../assets/svg/heart.svg');
+}
+
+.queue::before {
+	background-image: url('../../assets/svg/cube-of-notes-stack.svg');
 }

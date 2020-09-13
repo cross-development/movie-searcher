@@ -15,7 +15,7 @@ const UserMenu = ({ avatar, name }) => (
 		<span className={styles.name}>{name}</span>
 		<div className={styles.avatarWrapper}>
 			<img src={avatar} alt="" width="32" className={styles.avatar} />
-			<span className={styles.status}></span>
+			<span className={name ? styles.online : styles.offline}></span>
 		</div>
 	</div>
 );
