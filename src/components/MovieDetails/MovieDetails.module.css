@@ -2,33 +2,36 @@
 @value fav-btn-text-color from '../../index.css';
 
 .movieWrapper {
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	align-items: stretch;
-	padding-top: 10px;
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	grid-template-rows: 1fr;
+	gap: 10px 30px;
+	grid-template-areas: 'poster';
+	margin-bottom: 20px;
 }
 
 .posterWrapper {
 	border-radius: 10px;
 	overflow: hidden;
+	grid-area: poster;
 }
 
 .detailsWrapper {
 	align-items: stretch;
-	min-height: 100%;
-	padding: 0px 30px;
-	/* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-		0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
 }
 
 .detailsWrapper h1 {
 	font-size: 32px;
-	margin-top: 0;
+	margin-bottom: 20px;
 }
 
-.detailsWrapper p {
+.overview {
+	margin: 50px 0;
+}
+
+.overview p {
 	text-align: justify;
+	margin: 10px 0;
 }
 
 .favoriteButton {

@@ -7,6 +7,7 @@ import storage from 'redux-persist/lib/storage';
 import { authReducers } from 'redux/auth';
 import { actorsReducers } from 'redux/actors';
 import { moviesReducers } from 'redux/movies';
+import { collectionReducers } from 'redux/collection';
 
 const authPersistConfig = {
 	key: 'auth',
@@ -18,6 +19,7 @@ export const store = configureStore({
 	reducer: {
 		actors: actorsReducers,
 		movies: moviesReducers,
+		collection: collectionReducers,
 		auth: persistReducer(authPersistConfig, authReducers),
 	},
 

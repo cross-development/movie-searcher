@@ -33,10 +33,12 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie, isAuth
 
 				<Rating name="customized-10" defaultValue={vote_average} max={10} readOnly />
 
-				<h2>Overview</h2>
-				<p>{overview}</p>
-				<h3>Genres</h3>
-				<p>{movieGenres}</p>
+				<div className={styles.overview}>
+					<h2>Overview</h2>
+					<p>{overview}</p>
+					<h3>Genres</h3>
+					<p>{movieGenres}</p>
+				</div>
 
 				{isAuthenticated &&
 					(!isFavorite ? (
