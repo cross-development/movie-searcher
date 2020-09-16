@@ -13,17 +13,118 @@ const userSchema = new Schema({
 		required: true,
 	},
 
-	cart: {
-		items: [
+	movies: {
+		favorites: [
 			{
-				count: {
+				movieId: {
 					type: Number,
 					required: true,
-					default: 1,
 				},
-				courseId: {
+
+				poster_path: {
+					type: String,
+					required: true,
+				},
+
+				title: {
+					type: String,
+					required: false,
+				},
+
+				name: {
+					type: String,
+					required: false,
+				},
+
+				release_date: {
+					type: String,
+					required: true,
+				},
+
+				vote_average: {
+					type: Number,
+					required: true,
+				},
+
+				overview: {
+					type: String,
+					required: true,
+				},
+
+				genres: [
+					{
+						id: {
+							type: Number,
+							required: true,
+						},
+						name: {
+							type: String,
+							required: true,
+						},
+					},
+				],
+
+				favoritesId: {
 					type: Schema.Types.ObjectId,
-					ref: 'Course',
+					ref: 'Favorites',
+					required: true,
+				},
+			},
+		],
+
+		queue: [
+			{
+				movieId: {
+					type: Number,
+					required: true,
+				},
+
+				poster_path: {
+					type: String,
+					required: true,
+				},
+
+				title: {
+					type: String,
+					required: false,
+				},
+
+				name: {
+					type: String,
+					required: false,
+				},
+
+				release_date: {
+					type: String,
+					required: true,
+				},
+
+				vote_average: {
+					type: Number,
+					required: true,
+				},
+
+				overview: {
+					type: String,
+					required: true,
+				},
+
+				genres: [
+					{
+						id: {
+							type: Number,
+							required: true,
+						},
+						name: {
+							type: String,
+							required: true,
+						},
+					},
+				],
+
+				favoritesId: {
+					type: Schema.Types.ObjectId,
+					ref: 'Favorites',
 					required: true,
 				},
 			},

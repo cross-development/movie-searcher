@@ -5,8 +5,6 @@ const router = Router();
 
 router.get('/login', async (req, res) => {
 	res.render('auth/login', {
-		title: 'Авторизация',
-		isLogin: true,
 		loginError: req.flash('loginError'),
 		registerError: req.flash('registerError'),
 	});
@@ -55,22 +53,19 @@ router.post('/register', async (req, res) => {
 		const candidate = await User.findOne({ email });
 
 		if (candidate) {
-			req.flash(
-				'registerError',
-				'Пользователь с таким email уже существует!',
-			);
-			res.redirect('/auth/login#register');
+			req.flash('registerError', 'Пользователь с таким email уже существует!');
+			res.redirect('/auth/login');
 		} else {
 			const hashPassword = await bcrypt.hash(password, 10);
 			const user = new User({
 				email,
 				name,
 				password: hashPassword,
-				cart: { items: [] },
+				movies: { favorites: [], queue: [] },
 			});
 
 			await user.save();
-			res.redirect('/auth/login#login');
+			res.redirect('/auth/login');
 		}
 	} catch (error) {
 		console.log(error);
