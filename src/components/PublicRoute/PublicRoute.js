@@ -16,7 +16,7 @@ const PublicRoute = ({ component: Component, isAuthenticated, ...routeProps }) =
 );
 
 PublicRoute.propTypes = {
-	isAuthenticated: PropTypes.string,
+	isAuthenticated: PropTypes.objectOf(PropTypes.any),
 };
 
 PublicRoute.defaultProps = {

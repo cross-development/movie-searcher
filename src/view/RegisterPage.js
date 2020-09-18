@@ -11,11 +11,11 @@ import { authOperations, authSelectors } from 'redux/auth';
 class RegisterView extends Component {
 	static propTypes = {
 		onRegister: PropTypes.func.isRequired,
-		hasError: PropTypes.object,
+		error: PropTypes.object,
 	};
 
 	static defaultProps = {
-		hasError: null,
+		error: null,
 	};
 
 	state = {
@@ -35,17 +35,27 @@ class RegisterView extends Component {
 
 	// defineErrorType = () => {
 	// 	const { error } = this.props;
-	// 	return error && error.config.url.includes('login');
+
+	// 	if (error.code === 'auth/email-already-in-use') {
+	// 		return 'The password is already in use.';
+	// 	}
+
+	// 	if (error.code === 'auth/weak-password') {
+	// 		return 'The password is too weak.';
+	// 	}
+
+	// 	return error.message;
 	// };
 
 	render() {
-		// const isErrorTypeRegister = this.defineErrorType();
+		// const errorMessage = this.defineErrorType();
+		// const { error } = this.props;
 
 		return (
 			<>
 				<Register {...this.state} onChange={this.handleChange} onSubmit={this.handleSubmit} />
 
-				{/* {isErrorTypeRegister && <Error message="User with this email already exists" />} */}
+				{/* {error && <Error message={errorMessage} />} */}
 			</>
 		);
 	}

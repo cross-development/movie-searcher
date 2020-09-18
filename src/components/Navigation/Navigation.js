@@ -50,7 +50,7 @@ const Navigation = ({ isAuthenticated }) => (
 );
 
 Navigation.propTypes = {
-	isAuthenticated: PropTypes.string,
+	isAuthenticated: PropTypes.objectOf(PropTypes.any),
 };
 
 Navigation.defaultProps = {

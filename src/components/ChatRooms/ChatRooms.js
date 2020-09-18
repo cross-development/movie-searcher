@@ -53,7 +53,7 @@ const ChatRooms = ({ isAuthenticated }) => {
 };
 
 ChatRooms.propTypes = {
-	isAuthenticated: PropTypes.string,
+	isAuthenticated: PropTypes.objectOf(PropTypes.any),
 };
 
 ChatRooms.defaultProps = {

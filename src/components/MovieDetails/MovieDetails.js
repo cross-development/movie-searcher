@@ -60,10 +60,10 @@ const MovieDetails = ({ movieData, isFavorite, onAddMovie, onRemoveMovie, isAuth
 };
 
 MovieDetails.propTypes = {
-	isAuthenticated: PropTypes.string,
 	isFavorite: PropTypes.bool.isRequired,
 	onAddMovie: PropTypes.func.isRequired,
 	onRemoveMovie: PropTypes.func.isRequired,
+	isAuthenticated: PropTypes.objectOf(PropTypes.any),
 	movieData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 

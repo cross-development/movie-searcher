@@ -14,7 +14,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...routeProps }) 
 );
 
 PrivateRoute.propTypes = {
-	isAuthenticated: PropTypes.string,
+	isAuthenticated: PropTypes.objectOf(PropTypes.any),
 };
 
 PrivateRoute.defaultProps = {

@@ -1,72 +1,64 @@
-//Core
-import axios from 'axios';
+//Database
+import * as firebase from 'firebase';
 //Redux
 import authActions from './authActions';
 
-//Axios defaults config
-const backendBaseURL = 'https://goit-phonebook-api.herokuapp.com';
-
-const token = {
-	set(token) {
-		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-	},
-
-	unset() {
-		axios.defaults.headers.common.Authorization = '';
-	},
-};
-
-const register = credential => dispatch => {
+const register = ({ name, email, password }) => async dispatch => {
 	dispatch(authActions.registerRequest());
 
-	axios
-		.post(`${backendBaseURL}/users/signup`, credential)
-		.then(({ data }) => {
-			token.set(data.token);
-			dispatch(authActions.registerSuccess(data));
-		})
-		.catch(error => dispatch(authActions.registerFailure(error)));
+	try {
+		const newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+		await newUser.user.updateProfile({ displayName: name });
+		const user = newUser.user.toJSON();
+
+		dispatch(authActions.registerSuccess(user));
+	} catch (error) {
+		dispatch(authActions.registerFailure(error));
+	}
 };
 
-const login = credential => dispatch => {
+const login = ({ email, password }) => async dispatch => {
 	dispatch(authActions.loginRequest());
 
-	axios
-		.post(`${backendBaseURL}/users/login`, credential)
-		.then(({ data }) => {
-			token.set(data.token);
-			dispatch(authActions.loginSuccess(data));
-		})
-		.catch(error => dispatch(authActions.loginFailure(error)));
+	try {
+		const currentUser = await firebase.auth().signInWithEmailAndPassword(email, password);
+		const user = currentUser.user.toJSON();
+
+		dispatch(authActions.loginSuccess(user));
+	} catch (error) {
+		dispatch(authActions.loginFailure(error));
+	}
 };
 
-const logout = () => dispatch => {
+const logout = () => async dispatch => {
 	dispatch(authActions.logoutRequest());
 
-	axios
-		.post(`${backendBaseURL}/users/logout`)
-		.then(() => {
-			token.unset();
-			dispatch(authActions.logoutSuccess());
-		})
-		.catch(error => dispatch(authActions.logoutFailure(error)));
+	try {
+		await firebase
+			.auth()
+			.signOut()
+			.then(() => dispatch(authActions.logoutSuccess()));
+	} catch (error) {
+		dispatch(authActions.logoutFailure(error));
+	}
 };
 
-const getCurrentUser = () => (dispatch, getState) => {
-	const state = getState();
-	const { token: existToken } = state.auth;
-
-	if (!existToken) {
-		return;
-	}
-
-	token.set(existToken);
+const getCurrentUser = () => dispatch => {
 	dispatch(authActions.getCurrentUserRequest());
 
-	axios
-		.get(`${backendBaseURL}/users/current`)
-		.then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-		.catch(error => dispatch(authActions.getCurrentUserFailure(error)));
+	try {
+		firebase.auth().onAuthStateChanged(currentUser => {
+			if (!currentUser) {
+				return firebase.auth().signOut();
+			}
+
+			const user = currentUser.toJSON();
+
+			dispatch(authActions.getCurrentUserSuccess(user));
+		});
+	} catch (error) {
+		dispatch(authActions.getCurrentUserFailure(error));
+	}
 };
 
 export default { register, login, logout, getCurrentUser };

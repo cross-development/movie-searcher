@@ -25,7 +25,7 @@ const AppBar = ({ isAuthenticated }) => (
 );
 
 AppBar.propTypes = {
-	isAuthenticated: PropTypes.string,
+	isAuthenticated: PropTypes.objectOf(PropTypes.any),
 };
 
 AppBar.defaultProps = {
