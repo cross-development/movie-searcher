@@ -1,18 +1,26 @@
 //Core
 import axios from 'axios';
+//Database
+import * as firebase from 'firebase';
 //Redux
 import collectionActions from './collectionActions';
 
 //Axios defaults config
 const backendBaseURL = 'https://goit-phonebook-api.herokuapp.com';
 
-const addFavoriteMovie = description => dispatch => {
+const addFavoriteMovie = (userId, movie) => dispatch => {
 	dispatch(collectionActions.addFavoriteMovieRequest());
 
-	axios
-		.post(`${backendBaseURL}/favorites`, { description })
-		.then(({ data }) => dispatch(collectionActions.addFavoriteMovieSuccess(data)))
-		.catch(error => dispatch(collectionActions.addFavoriteMovieFailure(error)));
+	const db = firebase.database();
+	const userCollection = db.ref('users/' + userId);
+
+	try {
+		const addedMovie = userCollection.child('favorites').push(movie);
+		console.log(addedMovie);
+		// dispatch(collectionActions.addFavoriteMovieSuccess(data));
+	} catch (error) {
+		dispatch(collectionActions.addFavoriteMovieFailure(error));
+	}
 };
 
 const removeFavoriteMovie = id => dispatch => {

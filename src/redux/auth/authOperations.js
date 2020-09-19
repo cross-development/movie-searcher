@@ -7,9 +7,15 @@ const register = ({ name, email, password }) => async dispatch => {
 	dispatch(authActions.registerRequest());
 
 	try {
-		const newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-		await newUser.user.updateProfile({ displayName: name });
-		const user = newUser.user.toJSON();
+		const { user: newUser } = await firebase.auth().createUserWithEmailAndPassword(email, password);
+		await newUser.updateProfile({ displayName: name });
+
+		await firebase
+			.database()
+			.ref('users/' + newUser.uid)
+			.set({ name, queue: '', favorites: '', uid: newUser.uid });
+
+		const user = newUser.toJSON();
 
 		dispatch(authActions.registerSuccess(user));
 	} catch (error) {
@@ -21,8 +27,8 @@ const login = ({ email, password }) => async dispatch => {
 	dispatch(authActions.loginRequest());
 
 	try {
-		const currentUser = await firebase.auth().signInWithEmailAndPassword(email, password);
-		const user = currentUser.user.toJSON();
+		const { user: currentUser } = await firebase.auth().signInWithEmailAndPassword(email, password);
+		const user = currentUser.toJSON();
 
 		dispatch(authActions.loginSuccess(user));
 	} catch (error) {

@@ -28,14 +28,14 @@ class Header extends Component {
 
 				<SearchForm onSubmit={this.handleChangeByQuery} placeholder="Search movie..." />
 
-				{this.props.isAuthenticated ? <UserMenu /> : <AuthNav />}
+				{this.props.existUser ? <UserMenu /> : <AuthNav />}
 			</header>
 		);
 	}
 }
 
 const mapStateToProps = state => ({
-	isAuthenticated: authSelectors.isAuthenticated(state),
+	existUser: authSelectors.existUser(state),
 });
 
 export default connect(mapStateToProps)(Header);

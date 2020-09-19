@@ -6,23 +6,23 @@ import { Route, Redirect } from 'react-router-dom';
 //Redux
 import { authSelectors } from 'redux/auth';
 
-const PrivateRoute = ({ component: Component, isAuthenticated, ...routeProps }) => (
+const PrivateRoute = ({ component: Component, existUser, ...routeProps }) => (
 	<Route
 		{...routeProps}
-		render={props => (isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />)}
+		render={props => (existUser ? <Component {...props} /> : <Redirect to="/login" />)}
 	/>
 );
 
 PrivateRoute.propTypes = {
-	isAuthenticated: PropTypes.objectOf(PropTypes.any),
+	existUser: PropTypes.objectOf(PropTypes.any),
 };
 
 PrivateRoute.defaultProps = {
-	isAuthenticated: null,
+	existUser: null,
 };
 
 const mapStateToProps = state => ({
-	isAuthenticated: authSelectors.isAuthenticated(state),
+	existUser: authSelectors.existUser(state),
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

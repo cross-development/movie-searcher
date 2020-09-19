@@ -10,7 +10,7 @@ import routes from 'router';
 //Styles
 import styles from './Navigation.module.css';
 
-const Navigation = ({ isAuthenticated }) => (
+const Navigation = ({ existUser }) => (
 	<ul className={styles.navigationList}>
 		{routes.map(
 			route =>
@@ -29,7 +29,7 @@ const Navigation = ({ isAuthenticated }) => (
 				),
 		)}
 
-		{isAuthenticated &&
+		{existUser &&
 			routes.map(
 				route =>
 					route.isNavigation &&
@@ -50,15 +50,15 @@ const Navigation = ({ isAuthenticated }) => (
 );
 
 Navigation.propTypes = {
-	isAuthenticated: PropTypes.objectOf(PropTypes.any),
+	existUser: PropTypes.objectOf(PropTypes.any),
 };
 
 Navigation.defaultProps = {
-	isAuthenticated: null,
+	existUser: null,
 };
 
 const mapStateToProps = state => ({
-	isAuthenticated: authSelectors.isAuthenticated(state),
+	existUser: authSelectors.existUser(state),
 });
 
 export default connect(mapStateToProps)(Navigation);

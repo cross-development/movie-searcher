@@ -12,28 +12,28 @@ import Navigation from '../Navigation';
 //Styles
 import styles from './AppBar.module.css';
 
-const AppBar = ({ isAuthenticated }) => (
+const AppBar = ({ existUser }) => (
 	<aside className={styles.appBar}>
 		<Logo />
 
 		<Navigation />
 
-		<ChatRooms isAuthenticated={isAuthenticated} />
+		<ChatRooms existUser={existUser} />
 
-		{isAuthenticated && <AuthMenu />}
+		{existUser && <AuthMenu />}
 	</aside>
 );
 
 AppBar.propTypes = {
-	isAuthenticated: PropTypes.objectOf(PropTypes.any),
+	existUser: PropTypes.objectOf(PropTypes.any),
 };
 
 AppBar.defaultProps = {
-	isAuthenticated: null,
+	existUser: null,
 };
 
 const mapStateToProps = state => ({
-	isAuthenticated: authSelectors.isAuthenticated(state),
+	existUser: authSelectors.existUser(state),
 });
 
 export default connect(mapStateToProps)(AppBar);

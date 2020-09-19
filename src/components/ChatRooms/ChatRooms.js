@@ -7,7 +7,7 @@ import chatData from 'data/chatData.json';
 //Styles
 import styles from './ChatRooms.module.css';
 
-const ChatRooms = ({ isAuthenticated }) => {
+const ChatRooms = ({ existUser }) => {
 	return (
 		<div className={styles.chatsWrapper}>
 			<div className={styles.chatRooms}>
@@ -53,11 +53,11 @@ const ChatRooms = ({ isAuthenticated }) => {
 };
 
 ChatRooms.propTypes = {
-	isAuthenticated: PropTypes.objectOf(PropTypes.any),
+	existUser: PropTypes.objectOf(PropTypes.any),
 };
 
 ChatRooms.defaultProps = {
-	isAuthenticated: null,
+	existUser: null,
 };
 
 export default ChatRooms;

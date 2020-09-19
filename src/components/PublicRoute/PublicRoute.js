@@ -6,25 +6,25 @@ import { Route, Redirect } from 'react-router-dom';
 //Redux
 import { authSelectors } from 'redux/auth';
 
-const PublicRoute = ({ component: Component, isAuthenticated, ...routeProps }) => (
+const PublicRoute = ({ component: Component, existUser, ...routeProps }) => (
 	<Route
 		{...routeProps}
 		render={props =>
-			isAuthenticated && routeProps.restricted ? <Redirect to="/home" /> : <Component {...props} />
+			existUser && routeProps.restricted ? <Redirect to="/home" /> : <Component {...props} />
 		}
 	/>
 );
 
 PublicRoute.propTypes = {
-	isAuthenticated: PropTypes.objectOf(PropTypes.any),
+	existUser: PropTypes.objectOf(PropTypes.any),
 };
 
 PublicRoute.defaultProps = {
-	isAuthenticated: null,
+	existUser: null,
 };
 
 const mapStateToProps = state => ({
-	isAuthenticated: authSelectors.isAuthenticated(state),
+	existUser: authSelectors.existUser(state),
 });
 
 export default connect(mapStateToProps)(PublicRoute);

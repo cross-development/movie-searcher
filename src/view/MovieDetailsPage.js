@@ -18,54 +18,11 @@ class MovieDetailsPage extends Component {
 	componentDidMount() {
 		const { match, onFetchMovieDetails } = this.props;
 
-		const existFavList = localStorage.getItem('favorite_movies');
-
-		if (existFavList) {
-			const favMovies = [...JSON.parse(existFavList)];
-
-			favMovies.find(({ id }) => {
-				if (id === Number(match.params.movieId)) {
-					return this.setFavoriteMovie();
-				}
-
-				return false;
-			});
-		}
-
 		onFetchMovieDetails(match.params.movieId);
 	}
 
-	setMovieToLocalStorage = () => {
-		const existFavList = localStorage.getItem('favorite_movies');
-
-		if (!existFavList) {
-			localStorage.setItem('favorite_movies', JSON.stringify([this.props.movie]));
-			this.setFavoriteMovie();
-			return;
-		}
-
-		const favMovies = [...JSON.parse(existFavList), this.props.movie];
-		localStorage.setItem('favorite_movies', JSON.stringify(favMovies));
-		this.setFavoriteMovie();
-	};
-
 	setFavoriteMovie = () => this.setState(prevState => ({ isFavorite: !prevState.isFavorite }));
 
-	removeMovie = movieId => {
-		const existFavList = localStorage.getItem('favorite_movies');
-
-		if (!existFavList) {
-			return this.setFavoriteMovie();
-		}
-
-		const favMovies = [...JSON.parse(existFavList)];
-		const filteredFavMovies = favMovies.filter(({ id }) => id !== movieId);
-
-		localStorage.setItem('favorite_movies', JSON.stringify(filteredFavMovies));
-		this.setFavoriteMovie();
-	};
-
-	//TODO: проверить на null
 	render() {
 		const { movie, error, isLoading } = this.props;
 
@@ -79,12 +36,7 @@ class MovieDetailsPage extends Component {
 				<div>
 					{!isLoading && movie && (
 						<>
-							<MovieDetails
-								movieData={movie}
-								isFavorite={this.state.isFavorite}
-								onAddMovie={this.setMovieToLocalStorage}
-								onRemoveMovie={this.removeMovie}
-							/>
+							<MovieDetails movieData={movie} isFavorite={this.state.isFavorite} />
 
 							<AdditionInfo {...this.props} />
 						</>
@@ -106,3 +58,31 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage);
+
+// setMovieToLocalStorage = () => {
+// 	const existFavList = localStorage.getItem('favorite_movies');
+
+// 	if (!existFavList) {
+// 		localStorage.setItem('favorite_movies', JSON.stringify([this.props.movie]));
+// 		this.setFavoriteMovie();
+// 		return;
+// 	}
+
+// 	const favMovies = [...JSON.parse(existFavList), this.props.movie];
+// 	localStorage.setItem('favorite_movies', JSON.stringify(favMovies));
+// 	this.setFavoriteMovie();
+// };
+
+// removeMovie = movieId => {
+// 	const existFavList = localStorage.getItem('favorite_movies');
+
+// 	if (!existFavList) {
+// 		return this.setFavoriteMovie();
+// 	}
+
+// 	const favMovies = [...JSON.parse(existFavList)];
+// 	const filteredFavMovies = favMovies.filter(({ id }) => id !== movieId);
+
+// 	localStorage.setItem('favorite_movies', JSON.stringify(filteredFavMovies));
+// 	this.setFavoriteMovie();
+// };
