@@ -30,29 +30,28 @@ const MoviesList = ({ movies, location }) => (
 						src={poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster}
 						alt={name || title}
 					/>
-					{/* <span>{name || title}</span> */}
 				</Link>
 				<span className={styles.movieVote}>{vote_average}</span>
 			</li>
 		))}
-		<li className={styles.pagination}>
-			<button type="submit" className={styles.button}>
-				&larr;
-			</button>
-			<button type="submit" className={styles.button}>
-				&rarr;
-			</button>
-		</li>
+		{movies.length > 19 && (
+			<li className={styles.pagination}>
+				<button type="submit" className={styles.button}>
+					&larr;
+				</button>
+				<button type="submit" className={styles.button}>
+					&rarr;
+				</button>
+			</li>
+		)}
 	</ul>
 );
 
 MoviesList.defaultProps = {
-	title: '',
 	location: {},
 };
 
 MoviesList.propTypes = {
-	title: PropTypes.string,
 	location: PropTypes.object,
 	movies: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any).isRequired).isRequired,
 };

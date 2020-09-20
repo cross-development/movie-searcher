@@ -1,9 +1,6 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-//Redux
-import { authSelectors } from 'redux/auth';
 //Components
 import Rating from '@material-ui/lab/Rating';
 import CollectionsControls from '../CollectionsControls';
@@ -14,7 +11,7 @@ import getDefaultPoster from 'assets/default_poster.jpg';
 //Styles
 import styles from './MovieDetails.module.css';
 
-const MovieDetails = ({ movieData, isFavorite, existUser }) => {
+const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
 	const { poster_path, title, name, release_date, vote_average, overview, genres } = movieData;
 
 	const moviePoster = poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster;
@@ -42,7 +39,12 @@ const MovieDetails = ({ movieData, isFavorite, existUser }) => {
 				</div>
 
 				{existUser && (
-					<CollectionsControls movie={movieData} user={existUser} isFavorite={isFavorite} />
+					<CollectionsControls
+						movie={movieData}
+						user={existUser}
+						isFavorite={isFavorite}
+						isQueue={isQueue}
+					/>
 				)}
 			</div>
 		</div>
@@ -50,16 +52,16 @@ const MovieDetails = ({ movieData, isFavorite, existUser }) => {
 };
 
 MovieDetails.propTypes = {
+	isQueue: PropTypes.bool,
+	isFavorite: PropTypes.bool,
 	existUser: PropTypes.objectOf(PropTypes.any),
 	movieData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 MovieDetails.defaultProps = {
+	isQueue: false,
 	existUser: null,
+	isFavorite: false,
 };
 
-const mapStateToProps = state => ({
-	existUser: authSelectors.existUser(state),
-});
-
-export default connect(mapStateToProps)(MovieDetails);
+export default MovieDetails;

@@ -24,7 +24,7 @@ class MoviesPage extends Component {
 	}
 
 	render() {
-		const { movies, error, isLoading } = this.props;
+		const { movies, location, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -32,7 +32,7 @@ class MoviesPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList {...this.props} />}
+				{!isLoading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
 			</>
 		);
 	}

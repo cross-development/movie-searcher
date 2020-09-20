@@ -34,15 +34,6 @@ const fetchMoviesByQuery = query => dispatch => {
 		.catch(error => dispatch(moviesActions.searchMoviesFailure(error)));
 };
 
-const fetchMovieDetails = movieId => dispatch => {
-	dispatch(moviesActions.getMovieDetailsRequest());
-
-	axios
-		.get(`/movie/${movieId}?api_key=${API_KEY}`)
-		.then(({ data }) => dispatch(moviesActions.getMovieDetailsSuccess(data)))
-		.catch(error => dispatch(moviesActions.getMovieDetailsFailure(error)));
-};
-
 const fetchMovieCast = movieId => dispatch => {
 	dispatch(moviesActions.getMovieCastRequest());
 
@@ -64,7 +55,6 @@ const fetchMovieReviews = movieId => dispatch => {
 export default {
 	fetchTrendMovies,
 	fetchMoviesByQuery,
-	fetchMovieDetails,
 	fetchMovieCast,
 	fetchMovieReviews,
 	fetchUpcomingMovies,

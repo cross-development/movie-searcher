@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //Redux
-import { moviesOperations, moviesSelectors } from 'redux/movies';
+import { authSelectors } from 'redux/auth';
+import { movieOperations, movieSelectors } from 'redux/movie';
 //Components
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
@@ -11,20 +12,29 @@ import MovieDetails from 'components/MovieDetails';
 import AdditionInfo from 'components/AdditionInfo';
 
 class MovieDetailsPage extends Component {
-	state = {
-		isFavorite: false,
-	};
-
 	componentDidMount() {
-		const { match, onFetchMovieDetails } = this.props;
+		const { user, match, location } = this.props;
+		const {
+			params: { movieId },
+		} = match;
 
-		onFetchMovieDetails(match.params.movieId);
+		console.log(location.state.from.pathname);
+
+		if (location.state.from.pathname === '/favorites') {
+			this.props.onFetchFavMovieDetails(user.uid, Number(movieId));
+			return;
+		}
+
+		if (location.state.from.pathname === '/queue') {
+			this.props.onFetchQueueMovieDetails(user.uid, Number(movieId));
+			return;
+		}
+
+		this.props.onFetchMovieDetails(Number(movieId));
 	}
 
-	setFavoriteMovie = () => this.setState(prevState => ({ isFavorite: !prevState.isFavorite }));
-
 	render() {
-		const { movie, error, isLoading } = this.props;
+		const { movie, user, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -36,7 +46,12 @@ class MovieDetailsPage extends Component {
 				<div>
 					{!isLoading && movie && (
 						<>
-							<MovieDetails movieData={movie} isFavorite={this.state.isFavorite} />
+							<MovieDetails
+								movieData={movie}
+								existUser={user}
+								isFavorite={movie.isFavorite}
+								isQueue={movie.isQueue}
+							/>
 
 							<AdditionInfo {...this.props} />
 						</>
@@ -48,41 +63,16 @@ class MovieDetailsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-	movie: moviesSelectors.getMovie(state),
-	error: moviesSelectors.getError(state),
-	isLoading: moviesSelectors.getLoading(state),
+	user: authSelectors.existUser(state),
+	movie: movieSelectors.getMovie(state),
+	error: movieSelectors.getError(state),
+	isLoading: movieSelectors.getLoading(state),
 });
 
 const mapDispatchToProps = {
-	onFetchMovieDetails: moviesOperations.fetchMovieDetails,
+	onFetchMovieDetails: movieOperations.fetchMovieDetails,
+	onFetchQueueMovieDetails: movieOperations.fetchQueueMovieDetails,
+	onFetchFavMovieDetails: movieOperations.fetchFavoriteMovieDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage);
-
-// setMovieToLocalStorage = () => {
-// 	const existFavList = localStorage.getItem('favorite_movies');
-
-// 	if (!existFavList) {
-// 		localStorage.setItem('favorite_movies', JSON.stringify([this.props.movie]));
-// 		this.setFavoriteMovie();
-// 		return;
-// 	}
-
-// 	const favMovies = [...JSON.parse(existFavList), this.props.movie];
-// 	localStorage.setItem('favorite_movies', JSON.stringify(favMovies));
-// 	this.setFavoriteMovie();
-// };
-
-// removeMovie = movieId => {
-// 	const existFavList = localStorage.getItem('favorite_movies');
-
-// 	if (!existFavList) {
-// 		return this.setFavoriteMovie();
-// 	}
-
-// 	const favMovies = [...JSON.parse(existFavList)];
-// 	const filteredFavMovies = favMovies.filter(({ id }) => id !== movieId);
-
-// 	localStorage.setItem('favorite_movies', JSON.stringify(filteredFavMovies));
-// 	this.setFavoriteMovie();
-// };

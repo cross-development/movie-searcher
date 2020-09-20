@@ -5,21 +5,17 @@ const getMoviesRequest = createAction('movies/getMoviesRequest');
 const getMoviesSuccess = createAction('movies/getMoviesSuccess');
 const getMoviesFailure = createAction('movies/getMoviesFailure');
 
-const searchMoviesRequest = createAction('movie/searchMoviesRequest');
-const searchMoviesSuccess = createAction('movie/searchMoviesSuccess');
-const searchMoviesFailure = createAction('movie/searchMoviesFailure');
+const searchMoviesRequest = createAction('movies/searchMoviesRequest');
+const searchMoviesSuccess = createAction('movies/searchMoviesSuccess');
+const searchMoviesFailure = createAction('movies/searchMoviesFailure');
 
-const getMovieCastRequest = createAction('movie/getMovieCastRequest');
-const getMovieCastSuccess = createAction('movie/getMovieCastSuccess');
-const getMovieCastFailure = createAction('movie/getMovieCastFailure');
+const getMovieCastRequest = createAction('movies/getMovieCastRequest');
+const getMovieCastSuccess = createAction('movies/getMovieCastSuccess');
+const getMovieCastFailure = createAction('movies/getMovieCastFailure');
 
-const getMovieReviewsRequest = createAction('movie/getMovieReviewsRequest');
-const getMovieReviewsSuccess = createAction('movie/getMovieReviewsSuccess');
-const getMovieReviewsFailure = createAction('movie/getMovieReviewsFailure');
-
-const getMovieDetailsRequest = createAction('movie/getMovieDetailsRequest');
-const getMovieDetailsSuccess = createAction('movie/getMovieDetailsSuccess');
-const getMovieDetailsFailure = createAction('movie/getMovieDetailsFailure');
+const getMovieReviewsRequest = createAction('movies/getMovieReviewsRequest');
+const getMovieReviewsSuccess = createAction('movies/getMovieReviewsSuccess');
+const getMovieReviewsFailure = createAction('movies/getMovieReviewsFailure');
 
 const getUpcomingMoviesRequest = createAction('movies/getUpcomingMoviesRequest');
 const getUpcomingMoviesSuccess = createAction('movies/getUpcomingMoviesSuccess');
@@ -41,10 +37,6 @@ export default {
 	getMovieReviewsRequest,
 	getMovieReviewsSuccess,
 	getMovieReviewsFailure,
-
-	getMovieDetailsRequest,
-	getMovieDetailsSuccess,
-	getMovieDetailsFailure,
 
 	getUpcomingMoviesRequest,
 	getUpcomingMoviesSuccess,

@@ -7,7 +7,14 @@ import { collectionOperations } from 'redux/collection';
 //Styles
 import styles from './CollectionsControls.module.css';
 
-const CollectionsControls = ({ isFavorite, addFavMovie, removeFavMovie }) => {
+const CollectionsControls = ({
+	isFavorite,
+	isQueue,
+	addFavMovie,
+	removeFavMovie,
+	addQueMovie,
+	removeQueMovie,
+}) => {
 	return (
 		<div>
 			{!isFavorite ? (
@@ -20,32 +27,33 @@ const CollectionsControls = ({ isFavorite, addFavMovie, removeFavMovie }) => {
 				</button>
 			)}
 
-			{/* {!isQueue ? (
-					<button type="button" className={styles.favoriteButton} onClick={addQueueMovie}>
-						Add to queue
-					</button>
-				) : (
-					<button
-						type="button"
-						className={styles.favoriteButton}
-						onClick={() => removeQueueMovie(id)}
-					>
-						Remove from queue
-					</button>
-				)} */}
+			{!isQueue ? (
+				<button type="button" className={styles.favoriteButton} onClick={addQueMovie}>
+					Add to queue
+				</button>
+			) : (
+				<button type="button" className={styles.favoriteButton} onClick={removeQueMovie}>
+					Remove from queue
+				</button>
+			)}
 		</div>
 	);
 };
 
 CollectionsControls.propTypes = {
+	isQueue: PropTypes.bool.isRequired,
 	isFavorite: PropTypes.bool.isRequired,
 	addFavMovie: PropTypes.func.isRequired,
 	removeFavMovie: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch, { movie, user }) => ({
-	addFavMovie: () => dispatch(collectionOperations.addFavoriteMovie(user.uid, movie)),
-	removeFavMovie: () => dispatch(collectionOperations.removeFavoriteMovie(user.uid, movie)),
+const mapDispatchToProps = (dispatch, { movie, user: { uid } }) => ({
+	addFavMovie: () =>
+		dispatch(collectionOperations.addFavoriteMovie(uid, { ...movie, isFavorite: true })),
+	removeFavMovie: () => dispatch(collectionOperations.removeFavoriteMovie(uid, movie.id)),
+
+	addQueMovie: () => dispatch(collectionOperations.addQueueMovie(uid, { ...movie, isQueue: true })),
+	removeQueMovie: () => dispatch(collectionOperations.removeQueueMovie(uid, movie.id)),
 });
 
 export default connect(null, mapDispatchToProps)(CollectionsControls);

@@ -9,6 +9,7 @@ import PersonsList from 'components/PersonsList';
 import Notification from 'components/Notification';
 //Utils
 import getQueryString from 'utils/getQueryString';
+import { act } from 'react-dom/test-utils';
 
 class PersonsPage extends Component {
 	componentDidMount() {
@@ -24,7 +25,7 @@ class PersonsPage extends Component {
 	}
 
 	render() {
-		const { actors, error, isLoading } = this.props;
+		const { actors, location, error, isLoading } = this.props;
 
 		return (
 			<>
@@ -32,7 +33,7 @@ class PersonsPage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && actors.length > 0 && <PersonsList {...this.props} />}
+				{!isLoading && actors.length > 0 && <PersonsList actors={actors} location={location} />}
 			</>
 		);
 	}

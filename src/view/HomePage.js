@@ -14,7 +14,7 @@ class HomePage extends Component {
 	}
 
 	render() {
-		const { movies, isLoading, error } = this.props;
+		const { movies, location, isLoading, error } = this.props;
 
 		return (
 			<>
@@ -22,7 +22,7 @@ class HomePage extends Component {
 
 				{isLoading && <Loader onLoad={isLoading} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList {...this.props} />}
+				{!isLoading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
 			</>
 		);
 	}

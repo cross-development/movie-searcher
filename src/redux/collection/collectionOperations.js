@@ -1,71 +1,112 @@
-//Core
-import axios from 'axios';
 //Database
 import * as firebase from 'firebase';
 //Redux
 import collectionActions from './collectionActions';
 
-//Axios defaults config
-const backendBaseURL = 'https://goit-phonebook-api.herokuapp.com';
-
 const addFavoriteMovie = (userId, movie) => dispatch => {
 	dispatch(collectionActions.addFavoriteMovieRequest());
 
-	const db = firebase.database();
-	const userCollection = db.ref('users/' + userId);
-
 	try {
-		const addedMovie = userCollection.child('favorites').push(movie);
-		console.log(addedMovie);
+		const userCollection = firebase.database().ref('users/' + userId);
+
+		userCollection.child('favorites').push(movie);
+
 		// dispatch(collectionActions.addFavoriteMovieSuccess(data));
 	} catch (error) {
 		dispatch(collectionActions.addFavoriteMovieFailure(error));
 	}
 };
 
-const removeFavoriteMovie = id => dispatch => {
+const removeFavoriteMovie = (userId, movieId) => dispatch => {
 	dispatch(collectionActions.removeFavoriteMovieRequest());
 
-	axios
-		.delete(`${backendBaseURL}/favorites/${id}`)
-		.then(() => dispatch(collectionActions.removeFavoriteMovieSuccess(id)))
-		.catch(error => dispatch(collectionActions.removeFavoriteMovieFailure(error)));
+	try {
+		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
+
+		favMovies.on('value', snapshot =>
+			snapshot.forEach(data => {
+				if (data.val().id === movieId) {
+					firebase
+						.database()
+						.ref('users/' + userId + '/favorites/' + data.key)
+						.remove();
+				}
+			}),
+		);
+
+		// dispatch(collectionActions.removeFavoriteMovieSuccess(id))
+	} catch (error) {
+		dispatch(collectionActions.removeFavoriteMovieFailure(error));
+	}
 };
 
-const fetchFavoriteMovies = () => dispatch => {
+const fetchFavoriteMovies = userId => dispatch => {
 	dispatch(collectionActions.getFavoriteMoviesRequest());
 
-	axios
-		.get(`${backendBaseURL}/favorites`)
-		.then(({ data }) => dispatch(collectionActions.getFavoriteMoviesSuccess(data)))
-		.catch(error => dispatch(collectionActions.getFavoriteMoviesFailure(error)));
+	try {
+		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
+
+		favMovies.on('value', snapshot => {
+			const favMovieData = Object.values(snapshot.val());
+
+			dispatch(collectionActions.getFavoriteMoviesSuccess(favMovieData));
+		});
+	} catch (error) {
+		dispatch(collectionActions.getFavoriteMoviesFailure(error));
+	}
 };
 
-const addQueueMovie = description => dispatch => {
+const addQueueMovie = (userId, movie) => dispatch => {
 	dispatch(collectionActions.addQueueMovieRequest());
 
-	axios
-		.post(`${backendBaseURL}/queue`, { description })
-		.then(({ data }) => dispatch(collectionActions.addQueueMovieSuccess(data)))
-		.catch(error => dispatch(collectionActions.addQueueMovieFailure(error)));
+	try {
+		const userCollection = firebase.database().ref('users/' + userId);
+
+		userCollection.child('queue').push(movie);
+
+		// dispatch(collectionActions.addQueueMovieSuccess(data));
+	} catch (error) {
+		dispatch(collectionActions.addQueueMovieFailure(error));
+	}
 };
 
-const removeQueueMovie = id => dispatch => {
+const removeQueueMovie = (userId, movieId) => dispatch => {
 	dispatch(collectionActions.removeQueueMovieRequest());
 
-	axios
-		.delete(`${backendBaseURL}/queue/${id}`)
-		.then(() => dispatch(collectionActions.removeQueueMovieSuccess(id)))
-		.catch(error => dispatch(collectionActions.removeQueueMovieFailure(error)));
+	try {
+		const queMovies = firebase.database().ref('users/' + userId + '/queue');
+
+		queMovies.on('value', snapshot =>
+			snapshot.forEach(data => {
+				if (data.val().id === movieId) {
+					firebase
+						.database()
+						.ref('users/' + userId + '/queue/' + data.key)
+						.remove();
+				}
+			}),
+		);
+
+		// dispatch(collectionActions.removeQueueMovieSuccess(id))
+	} catch (error) {
+		dispatch(collectionActions.removeQueueMovieFailure(error));
+	}
 };
 
-const fetchQueueMovies = () => dispatch => {
+const fetchQueueMovies = userId => dispatch => {
 	dispatch(collectionActions.getQueueMoviesRequest());
 
-	axios
-		.get(`${backendBaseURL}/queue`)
-		.then(({ data }) => dispatch(collectionActions.getQueueMoviesSuccess(data)))
-		.catch(error => dispatch(collectionActions.getQueueMoviesFailure(error)));
+	try {
+		const queMovies = firebase.database().ref('users/' + userId + '/queue');
+
+		queMovies.on('value', snapshot => {
+			const queMovieData = Object.values(snapshot.val());
+
+			dispatch(collectionActions.getQueueMoviesSuccess(queMovieData));
+		});
+	} catch (error) {
+		dispatch(collectionActions.getQueueMoviesFailure(error));
+	}
 };
 
 export default {

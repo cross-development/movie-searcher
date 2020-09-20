@@ -10,7 +10,7 @@ const addMovieToCollection = (state, { payload }) => [...state, payload];
 const removeMovieFromCollection = (state, { payload }) =>
 	state.map(movie => (movie.id === payload.id ? payload : movie));
 
-const getMovieFromCollection = (state, { payload }) => payload;
+const getMovieFromCollection = (state, { payload }) => [...payload];
 
 //Favorites reducer
 const favorites = createReducer([], {
