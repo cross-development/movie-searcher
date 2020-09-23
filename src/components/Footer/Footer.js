@@ -10,7 +10,7 @@ const Header = () => (
 	<footer className={styles.footer}>
 		<DataSource />
 
-		{/* <Creator creator="Vitaliy Derda" /> */}
+		<Creator creator="Vitaliy Derda" />
 	</footer>
 );
 

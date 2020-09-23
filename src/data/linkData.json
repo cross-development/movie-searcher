@@ -2,36 +2,43 @@
 	{
 		"label": "Facebook",
 		"url": "https://www.facebook.com/vitaliy.derda",
-		"icon": "https://avatanplus.com/files/resources/original/5817614d3949c1581b5415b3.png"
+		"icon": ["fab", "facebook-square"],
+		"color": "#38529A"
 	},
 	{
 		"label": "Instagram",
 		"url": "https://www.instagram.com/vitaliyderda/",
-		"icon": "https://www.kindpng.com/picc/m/36-368497_instagram-link-logo-instagram-png-transparent-png.png"
+		"icon": ["fab", "instagram-square"],
+		"color": "#BD2D9B"
 	},
 	{
 		"label": "LinkedIn",
 		"url": "https://www.linkedin.com/in/vitaliy-derda-821723b0/",
-		"icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Linkedin_icon.svg/600px-Linkedin_icon.svg.png"
+		"icon": ["fab", "linkedin"],
+		"color": "#0A71AF"
 	},
 	{
 		"label": "Pinterest",
 		"url": "https://www.pinterest.com/vitaliyderda/",
-		"icon": "https://www.freepnglogos.com/uploads/pinterest-icon-logo-png-20.png"
+		"icon": ["fab", "pinterest-square"],
+		"color": "#C62026"
 	},
 	{
 		"label": "Reddit",
 		"url": "https://www.reddit.com/user/VitaliyCross",
-		"icon": "https://inm-baobab-prod-eu-west-1.s3.amazonaws.com/public/inm/media/2018/04/03/br/283/reddit.png"
+		"icon": ["fab", "reddit-square"],
+		"color": "#F74300"
 	},
 	{
 		"label": "GitHub",
 		"url": "https://github.com/cross-development",
-		"icon": "https://github.com/github/explore/blob/master/topics/github/github.png"
+		"icon": ["fab", "github-square"],
+		"color": "#000000"
 	},
 	{
 		"label": "Twitter",
 		"url": "https://twitter.com/derda_vitaliy",
-		"icon": "https://github.com/github/explore/blob/master/topics/twitter/twitter.png"
+		"icon": ["fab", "twitter-square"],
+		"color": "#1C9CEA"
 	}
 ]

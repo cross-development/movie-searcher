@@ -1,0 +1,35 @@
+.listWrapper {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.socialList {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 0.7rem;
+}
+
+.socialItem:not(:last-child) {
+	margin-right: 14px;
+}
+
+.heartWrapper {
+	margin-bottom: 4px;
+}
+
+.copyright {
+	margin-bottom: 8px;
+}
+
+.heart {
+	color: #e74c3c;
+}
+
+.copyright a {
+	color: #2980b9;
+}
