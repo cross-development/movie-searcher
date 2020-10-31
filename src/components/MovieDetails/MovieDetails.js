@@ -11,6 +11,7 @@ import getDefaultPoster from 'assets/default_poster.jpg';
 //Styles
 import styles from './MovieDetails.module.css';
 
+//TODO: fiiiiiix it
 const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
 	const { poster_path, title, name, release_date, vote_average, overview, genres } = movieData;
 
@@ -42,8 +43,8 @@ const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
 					<CollectionsControls
 						movie={movieData}
 						user={existUser}
-						isFavorite={isFavorite}
-						isQueue={isQueue}
+						// isFavorite={isFavorite}
+						// isQueue={isQueue}
 					/>
 				)}
 			</div>
@@ -52,8 +53,8 @@ const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
 };
 
 MovieDetails.propTypes = {
-	isQueue: PropTypes.bool,
-	isFavorite: PropTypes.bool,
+	// isQueue: PropTypes.bool,
+	// isFavorite: PropTypes.bool,
 	existUser: PropTypes.objectOf(PropTypes.any),
 	movieData: PropTypes.objectOf(PropTypes.any).isRequired,
 };

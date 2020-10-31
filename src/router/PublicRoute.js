@@ -10,7 +10,7 @@ const PublicRoute = ({ component: Component, existUser, ...routeProps }) => (
 	<Route
 		{...routeProps}
 		render={props =>
-			existUser && routeProps.restricted ? <Redirect to="/home" /> : <Component {...props} />
+			existUser && routeProps.restricted ? <Redirect to="/" /> : <Component {...props} />
 		}
 	/>
 );

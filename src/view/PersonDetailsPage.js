@@ -1,46 +1,37 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { actorsOperations, actorsSelectors } from 'redux/actors';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
 import Notification from 'components/Notification';
 import PersonDetails from 'components/PersonDetails';
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { actorsOperations } from 'redux/actors';
 
-class PersonDetailsPage extends Component {
-	componentDidMount() {
-		const { match, onFetchActorDetails } = this.props;
+//Fixed
+const PersonDetailsPage = () => {
+	const { personId } = useParams();
 
-		onFetchActorDetails(match.params.personId);
-	}
+	const dispatch = useDispatch();
+	const { item: actor, error, loading } = useSelector(state => state.actors);
 
-	render() {
-		const { actor, error, isLoading } = this.props;
+	useEffect(() => {
+		dispatch(actorsOperations.fetchActorDetails(personId));
+	}, [personId, dispatch]);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{isLoading && <Loader onLoad={isLoading} />}
+			{loading && <Loader onLoad={loading} />}
 
-				{actor === null && <NotFound />}
+			{actor === null && <NotFound />}
 
-				<div>{!isLoading && actor && <PersonDetails {...this.props} />}</div>
-			</>
-		);
-	}
-}
-
-const mapStateToProps = state => ({
-	actor: actorsSelectors.getActor(state),
-	error: actorsSelectors.getError(state),
-	isLoading: actorsSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = {
-	onFetchActorDetails: actorsOperations.fetchActorDetails,
+			<div>{!loading && actor && <PersonDetails actor={actor} />}</div>
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonDetailsPage);
+export default PersonDetailsPage;

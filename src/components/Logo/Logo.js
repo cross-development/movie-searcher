@@ -6,9 +6,10 @@ import logoPath from 'assets/svg/video-camera.svg';
 //Styles
 import styles from './Logo.module.css';
 
+//Fixed
 const Logo = () => (
 	<div className={styles.logoWrapper}>
-		<NavLink exact to="/home" className={styles.logoLink}>
+		<NavLink exact to="/" className={styles.logoLink}>
 			<img src={logoPath} alt="site logo" className={styles.logo} />
 			Derda.vs
 		</NavLink>

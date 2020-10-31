@@ -1,41 +1,41 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { authSelectors } from 'redux/auth';
+import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 //Components
 import AuthNav from '../AuthNav';
 import UserMenu from '../UserMenu';
 import MainTitle from '../MainTitle';
 import SearchForm from '../SearchForm';
+//Redux
+import { useSelector } from 'react-redux';
 //Styles
 import styles from './Header.module.css';
 
-class Header extends Component {
-	handleChangeByQuery = query => {
-		this.props.history.push({
-			pathname: this.props.location.pathname,
+//Fixed
+const Header = () => {
+	const { user } = useSelector(state => state.auth);
+
+	const history = useHistory();
+	const { pathname } = useLocation();
+
+	const handleChangeByQuery = query => {
+		history.push({
+			pathname,
 			search: `query=${query}`,
 		});
 	};
 
-	render() {
-		const { pathname } = this.props.location;
+	const targetToSearch = pathname.slice(1);
 
-		return (
-			<header className={styles.header}>
-				<MainTitle pathname={pathname} />
+	return (
+		<header className={styles.header}>
+			<MainTitle pathname={pathname} />
 
-				<SearchForm onSubmit={this.handleChangeByQuery} placeholder="Search movie..." />
+			<SearchForm onSubmit={handleChangeByQuery} placeholder={`Search ${targetToSearch}...`} />
 
-				{this.props.existUser ? <UserMenu /> : <AuthNav />}
-			</header>
-		);
-	}
-}
+			{user ? <UserMenu /> : <AuthNav />}
+		</header>
+	);
+};
 
-const mapStateToProps = state => ({
-	existUser: authSelectors.existUser(state),
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

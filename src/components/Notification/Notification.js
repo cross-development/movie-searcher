@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import styles from './Notification.module.css';
 
+//Fixed
 const Notification = ({ message }) => (
 	<div className={styles.errorWrapper}>
 		{`${message}` === 'Failed to fetch' ? (

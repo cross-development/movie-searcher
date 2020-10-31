@@ -1,60 +1,55 @@
 //Core
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 //Components
 import Notification from '../Notification';
 //Styles
 import styles from './SearchForm.module.css';
 
-export default class SearchForm extends Component {
-	static propTypes = {
-		onSubmit: PropTypes.func.isRequired,
-	};
+//Fixed
+const SearchForm = ({ onSubmit, placeholder }) => {
+	const [value, setValue] = useState('');
+	const [error, setError] = useState(false);
 
-	state = {
-		value: '',
-		error: false,
-	};
+	const handleChange = ({ target: { value } }) => setValue(value);
 
-	handleChange = ({ target: { value } }) => this.setState({ value });
-
-	handleSubmit = e => {
+	const handleSubmit = e => {
 		e.preventDefault();
-		const { value } = this.state;
 
-		if (!value || value === ' ') {
-			return this.setState({ error: true });
-		}
+		if (!value || value === ' ') return setError(true);
 
-		this.props.onSubmit(value);
-		this.setState({ value: '', error: false });
+		onSubmit(value);
+		setError(false);
+		setValue('');
 	};
 
-	render() {
-		const { value, error } = this.state;
-		const { placeholder } = this.props;
+	return (
+		<>
+			<form onSubmit={handleSubmit} className={styles.searchForm}>
+				<div className={styles.searchbar}>
+					<button type="submit" className={styles.searchFormButton}>
+						<span className={styles.searchFormButtonLabel}>Search</span>
+					</button>
 
-		return (
-			<>
-				<form onSubmit={this.handleSubmit} className={styles.searchForm}>
-					<div className={styles.searchbar}>
-						<button type="submit" className={styles.searchFormButton}>
-							<span className={styles.searchFormButtonLabel}>Search</span>
-						</button>
+					<input
+						className={styles.searchFormInput}
+						type="text"
+						value={value}
+						autoComplete="off"
+						placeholder={placeholder}
+						onChange={handleChange}
+					/>
+				</div>
+			</form>
 
-						<input
-							className={styles.searchFormInput}
-							type="text"
-							value={value}
-							autoComplete="off"
-							placeholder={placeholder}
-							onChange={this.handleChange}
-						/>
-					</div>
-				</form>
+			{error && <Notification message="Please enter any movie title" />}
+		</>
+	);
+};
 
-				{error && <Notification message="Please enter any movie title" />}
-			</>
-		);
-	}
-}
+SearchForm.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+	placeholder: PropTypes.string.isRequired,
+};
+
+export default SearchForm;

@@ -6,13 +6,10 @@ import { Link } from 'react-router-dom';
 import getPosterUrl from 'utils/getPosterUrl';
 //Assets
 import getDefaultPoster from 'assets/default_poster.jpg';
-//Routes
-import routes from 'router';
 //Style
 import styles from './PersonsList.module.css';
 
-//TODO: откорректировать pathname: `/person/${id}`, на свойство из роутов
-
+//Fixed
 const PersonsList = ({ actors, location }) => (
 	<ul className={styles.personList}>
 		{actors.map(({ id, profile_path, name, popularity }) => (
@@ -20,8 +17,7 @@ const PersonsList = ({ actors, location }) => (
 				<Link
 					className={styles.personItemLink}
 					to={{
-						// pathname: `${routes.persons}/${id}`,
-						pathname: `/person/${id}`,
+						pathname: `/persons/${id}`,
 						state: { from: location },
 					}}
 				>
@@ -30,11 +26,11 @@ const PersonsList = ({ actors, location }) => (
 						src={profile_path ? `${getPosterUrl}${profile_path}` : getDefaultPoster}
 						alt={name}
 					/>
-					{/* <span>{name}</span> */}
 				</Link>
 				<span className={styles.personVote}>{Math.round(popularity)}</span>
 			</li>
 		))}
+
 		<li className={styles.pagination}>
 			<button type="submit" className={styles.button}>
 				&larr;

@@ -9,6 +9,7 @@ import asyncComponents from 'services/asyncComponents';
 //Styles
 import styles from './AdditionInfo.module.css';
 
+//Fixed
 const AdditionInfo = ({ isLoading, location, match }) => (
 	<div>
 		<h2 className={styles.additionalTitle}>Additional information</h2>

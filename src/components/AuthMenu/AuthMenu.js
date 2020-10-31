@@ -1,25 +1,28 @@
 //Core
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 //Redux
+import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
 //Styles
 import styles from './AuthMenu.module.css';
 
-const AuthMenu = ({ onLogout }) => (
-	<div className={styles.authMenu}>
-		<Link to="/settings" className={styles.settings}>
-			Settings
-		</Link>
-		<Link to="/home" onClick={onLogout} className={styles.logout}>
-			Log Off
-		</Link>
-	</div>
-);
+//Fixed
+const AuthMenu = () => {
+	const dispatch = useDispatch();
 
-const mapDispatchToProps = {
-	onLogout: authOperations.logout,
+	const onLogout = () => dispatch(authOperations.logout());
+
+	return (
+		<div className={styles.authMenu}>
+			<Link to="/settings" className={styles.settings}>
+				Settings
+			</Link>
+			<Link to="/" onClick={onLogout} className={styles.logout}>
+				Log Off
+			</Link>
+		</div>
+	);
 };
 
-export default connect(null, mapDispatchToProps)(AuthMenu);
+export default AuthMenu;

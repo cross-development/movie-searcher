@@ -11,7 +11,7 @@ const addFavoriteMovie = (userId, movie) => dispatch => {
 
 		userCollection.child('favorites').push(movie);
 
-		// dispatch(collectionActions.addFavoriteMovieSuccess(data));
+		dispatch(collectionActions.addFavoriteMovieSuccess());
 	} catch (error) {
 		dispatch(collectionActions.addFavoriteMovieFailure(error));
 	}

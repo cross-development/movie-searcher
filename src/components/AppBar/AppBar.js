@@ -1,39 +1,30 @@
 //Core
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-//Redux
-import { authSelectors } from 'redux/auth';
 //Components
 import Logo from '../Logo';
 import AuthMenu from '../AuthMenu';
 import ChatRooms from '../ChatRooms';
 import Navigation from '../Navigation';
+//Redux
+import { useSelector } from 'react-redux';
 //Styles
 import styles from './AppBar.module.css';
 
-const AppBar = ({ existUser }) => (
-	<aside className={styles.appBar}>
-		<Logo />
+//Fixed
+const AppBar = () => {
+	const { user } = useSelector(state => state.auth);
 
-		<Navigation />
+	return (
+		<aside className={styles.appBar}>
+			<Logo />
 
-		<ChatRooms existUser={existUser} />
+			<Navigation />
 
-		{existUser && <AuthMenu />}
-	</aside>
-);
+			<ChatRooms existUser={user} />
 
-AppBar.propTypes = {
-	existUser: PropTypes.objectOf(PropTypes.any),
+			{user && <AuthMenu />}
+		</aside>
+	);
 };
 
-AppBar.defaultProps = {
-	existUser: null,
-};
-
-const mapStateToProps = state => ({
-	existUser: authSelectors.existUser(state),
-});
-
-export default connect(mapStateToProps)(AppBar);
+export default AppBar;

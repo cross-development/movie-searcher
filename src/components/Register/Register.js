@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import styles from './Register.module.css';
 
+//Fixed
 const Register = ({ name, email, password, onChange, onSubmit }) => (
 	<form onSubmit={onSubmit} className={styles.form}>
 		<label className={styles.label}>

@@ -1,53 +1,42 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { actorsOperations, actorsSelectors } from 'redux/actors';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import PersonsList from 'components/PersonsList';
 import Notification from 'components/Notification';
+//Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { actorsOperations } from 'redux/actors';
 //Utils
 import getQueryString from 'utils/getQueryString';
-import { act } from 'react-dom/test-utils';
 
-class PersonsPage extends Component {
-	componentDidMount() {
-		this.props.onFetchTrendActors();
-	}
+//Fixed
+const PersonsPage = () => {
+	const dispatch = useDispatch();
+	const location = useLocation();
 
-	componentDidUpdate(prevProps, prevState) {
-		const { location, onFetchActorsByQuery } = this.props;
-		const { query: prevQuery } = getQueryString(prevProps.location.search);
-		const { query: nextQuery } = getQueryString(location.search);
+	const { items: actors, error, loading } = useSelector(state => state.actors);
 
-		return prevQuery !== nextQuery ? onFetchActorsByQuery(nextQuery) : null;
-	}
+	useEffect(() => {
+		dispatch(actorsOperations.fetchTrendActors());
+	}, [dispatch]);
 
-	render() {
-		const { actors, location, error, isLoading } = this.props;
+	useEffect(() => {
+		const { query } = getQueryString(location.search);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+		if (query) dispatch(actorsOperations.fetchActorsByQuery(query));
+	}, [location.search, dispatch]);
 
-				{isLoading && <Loader onLoad={isLoading} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{!isLoading && actors.length > 0 && <PersonsList actors={actors} location={location} />}
-			</>
-		);
-	}
-}
+			{loading && <Loader onLoad={loading} />}
 
-const mapStateToProps = state => ({
-	error: actorsSelectors.getError(state),
-	actors: actorsSelectors.getActors(state),
-	isLoading: actorsSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = {
-	onFetchTrendActors: actorsOperations.fetchTrendActors,
-	onFetchActorsByQuery: actorsOperations.fetchActorsByQuery,
+			{!loading && actors.length > 0 && <PersonsList actors={actors} location={location} />}
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonsPage);
+export default PersonsPage;

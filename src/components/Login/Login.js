@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 //Styles
 import styles from './Login.module.css';
 
-const Login = ({ email, password, onChange, onSubmit }) => (
+//Fixed
+const Login = ({ email, password, onChangeEmail, onChangePassword, onSubmit }) => (
 	<form onSubmit={onSubmit} className={styles.form}>
 		<label className={styles.label}>
 			Email
@@ -15,7 +16,7 @@ const Login = ({ email, password, onChange, onSubmit }) => (
 				name="email"
 				value={email}
 				autoComplete="off"
-				onChange={onChange}
+				onChange={onChangeEmail}
 			/>
 		</label>
 
@@ -28,7 +29,7 @@ const Login = ({ email, password, onChange, onSubmit }) => (
 				name="password"
 				value={password}
 				autoComplete="off"
-				onChange={onChange}
+				onChange={onChangePassword}
 			/>
 		</label>
 
@@ -41,7 +42,8 @@ const Login = ({ email, password, onChange, onSubmit }) => (
 Login.propTypes = {
 	email: PropTypes.string.isRequired,
 	password: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
+	onChangePassword: PropTypes.func.isRequired,
+	onChangeEmail: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 };
 

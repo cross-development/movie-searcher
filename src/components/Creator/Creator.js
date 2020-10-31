@@ -12,6 +12,7 @@ import styles from './Creator.module.css';
 
 library.add(fab, fas);
 
+//Chang to react-icons/fa
 const Creator = ({ creator }) => (
 	<div className={styles.listWrapper}>
 		<ul className={styles.socialList}>

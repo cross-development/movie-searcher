@@ -1,52 +1,42 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { moviesOperations, moviesSelectors } from 'redux/movies';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
+//Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { moviesOperations } from 'redux/movies';
 //Utils
 import getQueryString from 'utils/getQueryString';
 
-class MoviesPage extends Component {
-	componentDidMount() {
-		this.props.onFetchTrendMovies();
-	}
+//Fixed
+const MoviesPage = () => {
+	const dispatch = useDispatch();
+	const location = useLocation();
 
-	componentDidUpdate(prevProps, prevState) {
-		const { location, onFetchMoviesByQuery } = this.props;
-		const { query: prevQuery } = getQueryString(prevProps.location.search);
-		const { query: nextQuery } = getQueryString(location.search);
+	const { items: movies, error, loading } = useSelector(state => state.movies);
 
-		return prevQuery !== nextQuery ? onFetchMoviesByQuery(nextQuery) : null;
-	}
+	useEffect(() => {
+		dispatch(moviesOperations.fetchTrendMovies());
+	}, [dispatch]);
 
-	render() {
-		const { movies, location, error, isLoading } = this.props;
+	useEffect(() => {
+		const { query } = getQueryString(location.search);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+		if (query) dispatch(moviesOperations.fetchMoviesByQuery(query));
+	}, [location.search, dispatch]);
 
-				{isLoading && <Loader onLoad={isLoading} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
-			</>
-		);
-	}
-}
+			{loading && <Loader onLoad={loading} />}
 
-const mapStateToProps = state => ({
-	error: moviesSelectors.getError(state),
-	movies: moviesSelectors.getMovies(state),
-	isLoading: moviesSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = {
-	onFetchTrendMovies: moviesOperations.fetchTrendMovies,
-	onFetchMoviesByQuery: moviesOperations.fetchMoviesByQuery,
+			{!loading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);
+export default MoviesPage;

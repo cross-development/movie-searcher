@@ -1,41 +1,34 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { moviesOperations, moviesSelectors } from 'redux/movies';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { moviesOperations } from 'redux/movies';
 
-class HomePage extends Component {
-	componentDidMount() {
-		this.props.onFetchUpcomingMovies();
-	}
+//Fixed
+const HomePage = () => {
+	const location = useLocation();
+	const dispatch = useDispatch();
 
-	render() {
-		const { movies, location, isLoading, error } = this.props;
+	const { items: movies, error, loading } = useSelector(state => state.movies);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+	useEffect(() => {
+		dispatch(moviesOperations.fetchUpcomingMovies());
+	}, [dispatch]);
 
-				{isLoading && <Loader onLoad={isLoading} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{!isLoading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
-			</>
-		);
-	}
-}
+			{loading && <Loader onLoad={loading} />}
 
-const mapStateToProps = state => ({
-	error: moviesSelectors.getError(state),
-	movies: moviesSelectors.getMovies(state),
-	isLoading: moviesSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = {
-	onFetchUpcomingMovies: moviesOperations.fetchUpcomingMovies,
+			{!loading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

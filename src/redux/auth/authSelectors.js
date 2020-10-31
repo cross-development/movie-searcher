@@ -2,13 +2,13 @@ const existUser = state => state.auth.user;
 
 const getUserId = state => state.auth.user.uid;
 
-const getUserName = state => state.auth.user.displayName;
-
 const getError = state => state.auth.error;
+
+const getUserLoading = state => state.auth.loading;
 
 export default {
 	existUser,
-	getUserName,
 	getError,
 	getUserId,
+	getUserLoading,
 };

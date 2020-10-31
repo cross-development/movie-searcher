@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 //Utils
 import getPosterUrl from 'utils/getPosterUrl';
-//Routes
-import routes from 'router';
 //Styles
 import styles from './CastList.module.css';
 
-//TODO: откорректировать pathname: `/person/${id}`, на свойство из роутов
-
+//Fixed
 const CastList = ({ cast, location }) => (
 	<ul className={styles.castsList}>
 		{cast.map(
@@ -20,8 +17,7 @@ const CastList = ({ cast, location }) => (
 						<Link
 							className={styles.castsItemLink}
 							to={{
-								// pathname: `${routes.persons}/${id}`,
-								pathname: `/person/${id}`,
+								pathname: `/persons/${id}`,
 								state: { from: location },
 							}}
 						>

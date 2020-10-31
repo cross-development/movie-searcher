@@ -1,12 +1,14 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 //Redux
+import { connect } from 'react-redux';
 import { collectionOperations } from 'redux/collection';
+import { moviesSelectors } from 'redux/movies';
 //Styles
 import styles from './CollectionsControls.module.css';
 
+//TODO: fiiiiiix it
 const CollectionsControls = ({
 	isFavorite,
 	isQueue,
@@ -47,6 +49,11 @@ CollectionsControls.propTypes = {
 	removeFavMovie: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+	isFavorite: moviesSelectors.isFavorite(state),
+	isQueue: moviesSelectors.isQueue(state),
+});
+
 const mapDispatchToProps = (dispatch, { movie, user: { uid } }) => ({
 	addFavMovie: () =>
 		dispatch(collectionOperations.addFavoriteMovie(uid, { ...movie, isFavorite: true })),
@@ -56,4 +63,4 @@ const mapDispatchToProps = (dispatch, { movie, user: { uid } }) => ({
 	removeQueMovie: () => dispatch(collectionOperations.removeQueueMovie(uid, movie.id)),
 });
 
-export default connect(null, mapDispatchToProps)(CollectionsControls);
+export default connect(mapStateToProps, mapDispatchToProps)(CollectionsControls);

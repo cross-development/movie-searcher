@@ -6,7 +6,8 @@ import DataSource from '../DataSource';
 //Styles
 import styles from './Footer.module.css';
 
-const Header = () => (
+//Fixed
+const Footer = () => (
 	<footer className={styles.footer}>
 		<DataSource />
 
@@ -14,4 +15,4 @@ const Header = () => (
 	</footer>
 );
 
-export default Header;
+export default Footer;

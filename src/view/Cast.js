@@ -1,49 +1,39 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { moviesOperations, moviesSelectors } from 'redux/movies';
+import React, { useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import CastList from 'components/CastList';
 import Notification from 'components/Notification';
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { moviesOperations } from 'redux/movies';
 
-class Cast extends Component {
-	componentDidUpdate(prevProps, prevState) {
-		const { match, onFetchMovieCast } = this.props;
+const Cast = () => {
+	const { cast, error, loading } = useSelector(state => state.movies);
+	const dispatch = useDispatch();
 
-		if (prevProps !== this.props) {
-			onFetchMovieCast(match.params.movieId);
-		}
-	}
+	const { movieId } = useParams();
+	const location = useLocation();
 
-	render() {
-		const { cast, error, isLoading } = this.props;
+	//TODO: fiiiiiix it - re-render after click to link
+	useEffect(() => {
+		dispatch(moviesOperations.fetchMovieCast(movieId));
+	}, [movieId, dispatch]);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{isLoading && <Loader onLoad={isLoading} />}
+			{loading && <Loader onLoad={loading} />}
 
-				{!isLoading && !error && cast.length < 1 && (
-					<Notification message="We don't have any actors for this movie." />
-				)}
+			{!loading && !error && cast.length < 1 && (
+				<Notification message="We don't have any actors for this movie." />
+			)}
 
-				{cast.length > 0 && <CastList {...this.props} />}
-			</>
-		);
-	}
-}
-
-const mapStateToProps = state => ({
-	cast: moviesSelectors.getCast(state),
-	error: moviesSelectors.getError(state),
-	isLoading: moviesSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = {
-	onFetchMovieCast: moviesOperations.fetchMovieCast,
+			{cast.length > 0 && <CastList cast={cast} location={location} />}
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cast);
+export default Cast;

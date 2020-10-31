@@ -1,61 +1,38 @@
 //Core
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 //Components
-// import Error from 'components/Error';
 import Login from 'components/Login';
 //Redux
-import { authOperations, authSelectors } from 'redux/auth';
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/auth';
 
-class LoginPage extends Component {
-	static propTypes = {
-		onLogin: PropTypes.func.isRequired,
-		error: PropTypes.object,
-	};
+//Fixed
+const LoginPage = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
-	static defaultProps = {
-		error: null,
-	};
+	const dispatch = useDispatch();
 
-	state = {
-		email: '',
-		password: '',
-	};
+	const handleChangeEmail = ({ target: { value } }) => setEmail(value);
+	const handleChangePassword = ({ target: { value } }) => setPassword(value);
 
-	handleChange = e => this.setState({ [e.target.name]: e.target.value });
-
-	handleSubmit = e => {
+	const handleSubmit = e => {
 		e.preventDefault();
 
-		this.props.onLogin({ ...this.state });
-		this.setState({ email: '', password: '' });
+		dispatch(authOperations.login({ email, password }));
+		setPassword('');
+		setEmail('');
 	};
 
-	// defineErrorType = () => {
-	// 	const { error } = this.props;
-	// 	return error && error.config.url.includes('login');
-	// };
-
-	render() {
-		// const isErrorTypeLogin = this.defineErrorType();
-
-		return (
-			<>
-				<Login {...this.state} onChange={this.handleChange} onSubmit={this.handleSubmit} />
-
-				{/* {isErrorTypeLogin && <Error message="User with this email address not found" />} */}
-			</>
-		);
-	}
-}
-
-const mapStateToProps = state => ({
-	error: authSelectors.getError(state),
-});
-
-const mapDispatchToProps = {
-	onLogin: authOperations.login,
+	return (
+		<Login
+			email={email}
+			password={password}
+			onSubmit={handleSubmit}
+			onChangeEmail={handleChangeEmail}
+			onChangePassword={handleChangePassword}
+		/>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default LoginPage;

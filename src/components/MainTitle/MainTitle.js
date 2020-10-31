@@ -6,6 +6,7 @@ import routes from 'router';
 //Styles
 import styles from './MainTitle.module.css';
 
+//Fixed
 const MainTitle = ({ pathname }) =>
 	routes.map(
 		({ path, label }) =>

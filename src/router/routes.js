@@ -18,7 +18,7 @@ import { lazy } from 'react';
 
 export default [
 	{
-		path: '/home',
+		path: '/',
 		label: 'Home',
 		exact: true,
 		private: false,
@@ -83,7 +83,7 @@ export default [
 		component: lazy(() => import('view/Reviews' /* webpackChunkName: "reviews-view"*/)),
 	},
 	{
-		path: '/person',
+		path: '/persons',
 		label: 'Persons',
 		exact: true,
 		private: false,
@@ -92,7 +92,7 @@ export default [
 		component: lazy(() => import('view/PersonsPage' /* webpackChunkName: "persons-view"*/)),
 	},
 	{
-		path: '/person/:personId',
+		path: '/persons/:personId',
 		label: 'PersonDetails',
 		exact: false,
 		private: false,

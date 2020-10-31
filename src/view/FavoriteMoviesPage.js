@@ -1,55 +1,37 @@
 //Core
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-//Redux
-import { collectionSelectors, collectionOperations } from 'redux/collection';
-import { authSelectors } from 'redux/auth';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { collectionOperations } from 'redux/collection';
 
-class FavoriteMovies extends Component {
-	static propTypes = {
-		favorites: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)),
-		onFetchFavoritesMovies: PropTypes.func.isRequired,
-	};
+//Fixed, but it's components not tested
+const FavoriteMovies = () => {
+	const location = useLocation();
+	const dispatch = useDispatch();
 
-	componentDidMount() {
-		const {
-			user: { uid },
-			onFetchFavoritesMovies,
-		} = this.props;
-		onFetchFavoritesMovies(uid);
-	}
+	const { user } = useSelector(state => state.auth);
+	const { loading, error, favorites } = useSelector(state => state.collection);
 
-	render() {
-		const { favorites, location, error, isLoading } = this.props;
+	useEffect(() => {
+		dispatch(collectionOperations.fetchFavoriteMovies(user.uid));
+	}, [user.uid, dispatch]);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{isLoading && <Loader onLoad={isLoading} />}
+			{loading && <Loader onLoad={loading} />}
 
-				{favorites.length < 1 && <Notification message="We don't have any favorite movie." />}
+			{favorites.length < 1 && <Notification message="We don't have any favorite movie." />}
 
-				{favorites.length > 0 && <MoviesList movies={favorites} location={location} />}
-			</>
-		);
-	}
-}
-
-const mapStateToProps = state => ({
-	user: authSelectors.existUser(state),
-	error: collectionSelectors.getError(state),
-	isLoading: collectionSelectors.getLoading(state),
-	favorites: collectionSelectors.getFavoriteMovies(state),
-});
-
-const mapDispatchToProps = {
-	onFetchFavoritesMovies: collectionOperations.fetchFavoriteMovies,
+			{favorites.length > 0 && <MoviesList movies={favorites} location={location} />}
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoriteMovies);
+export default FavoriteMovies;

@@ -1,36 +1,37 @@
 //Core
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 //Redux
-import { authSelectors } from 'redux/auth';
+import { useSelector } from 'react-redux';
 //Styles
 import styles from './UserMenu.module.css';
 
-const UserMenu = ({ avatar, name }) => (
-	<div className={styles.container}>
-		<div className={styles.ringWrapper}>
-			<span className={styles.ring}>2</span>
+const defaultAvatar = 'https://icon-library.net/images/avatar-icon-images/avatar-icon-images-7.jpg';
+
+//Fixed
+const UserMenu = () => {
+	const {
+		user: { displayName, photoURL },
+	} = useSelector(state => state.auth);
+
+	return (
+		<div className={styles.container}>
+			<div className={styles.ringWrapper}>
+				<span className={styles.ring}>2</span>
+			</div>
+
+			<span className={styles.name}>{displayName}</span>
+
+			<div className={styles.avatarWrapper}>
+				<img
+					src={photoURL || defaultAvatar}
+					alt={displayName}
+					width="32"
+					className={styles.avatar}
+				/>
+				<span className={displayName ? styles.online : styles.offline}></span>
+			</div>
 		</div>
-
-		<span className={styles.name}>{name}</span>
-
-		<div className={styles.avatarWrapper}>
-			<img src={avatar} alt={name} width="32" className={styles.avatar} />
-			<span className={name ? styles.online : styles.offline}></span>
-		</div>
-	</div>
-);
-
-UserMenu.propTypes = {
-	name: PropTypes.string,
-	onLogout: PropTypes.func,
-	avatar: PropTypes.string,
+	);
 };
 
-const mapStateToProps = state => ({
-	name: authSelectors.getUserName(state),
-	avatar: 'https://icon-library.net/images/avatar-icon-images/avatar-icon-images-7.jpg',
-});
-
-export default connect(mapStateToProps)(UserMenu);
+export default UserMenu;

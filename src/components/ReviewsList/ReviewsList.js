@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import styles from './ReviewsList.module.css';
 
+//Fixed
 const ReviewsList = ({ reviews }) => (
 	<ul className={styles.reviewList}>
 		{reviews.map(({ id, author, content, url }) => (

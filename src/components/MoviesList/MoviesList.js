@@ -6,13 +6,10 @@ import { Link } from 'react-router-dom';
 import getPosterUrl from 'utils/getPosterUrl';
 //Assets
 import getDefaultPoster from 'assets/default_poster.jpg';
-//Routes
-import routes from 'router';
 //Style
 import styles from './MoviesList.module.css';
 
-//TODO: откорректировать pathname: `/movies/${id}`, на свойство из роутов
-
+//Fixed
 const MoviesList = ({ movies, location }) => (
 	<ul className={styles.movieList}>
 		{movies.map(({ id, poster_path, name, title, vote_average }) => (
@@ -20,7 +17,6 @@ const MoviesList = ({ movies, location }) => (
 				<Link
 					className={styles.movieItemLink}
 					to={{
-						// pathname: `${routes.movies}/${id}`,
 						pathname: `/movies/${id}`,
 						state: { from: location },
 					}}
@@ -34,6 +30,7 @@ const MoviesList = ({ movies, location }) => (
 				<span className={styles.movieVote}>{vote_average}</span>
 			</li>
 		))}
+
 		{movies.length > 19 && (
 			<li className={styles.pagination}>
 				<button type="submit" className={styles.button}>

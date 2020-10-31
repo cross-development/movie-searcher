@@ -13,6 +13,7 @@ const customCss = css`
 	margin: 20% auto;
 `;
 
+//Fixed
 const Loader = ({ onLoad }) => (
 	<PacmanLoader size={50} color={styles['loader-bg']} loading={onLoad} css={customCss} />
 );

@@ -1,9 +1,9 @@
 //Core
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 //Redux
+import { connect } from 'react-redux';
 import { authSelectors } from 'redux/auth';
-import { movieOperations, movieSelectors } from 'redux/movie';
+import { moviesOperations, moviesSelectors } from 'redux/movies';
 //Components
 import Loader from 'components/Loader';
 import NotFound from 'components/NotFound';
@@ -11,6 +11,7 @@ import Notification from 'components/Notification';
 import MovieDetails from 'components/MovieDetails';
 import AdditionInfo from 'components/AdditionInfo';
 
+//TODO: fiiiiiix it
 class MovieDetailsPage extends Component {
 	componentDidMount() {
 		const { user, match, location } = this.props;
@@ -33,6 +34,18 @@ class MovieDetailsPage extends Component {
 		this.props.onFetchMovieDetails(Number(movieId));
 	}
 
+	// componentDidUpdate(prevProps, prevState) {
+	// 	if (prevProps.movie !== this.props.movie) {
+	// 		return;
+	// 	}
+
+	// 	const { user, match } = this.props;
+	// 	const {
+	// 		params: { movieId },
+	// 	} = match;
+	// 	this.props.onFetchFavMovieDetails(user.uid, Number(movieId));
+	// }
+
 	render() {
 		const { movie, user, error, isLoading } = this.props;
 
@@ -49,8 +62,8 @@ class MovieDetailsPage extends Component {
 							<MovieDetails
 								movieData={movie}
 								existUser={user}
-								isFavorite={movie.isFavorite}
-								isQueue={movie.isQueue}
+								// isFavorite={movie.isFavorite}
+								// isQueue={movie.isQueue}
 							/>
 
 							<AdditionInfo {...this.props} />
@@ -64,15 +77,15 @@ class MovieDetailsPage extends Component {
 
 const mapStateToProps = state => ({
 	user: authSelectors.existUser(state),
-	movie: movieSelectors.getMovie(state),
-	error: movieSelectors.getError(state),
-	isLoading: movieSelectors.getLoading(state),
+	movie: moviesSelectors.getMovie(state),
+	error: moviesSelectors.getError(state),
+	isLoading: moviesSelectors.getLoading(state),
 });
 
 const mapDispatchToProps = {
-	onFetchMovieDetails: movieOperations.fetchMovieDetails,
-	onFetchQueueMovieDetails: movieOperations.fetchQueueMovieDetails,
-	onFetchFavMovieDetails: movieOperations.fetchFavoriteMovieDetails,
+	onFetchMovieDetails: moviesOperations.fetchMovieDetails,
+	onFetchQueueMovieDetails: moviesOperations.fetchQueueMovieDetails,
+	onFetchFavMovieDetails: moviesOperations.fetchFavoriteMovieDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage);

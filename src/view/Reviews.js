@@ -1,49 +1,38 @@
 //Core
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-//Redux
-import { moviesOperations, moviesSelectors } from 'redux/movies';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import ReviewsList from 'components/ReviewsList';
 import Notification from 'components/Notification';
+//Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { moviesOperations } from 'redux/movies';
 
-class Reviews extends Component {
-	componentDidUpdate(prevProps, prevState) {
-		const { match, onFetchMovieReviews } = this.props;
+const Reviews = () => {
+	const dispatch = useDispatch();
+	const { reviews, error, loading } = useSelector(state => state.movies);
 
-		if (prevProps !== this.props) {
-			onFetchMovieReviews(match.params.movieId);
-		}
-	}
+	const { movieId } = useParams();
 
-	render() {
-		const { reviews, error, isLoading } = this.props;
+	//TODO: fiiiiiix it - re-render after click to link
+	useEffect(() => {
+		dispatch(moviesOperations.fetchMovieReviews(movieId));
+	}, [movieId, dispatch]);
 
-		return (
-			<>
-				{error && <Notification message={error.message} />}
+	return (
+		<>
+			{error && <Notification message={error.message} />}
 
-				{isLoading && <Loader onLoad={isLoading} />}
+			{loading && <Loader onLoad={loading} />}
 
-				{!isLoading && !error && reviews.length < 1 && (
-					<Notification message="We don't have any reviews for this movie." />
-				)}
+			{!loading && !error && reviews.length < 1 && (
+				<Notification message="We don't have any reviews for this movie." />
+			)}
 
-				{reviews.length > 0 && <ReviewsList {...this.props} />}
-			</>
-		);
-	}
-}
-
-const mapStateToProps = state => ({
-	error: moviesSelectors.getError(state),
-	reviews: moviesSelectors.getReviews(state),
-	isLoading: moviesSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = {
-	onFetchMovieReviews: moviesOperations.fetchMovieReviews,
+			{reviews.length > 0 && <ReviewsList reviews={reviews} />}
+		</>
+	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Reviews);
+export default Reviews;
