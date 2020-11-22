@@ -13,7 +13,7 @@ const CastList = ({ cast, location }) => (
 		{cast.map(
 			({ id, name, profile_path }) =>
 				profile_path && (
-					<li key={id} className={styles.castsListItem}>
+					<li key={name} className={styles.castsListItem}>
 						<Link
 							className={styles.castsItemLink}
 							to={{

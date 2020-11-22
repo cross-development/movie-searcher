@@ -1,24 +1,27 @@
 //Core
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import ReviewsList from 'components/ReviewsList';
 import Notification from 'components/Notification';
-//Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { moviesOperations } from 'redux/movies';
+//API
+import moviesAPI from 'api/movies';
 
 const Reviews = () => {
-	const dispatch = useDispatch();
-	const { reviews, error, loading } = useSelector(state => state.movies);
+	const [reviews, setReviews] = useState([]);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	const { movieId } = useParams();
 
-	//TODO: fiiiiiix it - re-render after click to link
 	useEffect(() => {
-		dispatch(moviesOperations.fetchMovieReviews(movieId));
-	}, [movieId, dispatch]);
+		moviesAPI
+			.fetchMovieReviews(movieId)
+			.then(reviews => setReviews(reviews))
+			.catch(error => setError(error))
+			.finally(() => setLoading(false));
+	}, [movieId]);
 
 	return (
 		<>

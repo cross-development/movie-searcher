@@ -1,5 +1,5 @@
 //Core
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useLocation, useRouteMatch } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
@@ -8,36 +8,78 @@ import Notification from 'components/Notification';
 import MovieDetails from 'components/MovieDetails';
 import AdditionInfo from 'components/AdditionInfo';
 //Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { moviesOperations } from 'redux/movies';
+import { useSelector } from 'react-redux';
+//API
+import moviesAPI from 'api/movies';
+import collectionAPI from 'api/collection';
 
-//TODO: fiiiiiix it
 const MovieDetailsPage = () => {
-	const { item: movie, error, loading } = useSelector(state => state.movies);
-	const { user } = useSelector(state => state.auth);
+	const [movie, setMovie] = useState(null);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
+	const [isFavorite, setIsFavorite] = useState(false);
 
-	const dispatch = useDispatch();
+	const { user } = useSelector(state => state.auth);
 
 	const { movieId } = useParams();
 	const location = useLocation();
 	const match = useRouteMatch();
 
 	useEffect(() => {
-		dispatch(moviesOperations.fetchMovieDetails(Number(movieId)));
-	}, [dispatch, movieId]);
+		if (user) {
+			setLoading(true);
+
+			collectionAPI
+				.fetchCollectionMovies({ userId: user.uid })
+				.then(movies => {
+					movies.find(movie => {
+						if (movie.id === Number(movieId)) {
+							setMovie(movie);
+							setIsFavorite(true);
+							return false;
+						}
+
+						return false;
+					});
+
+					moviesAPI
+						.fetchMovieDetails(Number(movieId))
+						.then(movie => setMovie(movie))
+						.catch(error => setError(error));
+				})
+				.catch(error => setError(error))
+				.finally(() => setLoading(false));
+		}
+	}, [user, movieId]);
+
+	const handleChangeCollection = () => {
+		if (!isFavorite) {
+			collectionAPI.addCollectionMovie({ userId: user.uid, movie });
+			setIsFavorite(true);
+			return;
+		}
+
+		collectionAPI.removeCollectionMovie({ userId: user.uid, movieId: Number(movieId) });
+		setIsFavorite(false);
+	};
 
 	return (
 		<>
-			{error && <Notification message={error.message} />}
+			{error && error.response.status !== 404 && <Notification message={error.message} />}
 
 			{loading && <Loader onLoad={loading} />}
 
-			{movie === null && <NotFound />}
+			{error && error.response.status === 404 && <NotFound />}
 
 			<div>
 				{!loading && movie && (
 					<>
-						<MovieDetails movieData={movie} existUser={user} />
+						<MovieDetails
+							existUser={user}
+							movieData={movie}
+							isFavorite={isFavorite}
+							onChangeCollection={handleChangeCollection}
+						/>
 
 						<AdditionInfo location={location} isLoading={loading} match={match} />
 					</>

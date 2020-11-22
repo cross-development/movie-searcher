@@ -1,28 +1,28 @@
 //Core
-import React, { useEffect } from 'react';
-import { useLocation, useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import CastList from 'components/CastList';
 import Notification from 'components/Notification';
-//Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { moviesOperations } from 'redux/movies';
+//API
+import moviesAPI from 'api/movies';
 
 const Cast = () => {
-	const { cast, error, loading } = useSelector(state => state.movies);
-	const dispatch = useDispatch();
+	const [cast, setCast] = useState([]);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	const location = useLocation();
-	const {
-		params: { movieId },
-	} = useRouteMatch();
+	const { movieId } = useParams();
 
-	//TODO: fiiiiiix it - re-render after click to link
 	useEffect(() => {
-		console.log(movieId);
-		dispatch(moviesOperations.fetchMovieCast(movieId));
-	}, [movieId, dispatch]);
+		moviesAPI
+			.fetchMovieCast(movieId)
+			.then(cast => setCast(cast))
+			.catch(error => setError(error))
+			.finally(() => setLoading(false));
+	}, [movieId]);
 
 	return (
 		<>

@@ -1,24 +1,30 @@
 //Core
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
-//Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { moviesOperations } from 'redux/movies';
+//API
+import moviesAPI from 'api/movies';
 
 //Fixed
 const HomePage = () => {
-	const location = useLocation();
-	const dispatch = useDispatch();
+	const [movies, setMovies] = useState([]);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
-	const { items: movies, error, loading } = useSelector(state => state.movies);
+	const location = useLocation();
 
 	useEffect(() => {
-		dispatch(moviesOperations.fetchUpcomingMovies());
-	}, [dispatch]);
+		setLoading(true);
+
+		moviesAPI
+			.fetchUpcomingMovies()
+			.then(movies => setMovies(movies))
+			.catch(error => setError(error))
+			.finally(() => setLoading(false));
+	}, []);
 
 	return (
 		<>

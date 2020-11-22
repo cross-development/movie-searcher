@@ -16,21 +16,21 @@ const Header = () => {
 	const { user } = useSelector(state => state.auth);
 
 	const history = useHistory();
-	const { pathname } = useLocation();
+	const location = useLocation();
 
 	const handleChangeByQuery = query => {
 		history.push({
-			pathname,
+			...location,
+			pathname: location.pathname,
 			search: `query=${query}`,
 		});
 	};
 
-	//TODO: changes this method
-	const targetToSearch = pathname.slice(1);
+	const targetToSearch = location.pathname.split('/')[1];
 
 	return (
 		<header className={styles.header}>
-			<MainTitle pathname={pathname} />
+			<MainTitle pathname={location.pathname} />
 
 			<SearchForm onSubmit={handleChangeByQuery} placeholder={`Search ${targetToSearch}...`} />
 

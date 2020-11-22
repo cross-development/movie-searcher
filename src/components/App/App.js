@@ -8,9 +8,8 @@ import Header from '../Header';
 import Loader from '../Loader';
 import Footer from '../Footer';
 //Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
-import { collectionOperations } from 'redux/collection';
 //Routes
 import routes from 'router';
 import PublicRoute from 'router/PublicRoute';
@@ -20,22 +19,15 @@ import asyncComponents from 'services/asyncComponents';
 
 //Fixed
 const App = () => {
-	const { user } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(authOperations.getCurrentUser());
 	}, [dispatch]);
 
-	useEffect(() => {
-		if (user) {
-			dispatch(collectionOperations.fetchCollectionMovies({ userId: user.uid }));
-		}
-	}, [user, dispatch]);
-	//TODO: check Header
 	return (
 		<BrowserRouter>
-			<Route component={Header} />
+			<Header />
 
 			<AppBar />
 
@@ -49,6 +41,7 @@ const App = () => {
 								<PublicRoute key={route.path} {...route} />
 							),
 						)}
+
 						<Route component={asyncComponents.NotFoundPage} />
 					</Switch>
 				</Suspense>
@@ -60,3 +53,7 @@ const App = () => {
 };
 
 export default App;
+
+// {
+/* <Route component={Header} /> */
+// }

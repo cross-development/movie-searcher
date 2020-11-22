@@ -9,7 +9,7 @@ import { getPrettierMovieDetails } from 'utils/getPrettierMovie';
 import styles from './MovieDetails.module.css';
 
 //Fixed
-const MovieDetails = ({ movieData, existUser }) => {
+const MovieDetails = ({ movieData, isFavorite, existUser, onChangeCollection }) => {
 	const prettierMovieDetails = getPrettierMovieDetails(movieData);
 	const { vote, poster, release, overview, movieTitle, movieGenres } = prettierMovieDetails;
 
@@ -35,8 +35,8 @@ const MovieDetails = ({ movieData, existUser }) => {
 
 				{existUser && (
 					<div>
-						<button type="button" className={styles.favoriteButton}>
-							{false ? 'Remove from favorites' : 'Add to favorites'}
+						<button type="button" className={styles.favoriteButton} onClick={onChangeCollection}>
+							{isFavorite ? 'Remove from favorites' : 'Add to favorites'}
 						</button>
 
 						<button type="button" className={styles.favoriteButton}>
@@ -59,3 +59,13 @@ MovieDetails.defaultProps = {
 };
 
 export default MovieDetails;
+
+// {!isFavorite ? (
+// 	<button type="button" className={styles.addToFavorites} onClick={onAddMovie}>
+// 		Add to favorites
+// 	</button>
+// ) : (
+// 	<button type="button" className={styles.addToFavorites} onClick={() => onRemoveMovie(id)}>
+// 		Remove at favorites
+// 	</button>
+// )}
