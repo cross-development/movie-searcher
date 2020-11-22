@@ -9,7 +9,6 @@ import styles from './PersonDetails.module.css';
 //Fixed
 const PersonDetails = ({ actor }) => {
 	const prettierActorDetails = getPrettierActorDetails(actor);
-
 	const { name, poster, dayOfBirth, dayOfDeath, placeOfBirth, bioInfo } = prettierActorDetails;
 
 	return (

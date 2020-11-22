@@ -9,7 +9,7 @@ import Notification from 'components/Notification';
 import { useSelector } from 'react-redux';
 
 //Fixed
-const FavoriteMoviesPage = () => {
+const QueueMoviesPage = () => {
 	const location = useLocation();
 
 	const { loading, error, items: movies } = useSelector(state => state.collection);
@@ -20,11 +20,11 @@ const FavoriteMoviesPage = () => {
 
 			{loading && <Loader onLoad={loading} />}
 
-			{movies.length < 1 && <Notification message="We don't have any favorite movies." />}
+			{movies.length < 1 && <Notification message="We don't have any movies in queue." />}
 
 			{movies.length > 0 && <MoviesList movies={movies} location={location} />}
 		</>
 	);
 };
 
-export default FavoriteMoviesPage;
+export default QueueMoviesPage;

@@ -121,7 +121,7 @@ export default [
 		restricted: false,
 		isNavigation: true,
 		component: lazy(() =>
-			import('view/FavoriteMoviesPage' /* webpackChunkName: "favorite-movies-view" */),
+			import('view/QueueMoviesPage' /* webpackChunkName: "queue-movies-view" */),
 		),
 	},
 ];

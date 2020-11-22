@@ -1,7 +1,5 @@
 //Core
 import axios from 'axios';
-//Database
-import * as firebase from 'firebase';
 //Redux
 import moviesActions from './moviesActions';
 
@@ -57,50 +55,12 @@ const fetchMovieReviews = movieId => dispatch => {
 const fetchMovieDetails = movieId => dispatch => {
 	dispatch(moviesActions.getMovieDetailsRequest());
 
-	const isInCollection = { isFavorite: false, isQueue: false };
+	// const isInCollection = { isFavorite: false, isQueue: false };...isInCollection
 
 	axios
 		.get(`/movie/${movieId}?api_key=${API_KEY}`)
-		.then(({ data }) =>
-			dispatch(moviesActions.getMovieDetailsSuccess({ ...data, ...isInCollection })),
-		)
+		.then(({ data }) => dispatch(moviesActions.getMovieDetailsSuccess({ ...data })))
 		.catch(error => dispatch(moviesActions.getMovieDetailsFailure(error)));
-};
-
-const fetchFavoriteMovieDetails = (userId, movieId) => dispatch => {
-	dispatch(moviesActions.getFavoriteMovieDetailsRequest());
-
-	try {
-		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
-
-		favMovies.on('value', snapshot =>
-			snapshot.forEach(data => {
-				if (data.val().id === movieId) {
-					dispatch(moviesActions.getFavoriteMovieDetailsSuccess(data.val()));
-				}
-			}),
-		);
-	} catch (error) {
-		dispatch(moviesActions.getFavoriteMovieDetailsFailure(error));
-	}
-};
-
-const fetchQueueMovieDetails = (userId, movieId) => dispatch => {
-	dispatch(moviesActions.getQueueMovieDetailsRequest());
-
-	try {
-		const favMovies = firebase.database().ref('users/' + userId + '/queue');
-
-		favMovies.on('value', snapshot =>
-			snapshot.forEach(data => {
-				if (data.val().id === movieId) {
-					dispatch(moviesActions.getQueueMovieDetailsSuccess(data.val()));
-				}
-			}),
-		);
-	} catch (error) {
-		dispatch(moviesActions.getQueueMovieDetailsFailure(error));
-	}
 };
 
 export default {
@@ -110,6 +70,4 @@ export default {
 	fetchMovieReviews,
 	fetchUpcomingMovies,
 	fetchMovieDetails,
-	fetchFavoriteMovieDetails,
-	fetchQueueMovieDetails,
 };

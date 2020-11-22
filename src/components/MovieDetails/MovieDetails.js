@@ -3,34 +3,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //Components
 import Rating from '@material-ui/lab/Rating';
-import CollectionsControls from '../CollectionsControls';
 //Utils
-import getPosterUrl from 'utils/getPosterUrl';
-//Assets
-import getDefaultPoster from 'assets/default_poster.jpg';
+import { getPrettierMovieDetails } from 'utils/getPrettierMovie';
 //Styles
 import styles from './MovieDetails.module.css';
 
-//TODO: fiiiiiix it
-const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
-	const { poster_path, title, name, release_date, vote_average, overview, genres } = movieData;
-
-	const moviePoster = poster_path ? `${getPosterUrl}${poster_path}` : getDefaultPoster;
-	const movieGenres = genres.map(({ name }) => `${name}, `);
-	const releaseDate = release_date.substring(0, 4);
+//Fixed
+const MovieDetails = ({ movieData, existUser }) => {
+	const prettierMovieDetails = getPrettierMovieDetails(movieData);
+	const { vote, poster, release, overview, movieTitle, movieGenres } = prettierMovieDetails;
 
 	return (
 		<div className={styles.movieWrapper}>
 			<div className={styles.posterWrapper}>
-				<img src={moviePoster} alt={title || name} />
+				<img src={poster} alt={movieTitle} />
 			</div>
 
 			<div className={styles.detailsWrapper}>
 				<h1>
-					{title || name} ({releaseDate})
+					{movieTitle} ({release})
 				</h1>
 
-				<Rating name="customized-10" defaultValue={vote_average} max={10} readOnly />
+				<Rating name="customized-10" defaultValue={vote} max={10} readOnly />
 
 				<div className={styles.overview}>
 					<h2>Overview</h2>
@@ -40,12 +34,15 @@ const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
 				</div>
 
 				{existUser && (
-					<CollectionsControls
-						movie={movieData}
-						user={existUser}
-						// isFavorite={isFavorite}
-						// isQueue={isQueue}
-					/>
+					<div>
+						<button type="button" className={styles.favoriteButton}>
+							{false ? 'Remove from favorites' : 'Add to favorites'}
+						</button>
+
+						<button type="button" className={styles.favoriteButton}>
+							{false ? 'Remove from queue' : 'Add to queue'}
+						</button>
+					</div>
 				)}
 			</div>
 		</div>
@@ -53,16 +50,12 @@ const MovieDetails = ({ movieData, isFavorite, isQueue, existUser }) => {
 };
 
 MovieDetails.propTypes = {
-	// isQueue: PropTypes.bool,
-	// isFavorite: PropTypes.bool,
 	existUser: PropTypes.objectOf(PropTypes.any),
 	movieData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 MovieDetails.defaultProps = {
-	isQueue: false,
 	existUser: null,
-	isFavorite: false,
 };
 
 export default MovieDetails;

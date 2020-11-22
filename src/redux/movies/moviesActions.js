@@ -21,17 +21,9 @@ const getUpcomingMoviesRequest = createAction('movies/getUpcomingMoviesRequest')
 const getUpcomingMoviesSuccess = createAction('movies/getUpcomingMoviesSuccess');
 const getUpcomingMoviesFailure = createAction('movies/getUpcomingMoviesFailure');
 
-const getMovieDetailsRequest = createAction('movie/getMovieDetailsRequest');
-const getMovieDetailsSuccess = createAction('movie/getMovieDetailsSuccess');
-const getMovieDetailsFailure = createAction('movie/getMovieDetailsFailure');
-
-const getFavoriteMovieDetailsRequest = createAction('movie/getFavoriteMovieDetailsRequest');
-const getFavoriteMovieDetailsSuccess = createAction('movie/getFavoriteMovieDetailsSuccess');
-const getFavoriteMovieDetailsFailure = createAction('movie/getFavoriteMovieDetailsFailure');
-
-const getQueueMovieDetailsRequest = createAction('movie/getQueueMovieDetailsRequest');
-const getQueueMovieDetailsSuccess = createAction('movie/getQueueMovieDetailsSuccess');
-const getQueueMovieDetailsFailure = createAction('movie/getQueueMovieDetailsFailure');
+const getMovieDetailsRequest = createAction('movies/getMovieDetailsRequest');
+const getMovieDetailsSuccess = createAction('movies/getMovieDetailsSuccess');
+const getMovieDetailsFailure = createAction('movies/getMovieDetailsFailure');
 
 export default {
 	getMoviesRequest,
@@ -57,12 +49,4 @@ export default {
 	getMovieDetailsRequest,
 	getMovieDetailsSuccess,
 	getMovieDetailsFailure,
-
-	getFavoriteMovieDetailsRequest,
-	getFavoriteMovieDetailsSuccess,
-	getFavoriteMovieDetailsFailure,
-
-	getQueueMovieDetailsRequest,
-	getQueueMovieDetailsSuccess,
-	getQueueMovieDetailsFailure,
 };

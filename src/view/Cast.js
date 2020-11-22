@@ -1,6 +1,6 @@
 //Core
 import React, { useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
 import CastList from 'components/CastList';
@@ -13,11 +13,14 @@ const Cast = () => {
 	const { cast, error, loading } = useSelector(state => state.movies);
 	const dispatch = useDispatch();
 
-	const { movieId } = useParams();
 	const location = useLocation();
+	const {
+		params: { movieId },
+	} = useRouteMatch();
 
 	//TODO: fiiiiiix it - re-render after click to link
 	useEffect(() => {
+		console.log(movieId);
 		dispatch(moviesOperations.fetchMovieCast(movieId));
 	}, [movieId, dispatch]);
 

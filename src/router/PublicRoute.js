@@ -1,30 +1,20 @@
 //Core
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 //Redux
-import { authSelectors } from 'redux/auth';
+import { useSelector } from 'react-redux';
 
-const PublicRoute = ({ component: Component, existUser, ...routeProps }) => (
-	<Route
-		{...routeProps}
-		render={props =>
-			existUser && routeProps.restricted ? <Redirect to="/" /> : <Component {...props} />
-		}
-	/>
-);
+const PublicRoute = ({ component: Component, ...routeProps }) => {
+	const { user } = useSelector(state => state.auth);
 
-PublicRoute.propTypes = {
-	existUser: PropTypes.objectOf(PropTypes.any),
+	return (
+		<Route
+			{...routeProps}
+			render={props =>
+				user && routeProps.restricted ? <Redirect to="/" /> : <Component {...props} />
+			}
+		/>
+	);
 };
 
-PublicRoute.defaultProps = {
-	existUser: null,
-};
-
-const mapStateToProps = state => ({
-	existUser: authSelectors.existUser(state),
-});
-
-export default connect(mapStateToProps)(PublicRoute);
+export default PublicRoute;

@@ -25,6 +25,7 @@ const Header = () => {
 		});
 	};
 
+	//TODO: changes this method
 	const targetToSearch = pathname.slice(1);
 
 	return (

@@ -11,10 +11,8 @@ const items = createReducer([], {
 	[moviesActions.getUpcomingMoviesSuccess]: (state, { payload }) => payload,
 });
 
-const item = createReducer('', {
+const item = createReducer(null, {
 	[moviesActions.getMovieDetailsSuccess]: (state, { payload }) => payload,
-	[moviesActions.getFavoriteMovieDetailsSuccess]: (state, { payload }) => payload,
-	[moviesActions.getQueueMovieDetailsSuccess]: (state, { payload }) => payload,
 });
 
 //Cast reducer
@@ -52,14 +50,6 @@ const loading = createReducer(false, {
 	[moviesActions.getMovieDetailsRequest]: () => true,
 	[moviesActions.getMovieDetailsSuccess]: () => false,
 	[moviesActions.getMovieDetailsFailure]: () => false,
-
-	[moviesActions.getFavoriteMovieDetailsRequest]: () => true,
-	[moviesActions.getFavoriteMovieDetailsSuccess]: () => false,
-	[moviesActions.getFavoriteMovieDetailsFailure]: () => false,
-
-	[moviesActions.getQueueMovieDetailsRequest]: () => true,
-	[moviesActions.getQueueMovieDetailsSuccess]: () => false,
-	[moviesActions.getQueueMovieDetailsFailure]: () => false,
 });
 
 //Error reducer
@@ -70,8 +60,6 @@ const error = createReducer(null, {
 	[moviesActions.getMovieReviewsFailure]: (state, { payload }) => payload,
 	[moviesActions.getUpcomingMoviesFailure]: (state, { payload }) => payload,
 	[moviesActions.getMovieDetailsFailure]: (state, { payload }) => payload,
-	[moviesActions.getFavoriteMovieDetailsFailure]: (state, { payload }) => payload,
-	[moviesActions.getQueueMovieDetailsFailure]: (state, { payload }) => payload,
 });
 
 export default combineReducers({

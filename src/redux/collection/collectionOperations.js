@@ -3,118 +3,119 @@ import * as firebase from 'firebase';
 //Redux
 import collectionActions from './collectionActions';
 
-const addFavoriteMovie = (userId, movie) => dispatch => {
-	dispatch(collectionActions.addFavoriteMovieRequest());
+//fixed
+const addCollectionMovie = ({ userId, movie }) => dispatch => {
+	dispatch(collectionActions.addCollectionMovieRequest());
 
 	try {
 		const userCollection = firebase.database().ref('users/' + userId);
 
-		userCollection.child('favorites').push(movie);
+		userCollection.child('collection').push(movie);
 
-		dispatch(collectionActions.addFavoriteMovieSuccess());
+		dispatch(collectionActions.addCollectionMovieSuccess());
 	} catch (error) {
-		dispatch(collectionActions.addFavoriteMovieFailure(error));
+		dispatch(collectionActions.addCollectionMovieFailure(error));
 	}
 };
 
-const removeFavoriteMovie = (userId, movieId) => dispatch => {
-	dispatch(collectionActions.removeFavoriteMovieRequest());
+//Fixed
+const removeCollectionMovie = ({ userId, movieId }) => dispatch => {
+	dispatch(collectionActions.removeCollectionMovieRequest());
 
 	try {
-		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
+		const collectionMovies = firebase.database().ref('users/' + userId + '/collection');
 
-		favMovies.on('value', snapshot =>
+		collectionMovies.once('value', snapshot =>
 			snapshot.forEach(data => {
 				if (data.val().id === movieId) {
 					firebase
 						.database()
-						.ref('users/' + userId + '/favorites/' + data.key)
+						.ref('users/' + userId + '/collection/' + data.key)
 						.remove();
 				}
 			}),
 		);
 
-		// dispatch(collectionActions.removeFavoriteMovieSuccess(id))
+		dispatch(collectionActions.removeCollectionMovieSuccess());
 	} catch (error) {
-		dispatch(collectionActions.removeFavoriteMovieFailure(error));
+		dispatch(collectionActions.removeCollectionMovieFailure(error));
 	}
 };
 
-const fetchFavoriteMovies = userId => dispatch => {
-	dispatch(collectionActions.getFavoriteMoviesRequest());
+//fixed ?
+const fetchCollectionMovies = ({ userId }) => dispatch => {
+	dispatch(collectionActions.getCollectionMoviesRequest());
 
 	try {
-		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
+		const collectionMovies = firebase.database().ref('users/' + userId + '/collection');
 
-		favMovies.on('value', snapshot => {
-			const favMovieData = Object.values(snapshot.val());
+		collectionMovies.on('value', snapshot => {
+			let collectionMoviesData = [];
 
-			dispatch(collectionActions.getFavoriteMoviesSuccess(favMovieData));
+			if (!snapshot.val()) {
+				dispatch(collectionActions.getCollectionMoviesSuccess(collectionMoviesData));
+				return;
+			}
+
+			collectionMoviesData = Object.keys(snapshot.val()).reduce((acc, key) => {
+				acc.push({ ...snapshot.val()[key] });
+				return acc;
+			}, []);
+
+			dispatch(collectionActions.getCollectionMoviesSuccess(collectionMoviesData));
 		});
 	} catch (error) {
-		dispatch(collectionActions.getFavoriteMoviesFailure(error));
-	}
-};
-
-const addQueueMovie = (userId, movie) => dispatch => {
-	dispatch(collectionActions.addQueueMovieRequest());
-
-	try {
-		const userCollection = firebase.database().ref('users/' + userId);
-
-		userCollection.child('queue').push(movie);
-
-		// dispatch(collectionActions.addQueueMovieSuccess(data));
-	} catch (error) {
-		dispatch(collectionActions.addQueueMovieFailure(error));
-	}
-};
-
-const removeQueueMovie = (userId, movieId) => dispatch => {
-	dispatch(collectionActions.removeQueueMovieRequest());
-
-	try {
-		const queMovies = firebase.database().ref('users/' + userId + '/queue');
-
-		queMovies.on('value', snapshot =>
-			snapshot.forEach(data => {
-				if (data.val().id === movieId) {
-					firebase
-						.database()
-						.ref('users/' + userId + '/queue/' + data.key)
-						.remove();
-				}
-			}),
-		);
-
-		// dispatch(collectionActions.removeQueueMovieSuccess(id))
-	} catch (error) {
-		dispatch(collectionActions.removeQueueMovieFailure(error));
-	}
-};
-
-const fetchQueueMovies = userId => dispatch => {
-	dispatch(collectionActions.getQueueMoviesRequest());
-
-	try {
-		const queMovies = firebase.database().ref('users/' + userId + '/queue');
-
-		queMovies.on('value', snapshot => {
-			const queMovieData = Object.values(snapshot.val());
-
-			dispatch(collectionActions.getQueueMoviesSuccess(queMovieData));
-		});
-	} catch (error) {
-		dispatch(collectionActions.getQueueMoviesFailure(error));
+		dispatch(collectionActions.getCollectionMoviesFailure(error));
 	}
 };
 
 export default {
-	addFavoriteMovie,
-	removeFavoriteMovie,
-	fetchFavoriteMovies,
-
-	addQueueMovie,
-	removeQueueMovie,
-	fetchQueueMovies,
+	addCollectionMovie,
+	removeCollectionMovie,
+	fetchCollectionMovies,
 };
+
+// //! testing
+// const fetchFavoriteMovieDetails = ({ userId, movieId }) => dispatch => {
+// 	dispatch(moviesActions.getFavoriteMovieDetailsRequest());
+
+// 	try {
+// 		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
+
+// 		favMovies.on('value', snapshot =>
+// 			snapshot.forEach(data => {
+// 				if (data.val().id === movieId) {
+// 					dispatch(moviesActions.getFavoriteMovieDetailsSuccess(data.val()));
+// 				}
+// 			}),
+// 		);
+// 	} catch (error) {
+// 		dispatch(moviesActions.getFavoriteMovieDetailsFailure(error));
+// 	}
+// };
+
+// const fetchFavoriteMovieDetails = ({ userId, movieId }) => dispatch => {
+// 	dispatch(moviesActions.getFavoriteMovieDetailsRequest());
+
+// 	try {
+// 		const favMovies = firebase.database().ref('users/' + userId + '/favorites');
+
+// 		favMovies.on('value', snapshot =>
+// 			snapshot.forEach(data => {
+// 				if (data.val().id === movieId) {
+// 					dispatch(moviesActions.getFavoriteMovieDetailsSuccess(data.val()));
+// 				}
+// 			}),
+// 		);
+// 	} catch (error) {
+// 		dispatch(moviesActions.getFavoriteMovieDetailsFailure(error));
+// 	}
+// };
+
+// const getFavoriteMovieDetailsRequest = createAction('movies/getFavoriteMovieDetailsRequest');
+// const getFavoriteMovieDetailsSuccess = createAction('movies/getFavoriteMovieDetailsSuccess');
+// const getFavoriteMovieDetailsFailure = createAction('movies/getFavoriteMovieDetailsFailure');
+
+// const getQueueMovieDetailsRequest = createAction('movies/getQueueMovieDetailsRequest');
+// const getQueueMovieDetailsSuccess = createAction('movies/getQueueMovieDetailsSuccess');
+// const getQueueMovieDetailsFailure = createAction('movies/getQueueMovieDetailsFailure');

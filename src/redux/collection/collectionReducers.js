@@ -4,69 +4,35 @@ import { createReducer } from '@reduxjs/toolkit';
 //Redux
 import collectionActions from './collectionActions';
 
-//Favorites and queue reducer handlers
-const addMovieToCollection = (state, { payload }) => [...state, payload];
-
-const removeMovieFromCollection = (state, { payload }) =>
-	state.map(movie => (movie.id === payload.id ? payload : movie));
-
-const getMovieFromCollection = (state, { payload }) => [...payload];
-
 //Favorites reducer
-const favorites = createReducer([], {
-	[collectionActions.addFavoriteMovieSuccess]: addMovieToCollection,
-	[collectionActions.removeFavoriteMovieSuccess]: removeMovieFromCollection,
-	[collectionActions.getFavoriteMoviesSuccess]: getMovieFromCollection,
-});
-
-//Queue reducer
-const queue = createReducer([], {
-	[collectionActions.addQueueMovieSuccess]: addMovieToCollection,
-	[collectionActions.removeQueueMovieSuccess]: removeMovieFromCollection,
-	[collectionActions.getQueueMoviesSuccess]: getMovieFromCollection,
+const items = createReducer([], {
+	[collectionActions.getCollectionMoviesSuccess]: (state, { payload }) => [...payload],
 });
 
 //Loading reducer
 const loading = createReducer(false, {
-	[collectionActions.addFavoriteMovieRequest]: () => true,
-	[collectionActions.addFavoriteMovieSuccess]: () => false,
-	[collectionActions.addFavoriteMovieFailure]: () => false,
+	[collectionActions.addCollectionMovieRequest]: () => true,
+	[collectionActions.addCollectionMovieSuccess]: () => false,
+	[collectionActions.addCollectionMovieFailure]: () => false,
 
-	[collectionActions.removeFavoriteMovieRequest]: () => true,
-	[collectionActions.removeFavoriteMovieSuccess]: () => false,
-	[collectionActions.removeFavoriteMovieFailure]: () => false,
+	[collectionActions.removeCollectionMovieRequest]: () => true,
+	[collectionActions.removeCollectionMovieSuccess]: () => false,
+	[collectionActions.removeCollectionMovieFailure]: () => false,
 
-	[collectionActions.getFavoriteMoviesRequest]: () => true,
-	[collectionActions.getFavoriteMoviesSuccess]: () => false,
-	[collectionActions.getFavoriteMoviesFailure]: () => false,
-
-	[collectionActions.addQueueMovieRequest]: () => true,
-	[collectionActions.addQueueMovieSuccess]: () => false,
-	[collectionActions.addQueueMovieFailure]: () => false,
-
-	[collectionActions.removeQueueMovieRequest]: () => true,
-	[collectionActions.removeQueueMovieSuccess]: () => false,
-	[collectionActions.removeQueueMovieFailure]: () => false,
-
-	[collectionActions.getQueueMoviesRequest]: () => true,
-	[collectionActions.getQueueMoviesSuccess]: () => false,
-	[collectionActions.getQueueMoviesFailure]: () => false,
+	[collectionActions.getCollectionMoviesRequest]: () => true,
+	[collectionActions.getCollectionMoviesSuccess]: () => false,
+	[collectionActions.getCollectionMoviesFailure]: () => false,
 });
 
 //Error reducer
 const error = createReducer(null, {
-	[collectionActions.addFavoriteMovieFailure]: (state, { payload }) => payload,
-	[collectionActions.removeFavoriteMovieFailure]: (state, { payload }) => payload,
-	[collectionActions.getFavoriteMoviesFailure]: (state, { payload }) => payload,
-
-	[collectionActions.addQueueMovieFailure]: (state, { payload }) => payload,
-	[collectionActions.removeQueueMovieFailure]: (state, { payload }) => payload,
-	[collectionActions.getQueueMoviesFailure]: (state, { payload }) => payload,
+	[collectionActions.addCollectionMovieFailure]: (state, { payload }) => payload,
+	[collectionActions.removeCollectionMovieFailure]: (state, { payload }) => payload,
+	[collectionActions.getCollectionMoviesFailure]: (state, { payload }) => payload,
 });
 
 export default combineReducers({
-	favorites,
-	queue,
+	items,
 	loading,
 	error,
 });

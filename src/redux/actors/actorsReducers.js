@@ -10,7 +10,7 @@ const items = createReducer([], {
 	[actorsActions.searchActorsSuccess]: (state, { payload }) => payload,
 });
 
-const item = createReducer('', {
+const item = createReducer(null, {
 	[actorsActions.getActorDetailsSuccess]: (state, { payload }) => payload,
 });
 

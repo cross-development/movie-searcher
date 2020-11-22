@@ -1,52 +1,28 @@
 //Core
 import { createAction } from '@reduxjs/toolkit';
 
-const addFavoriteMovieRequest = createAction('collection/addFavoriteMovieRequest');
-const addFavoriteMovieSuccess = createAction('collection/addFavoriteMovieSuccess');
-const addFavoriteMovieFailure = createAction('collection/addFavoriteMovieFailure');
+const addCollectionMovieRequest = createAction('collection/addCollectionMovieRequest');
+const addCollectionMovieSuccess = createAction('collection/addCollectionMovieSuccess');
+const addCollectionMovieFailure = createAction('collection/addCollectionMovieFailure');
 
-const removeFavoriteMovieRequest = createAction('collection/removeFavoriteMovieRequest');
-const removeFavoriteMovieSuccess = createAction('collection/removeFavoriteMovieSuccess');
-const removeFavoriteMovieFailure = createAction('collection/removeFavoriteMovieFailure');
+const removeCollectionMovieRequest = createAction('collection/removeCollectionMovieRequest');
+const removeCollectionMovieSuccess = createAction('collection/removeCollectionMovieSuccess');
+const removeCollectionMovieFailure = createAction('collection/removeCollectionMovieFailure');
 
-const getFavoriteMoviesRequest = createAction('collection/getFavoriteMoviesRequest');
-const getFavoriteMoviesSuccess = createAction('collection/getFavoriteMoviesSuccess');
-const getFavoriteMoviesFailure = createAction('collection/getFavoriteMoviesFailure');
-
-const addQueueMovieRequest = createAction('collection/addQueueMovieRequest');
-const addQueueMovieSuccess = createAction('collection/addQueueMovieSuccess');
-const addQueueMovieFailure = createAction('collection/addQueueMovieFailure');
-
-const removeQueueMovieRequest = createAction('collection/removeQueueMovieRequest');
-const removeQueueMovieSuccess = createAction('collection/removeQueueMovieSuccess');
-const removeQueueMovieFailure = createAction('collection/removeQueueMovieFailure');
-
-const getQueueMoviesRequest = createAction('collection/getQueueMoviesRequest');
-const getQueueMoviesSuccess = createAction('collection/getQueueMoviesSuccess');
-const getQueueMoviesFailure = createAction('collection/getQueueMoviesFailure');
+const getCollectionMoviesRequest = createAction('collection/getCollectionMoviesRequest');
+const getCollectionMoviesSuccess = createAction('collection/getCollectionMoviesSuccess');
+const getCollectionMoviesFailure = createAction('collection/getCollectionMoviesFailure');
 
 export default {
-	addFavoriteMovieRequest,
-	addFavoriteMovieSuccess,
-	addFavoriteMovieFailure,
+	addCollectionMovieRequest,
+	addCollectionMovieSuccess,
+	addCollectionMovieFailure,
 
-	removeFavoriteMovieRequest,
-	removeFavoriteMovieSuccess,
-	removeFavoriteMovieFailure,
+	removeCollectionMovieRequest,
+	removeCollectionMovieSuccess,
+	removeCollectionMovieFailure,
 
-	getFavoriteMoviesRequest,
-	getFavoriteMoviesSuccess,
-	getFavoriteMoviesFailure,
-
-	addQueueMovieRequest,
-	addQueueMovieSuccess,
-	addQueueMovieFailure,
-
-	removeQueueMovieRequest,
-	removeQueueMovieSuccess,
-	removeQueueMovieFailure,
-
-	getQueueMoviesRequest,
-	getQueueMoviesSuccess,
-	getQueueMoviesFailure,
+	getCollectionMoviesRequest,
+	getCollectionMoviesSuccess,
+	getCollectionMoviesFailure,
 };
