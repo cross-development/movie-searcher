@@ -58,9 +58,10 @@
 	font-size: 14px;
 	line-height: 14px;
 	font-weight: bold;
-	background-color: movie-vote-bg;
+	background: #fb5c00;
 	color: #fff;
 	border-radius: 10px;
+	box-shadow: 0 0 8px 0.2px #fb5c00;
 	width: 30px;
 	height: 30px;
 }

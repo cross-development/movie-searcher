@@ -53,7 +53,8 @@
 	font-size: 14px;
 	line-height: 14px;
 	font-weight: bold;
-	background-color: person-vote-bg;
+	background-color: #fb5c00;
+	box-shadow: 0 0 8px 0.2px #fb5c00;
 	color: #fff;
 	border-radius: 10px;
 	width: 30px;

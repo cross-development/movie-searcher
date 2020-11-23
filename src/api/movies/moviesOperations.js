@@ -23,6 +23,15 @@ const fetchUpcomingMovies = () => {
 		});
 };
 
+const fetchNowPlayingMovies = () => {
+	return axios
+		.get(`/movie/now_playing?api_key=${API_KEY}&page=1`)
+		.then(({ data: { results } }) => results)
+		.catch(error => {
+			throw error;
+		});
+};
+
 const fetchMoviesByQuery = query => {
 	return axios
 		.get(`/search/movie?api_key=${API_KEY}&query=${query}&page=1`)
@@ -66,4 +75,5 @@ export default {
 	fetchMovieReviews,
 	fetchUpcomingMovies,
 	fetchMovieDetails,
+	fetchNowPlayingMovies,
 };

@@ -20,7 +20,7 @@ const AppBar = () => {
 
 			<Navigation />
 
-			<ChatRooms existUser={user} />
+			<ChatRooms />
 
 			{user && <AuthMenu />}
 		</aside>
