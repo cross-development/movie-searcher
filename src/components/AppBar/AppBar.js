@@ -3,7 +3,7 @@ import React from 'react';
 //Components
 import Logo from '../Logo';
 import AuthMenu from '../AuthMenu';
-import ChatRooms from '../ChatRooms';
+import AdditionMovies from '../AdditionMovies';
 import Navigation from '../Navigation';
 //Redux
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ const AppBar = () => {
 
 			<Navigation />
 
-			<ChatRooms />
+			<AdditionMovies />
 
 			{user && <AuthMenu />}
 		</aside>

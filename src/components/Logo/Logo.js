@@ -11,7 +11,7 @@ const Logo = () => (
 	<div className={styles.logoWrapper}>
 		<NavLink exact to="/" className={styles.logoLink}>
 			<img src={logoPath} alt="site logo" className={styles.logo} />
-			Derda.vs
+			Movies.my
 		</NavLink>
 
 		<button className={styles.button} type="button">

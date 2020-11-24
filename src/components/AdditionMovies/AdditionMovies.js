@@ -8,9 +8,9 @@ import getPosterUrl from 'utils/getPosterUrl';
 //Assets
 import getDefaultPoster from 'assets/default_poster.jpg';
 //Styles
-import styles from './ChatRooms.module.css';
+import styles from './AdditionMovies.module.css';
 
-const ChatRooms = () => {
+const AdditionMovies = () => {
 	const [movies, setMovies] = useState([]);
 	const [error, setError] = useState(null);
 
@@ -59,4 +59,4 @@ const ChatRooms = () => {
 	);
 };
 
-export default ChatRooms;
+export default AdditionMovies;
