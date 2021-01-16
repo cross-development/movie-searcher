@@ -3,27 +3,27 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.30",
-		"@fortawesome/free-brands-svg-icons": "^5.14.0",
-		"@fortawesome/free-regular-svg-icons": "^5.14.0",
-		"@fortawesome/free-solid-svg-icons": "^5.14.0",
-		"@fortawesome/react-fontawesome": "^0.1.11",
-		"@material-ui/core": "^4.11.0",
-		"@material-ui/lab": "^4.0.0-alpha.56",
-		"@reduxjs/toolkit": "^1.4.0",
+		"@fortawesome/fontawesome-svg-core": "^1.2.34",
+		"@fortawesome/free-brands-svg-icons": "^5.15.2",
+		"@fortawesome/free-regular-svg-icons": "^5.15.2",
+		"@fortawesome/free-solid-svg-icons": "^5.15.2",
+		"@fortawesome/react-fontawesome": "^0.1.14",
+		"@material-ui/core": "^4.11.2",
+		"@material-ui/lab": "^4.0.0-alpha.57",
+		"@reduxjs/toolkit": "^1.5.0",
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
-		"axios": "^0.20.0",
-		"firebase": "^7.21.0",
+		"axios": "^0.21.1",
+		"firebase": "^8.2.3",
 		"gh-pages": "^3.1.0",
-		"lint-staged": "^10.2.13",
-		"query-string": "^6.13.2",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-redux": "^7.2.1",
+		"lint-staged": "^10.5.3",
+		"query-string": "^6.13.8",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
+		"react-redux": "^7.2.2",
 		"react-router-dom": "^5.2.0",
-		"react-scripts": "^3.4.3",
+		"react-scripts": "^3.4.4",
 		"react-spinners": "^0.9.0",
 		"react-transition-group": "^4.4.1"
 	},
@@ -51,7 +51,7 @@
 		]
 	},
 	"devDependencies": {
-		"husky": "^4.3.0",
-		"prettier": "^2.1.1"
+		"husky": "^4.3.8",
+		"prettier": "^2.2.1"
 	}
 }

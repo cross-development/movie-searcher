@@ -1,5 +1,5 @@
 //Core
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
 export default firebase.initializeApp({
 	apiKey: 'AIzaSyCj4tiSEHiP650wdb8DWOiSNuUFDDWNkoY',
