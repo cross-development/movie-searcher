@@ -24,7 +24,7 @@ export default [
 		private: false,
 		restricted: false,
 		isNavigation: true,
-		component: lazy(() => import('view/HomePage' /* webpackChunkName: "home-view" */)),
+		component: lazy(() => import('pages/HomePage' /* webpackChunkName: "home-page" */)),
 	},
 	{
 		path: '/register',
@@ -33,7 +33,7 @@ export default [
 		private: false,
 		restricted: true,
 		isNavigation: false,
-		component: lazy(() => import('view/RegisterPage' /* webpackChunkName: "register-view"*/)),
+		component: lazy(() => import('pages/RegisterPage' /* webpackChunkName: "register-page"*/)),
 	},
 	{
 		path: '/login',
@@ -42,7 +42,7 @@ export default [
 		private: false,
 		restricted: true,
 		isNavigation: false,
-		component: lazy(() => import('view/LoginPage' /* webpackChunkName: "login-view"*/)),
+		component: lazy(() => import('pages/LoginPage' /* webpackChunkName: "login-page"*/)),
 	},
 	{
 		path: '/movies',
@@ -51,7 +51,7 @@ export default [
 		private: false,
 		restricted: false,
 		isNavigation: true,
-		component: lazy(() => import('view/MoviesPage' /* webpackChunkName: "movies-view"*/)),
+		component: lazy(() => import('pages/MoviesPage' /* webpackChunkName: "movies-page"*/)),
 	},
 	{
 		path: '/movies/:movieId',
@@ -61,7 +61,7 @@ export default [
 		restricted: false,
 		isNavigation: false,
 		component: lazy(() =>
-			import('view/MovieDetailsPage' /* webpackChunkName: "movie-details-view" */),
+			import('pages/MovieDetailsPage' /* webpackChunkName: "movie-details-page" */),
 		),
 	},
 	{
@@ -71,7 +71,7 @@ export default [
 		private: false,
 		restricted: false,
 		isNavigation: false,
-		component: lazy(() => import('view/Cast' /* webpackChunkName: "cast-view" */)),
+		component: lazy(() => import('pages/Cast' /* webpackChunkName: "cast-page" */)),
 	},
 	{
 		path: '/movies/:movieId/reviews',
@@ -80,7 +80,7 @@ export default [
 		private: false,
 		restricted: false,
 		isNavigation: false,
-		component: lazy(() => import('view/Reviews' /* webpackChunkName: "reviews-view"*/)),
+		component: lazy(() => import('pages/Reviews' /* webpackChunkName: "reviews-page"*/)),
 	},
 	{
 		path: '/persons',
@@ -89,7 +89,7 @@ export default [
 		private: false,
 		restricted: false,
 		isNavigation: true,
-		component: lazy(() => import('view/PersonsPage' /* webpackChunkName: "persons-view"*/)),
+		component: lazy(() => import('pages/PersonsPage' /* webpackChunkName: "persons-page"*/)),
 	},
 	{
 		path: '/persons/:personId',
@@ -99,7 +99,7 @@ export default [
 		restricted: false,
 		isNavigation: false,
 		component: lazy(() =>
-			import('view/PersonDetailsPage' /* webpackChunkName: "persons-details-view" */),
+			import('pages/PersonDetailsPage' /* webpackChunkName: "persons-details-page" */),
 		),
 	},
 	{
@@ -110,7 +110,7 @@ export default [
 		restricted: false,
 		isNavigation: true,
 		component: lazy(() =>
-			import('view/FavoriteMoviesPage' /* webpackChunkName: "favorite-movies-view" */),
+			import('pages/FavoriteMoviesPage' /* webpackChunkName: "favorite-movies-page" */),
 		),
 	},
 	{
@@ -121,7 +121,7 @@ export default [
 		restricted: false,
 		isNavigation: true,
 		component: lazy(() =>
-			import('view/QueueMoviesPage' /* webpackChunkName: "queue-movies-view" */),
+			import('pages/QueueMoviesPage' /* webpackChunkName: "queue-movies-page" */),
 		),
 	},
 ];

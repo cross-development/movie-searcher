@@ -1,5 +1,5 @@
 //Database
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 
 //fixed
 const addCollectionMovie = ({ userId, movie }) => {

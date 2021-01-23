@@ -7,8 +7,8 @@ import NotFound from 'components/NotFound';
 import Notification from 'components/Notification';
 import MovieDetails from 'components/MovieDetails';
 import AdditionInfo from 'components/AdditionInfo';
-//Redux
-import { useSelector } from 'react-redux';
+//Context
+import { useAuthState } from 'context';
 //API
 import moviesAPI from 'api/movies';
 import collectionAPI from 'api/collection';
@@ -19,37 +19,43 @@ const MovieDetailsPage = () => {
 	const [loading, setLoading] = useState(false);
 	const [isFavorite, setIsFavorite] = useState(false);
 
-	const { user } = useSelector(state => state.auth);
+	const { user } = useAuthState();
 
 	const { movieId } = useParams();
 	const location = useLocation();
 	const match = useRouteMatch();
 
+	//TODO: need to fix
 	useEffect(() => {
-		if (user) {
+		if (!user) {
 			setLoading(true);
 
-			collectionAPI
-				.fetchCollectionMovies({ userId: user.uid })
-				.then(movies => {
-					movies.find(movie => {
-						if (movie.id === Number(movieId)) {
-							setMovie(movie);
-							setIsFavorite(true);
-							return false;
-						}
-
-						return false;
-					});
-
-					moviesAPI
-						.fetchMovieDetails(Number(movieId))
-						.then(movie => setMovie(movie))
-						.catch(error => setError(error));
-				})
-				.catch(error => setError(error))
+			moviesAPI
+				.fetchMovieDetails(Number(movieId))
+				.then(setMovie)
+				.catch(setError)
 				.finally(() => setLoading(false));
 		}
+
+		setLoading(true);
+
+		collectionAPI
+			.fetchCollectionMovies({ userId: user.uid })
+			.then(movies => {
+				movies.find(movie => {
+					if (movie.id === Number(movieId)) {
+						setMovie(movie);
+						setIsFavorite(true);
+						return false;
+					}
+
+					return false;
+				});
+
+				moviesAPI.fetchMovieDetails(Number(movieId)).then(setMovie).catch(setError);
+			})
+			.catch(setError)
+			.finally(() => setLoading(false));
 	}, [user, movieId]);
 
 	const handleChangeCollection = () => {
@@ -65,17 +71,17 @@ const MovieDetailsPage = () => {
 
 	return (
 		<>
-			{error && error.response.status !== 404 && <Notification message={error.message} />}
+			{/* {error && error.response.status !== 404 && <Notification message={error.message} />} */}
 
 			{loading && <Loader onLoad={loading} />}
 
-			{error && error.response.status === 404 && <NotFound />}
+			{/* {error && error.response.status === 404 && <NotFound />} */}
 
 			<div>
 				{!loading && movie && (
 					<>
 						<MovieDetails
-							existUser={user}
+							existUser={user || null}
 							movieData={movie}
 							isFavorite={isFavorite}
 							onChangeCollection={handleChangeCollection}
@@ -90,3 +96,27 @@ const MovieDetailsPage = () => {
 };
 
 export default MovieDetailsPage;
+
+// useEffect(() => {
+// 	if (user) {
+// 		setLoading(true);
+
+// collectionAPI
+// 	.fetchCollectionMovies({ userId: user.uid })
+// 	.then(movies => {
+// 		movies.find(movie => {
+// 			if (movie.id === Number(movieId)) {
+// 				setMovie(movie);
+// 				setIsFavorite(true);
+// 				return false;
+// 			}
+
+// 			return false;
+// 		});
+
+// 		moviesAPI.fetchMovieDetails(Number(movieId)).then(setMovie).catch(setError);
+// 	})
+// 	.catch(setError)
+// 	.finally(() => setLoading(false));
+// 	}
+// }, [user, movieId]);

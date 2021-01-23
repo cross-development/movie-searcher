@@ -1,28 +1,30 @@
 //Core
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 //Components
 import Loader from 'components/Loader';
-import CastList from 'components/CastList';
+import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
 //API
 import moviesAPI from 'api/movies';
 
-const Cast = () => {
-	const [cast, setCast] = useState([]);
+//Fixed
+const HomePage = () => {
+	const [movies, setMovies] = useState([]);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 
 	const location = useLocation();
-	const { movieId } = useParams();
 
 	useEffect(() => {
+		setLoading(true);
+
 		moviesAPI
-			.fetchMovieCast(movieId)
-			.then(cast => setCast(cast))
-			.catch(error => setError(error))
+			.fetchUpcomingMovies()
+			.then(setMovies)
+			.catch(setError)
 			.finally(() => setLoading(false));
-	}, [movieId]);
+	}, []);
 
 	return (
 		<>
@@ -30,13 +32,9 @@ const Cast = () => {
 
 			{loading && <Loader onLoad={loading} />}
 
-			{!loading && !error && cast.length < 1 && (
-				<Notification message="We don't have any actors for this movie." />
-			)}
-
-			{cast.length > 0 && <CastList cast={cast} location={location} />}
+			{!loading && movies.length > 0 && <MoviesList movies={movies} location={location} />}
 		</>
 	);
 };
 
-export default Cast;
+export default HomePage;

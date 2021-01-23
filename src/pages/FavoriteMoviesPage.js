@@ -5,8 +5,8 @@ import { useLocation } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MoviesList from 'components/MoviesList';
 import Notification from 'components/Notification';
-//Redux
-import { useSelector } from 'react-redux';
+//Context
+import { useAuthState } from 'context';
 //API
 import collectionAPI from 'api/collection';
 
@@ -16,7 +16,7 @@ const FavoriteMoviesPage = () => {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 
-	const { user } = useSelector(state => state.auth);
+	const { user } = useAuthState();
 
 	const location = useLocation();
 
@@ -25,8 +25,8 @@ const FavoriteMoviesPage = () => {
 
 		collectionAPI
 			.fetchCollectionMovies({ userId: user.uid })
-			.then(movies => setMovies(movies))
-			.catch(error => setError(error))
+			.then(setMovies)
+			.catch(setError)
 			.finally(() => setLoading(false));
 	}, [user.uid]);
 

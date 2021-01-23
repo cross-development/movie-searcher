@@ -22,8 +22,8 @@ const PersonDetailsPage = () => {
 
 		actorsAPI
 			.fetchActorDetails(personId)
-			.then(actor => setActor(actor))
-			.catch(error => setError(error))
+			.then(setActor)
+			.catch(setError)
 			.finally(() => setLoading(false));
 	}, [personId]);
 

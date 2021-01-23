@@ -5,14 +5,14 @@ import Logo from '../Logo';
 import AuthMenu from '../AuthMenu';
 import AdditionMovies from '../AdditionMovies';
 import Navigation from '../Navigation';
-//Redux
-import { useSelector } from 'react-redux';
+//Context
+import { useAuthState } from 'context';
 //Styles
 import styles from './AppBar.module.css';
 
 //Fixed
 const AppBar = () => {
-	const { user } = useSelector(state => state.auth);
+	const { user } = useAuthState();
 
 	return (
 		<aside className={styles.appBar}>

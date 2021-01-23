@@ -1,13 +1,9 @@
 import { lazy } from 'react';
 
-const Cast = lazy(() => import('view/Cast' /* webpackChunkName: "cast-view" */));
-const Reviews = lazy(() => import('view/Reviews' /* webpackChunkName: "reviews-view"*/));
+const Cast = lazy(() => import('pages/Cast' /* webpackChunkName: "cast-page" */));
+const Reviews = lazy(() => import('pages/Reviews' /* webpackChunkName: "reviews-page"*/));
 const NotFoundPage = lazy(() =>
-	import('view/NotFoundPage' /* webpackChunkName: "not-found-view"*/),
+	import('pages/NotFoundPage' /* webpackChunkName: "not-found-page"*/),
 );
 
-export default {
-	NotFoundPage,
-	Cast,
-	Reviews,
-};
+export default { NotFoundPage, Cast, Reviews };

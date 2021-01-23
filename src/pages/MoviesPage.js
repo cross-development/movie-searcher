@@ -23,8 +23,8 @@ const MoviesPage = () => {
 
 		moviesAPI
 			.fetchTrendMovies()
-			.then(movies => setMovies(movies))
-			.catch(error => setError(error))
+			.then(setMovies)
+			.catch(setError)
 			.finally(() => setLoading(false));
 	}, []);
 
@@ -36,8 +36,8 @@ const MoviesPage = () => {
 
 			moviesAPI
 				.fetchMoviesByQuery(query)
-				.then(movies => setMovies(movies))
-				.catch(error => setError(error))
+				.then(setMovies)
+				.catch(setError)
 				.finally(() => setLoading(false));
 		}
 	}, [location.search]);

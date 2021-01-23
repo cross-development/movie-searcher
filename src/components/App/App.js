@@ -7,9 +7,8 @@ import Layout from '../Layout';
 import Header from '../Header';
 import Loader from '../Loader';
 import Footer from '../Footer';
-//Redux
-import { useDispatch } from 'react-redux';
-import { authOperations } from 'redux/auth';
+//Context
+import { getCurrentUser, useAuthDispatch } from 'context';
 //Routes
 import routes from 'router';
 import PublicRoute from 'router/PublicRoute';
@@ -19,10 +18,10 @@ import asyncComponents from 'services/asyncComponents';
 
 //Fixed
 const App = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAuthDispatch();
 
 	useEffect(() => {
-		dispatch(authOperations.getCurrentUser());
+		getCurrentUser(dispatch);
 	}, [dispatch]);
 
 	return (
@@ -53,7 +52,3 @@ const App = () => {
 };
 
 export default App;
-
-// {
-/* <Route component={Header} /> */
-// }

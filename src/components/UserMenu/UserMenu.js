@@ -1,7 +1,7 @@
 //Core
 import React from 'react';
-//Redux
-import { useSelector } from 'react-redux';
+//Context
+import { useAuthState } from 'context';
 //Styles
 import styles from './UserMenu.module.css';
 
@@ -11,7 +11,7 @@ const defaultAvatar = 'https://icon-library.net/images/avatar-icon-images/avatar
 const UserMenu = () => {
 	const {
 		user: { displayName, photoURL },
-	} = useSelector(state => state.auth);
+	} = useAuthState();
 
 	return (
 		<div className={styles.container}>

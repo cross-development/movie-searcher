@@ -20,9 +20,7 @@ const AdditionMovies = () => {
 		moviesAPI.fetchNowPlayingMovies().then(setMovies).catch(setError);
 	}, []);
 
-	const memoMoviesList = useMemo(() => movies.filter(({ vote_average }) => vote_average > 7), [
-		movies,
-	]);
+	const memoMoviesList = useMemo(() => movies.filter((movie, idx) => idx < 4 && movie), [movies]);
 
 	return (
 		<div className={styles.moviesWrapper}>

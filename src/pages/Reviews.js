@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
-import Loader from 'components/Loader';
 import ReviewsList from 'components/ReviewsList';
 import Notification from 'components/Notification';
 //API
@@ -16,18 +15,18 @@ const Reviews = () => {
 	const { movieId } = useParams();
 
 	useEffect(() => {
+		setLoading(true);
+
 		moviesAPI
 			.fetchMovieReviews(movieId)
-			.then(reviews => setReviews(reviews))
-			.catch(error => setError(error))
+			.then(setReviews)
+			.catch(setError)
 			.finally(() => setLoading(false));
 	}, [movieId]);
 
 	return (
 		<>
 			{error && <Notification message={error.message} />}
-
-			{loading && <Loader onLoad={loading} />}
 
 			{!loading && !error && reviews.length < 1 && (
 				<Notification message="We don't have any reviews for this movie." />

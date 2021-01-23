@@ -23,8 +23,8 @@ const PersonsPage = () => {
 
 		actorsAPI
 			.fetchTrendActors()
-			.then(actors => setActors(actors))
-			.catch(error => setError(error))
+			.then(setActors)
+			.catch(setError)
 			.finally(() => setLoading(false));
 	}, []);
 
@@ -36,8 +36,8 @@ const PersonsPage = () => {
 
 			actorsAPI
 				.fetchActorsByQuery(query)
-				.then(actors => setActors(actors))
-				.catch(error => setError(error))
+				.then(setActors)
+				.catch(setError)
 				.finally(() => setLoading(false));
 		}
 	}, [location.search]);

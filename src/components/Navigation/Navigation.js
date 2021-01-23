@@ -1,8 +1,8 @@
 //Core
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-//Redux
-import { useSelector } from 'react-redux';
+//Context
+import { useAuthState } from 'context';
 //Routes
 import routes from 'router';
 //Styles
@@ -10,7 +10,7 @@ import styles from './Navigation.module.css';
 
 //Fixed
 const Navigation = () => {
-	const { user } = useSelector(state => state.auth);
+	const { user } = useAuthState();
 
 	return (
 		<ul className={styles.navigationList}>
