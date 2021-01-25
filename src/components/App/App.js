@@ -3,10 +3,7 @@ import React, { useEffect, Suspense } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 //Components
 import AppBar from '../AppBar';
-import Layout from '../Layout';
-import Header from '../Header';
-import Loader from '../Loader';
-import Footer from '../Footer';
+import { Layout, Loader, Header, Footer } from '../Common';
 //Context
 import { getCurrentUser, useAuthDispatch } from 'context';
 //Routes

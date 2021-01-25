@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
-import Loader from 'components/Loader';
+import { Loader, Notification } from 'components/Common';
 import NotFound from 'components/NotFound';
-import Notification from 'components/Notification';
-import PersonDetails from 'components/PersonDetails';
+import PersonDetails from 'components/Person/PersonDetails';
 //API
 import actorsAPI from 'api/actors';
 

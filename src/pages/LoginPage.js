@@ -1,9 +1,8 @@
 //Core
 import React, { useState } from 'react';
 //Components
-import Login from 'components/Login';
-import Loader from 'components/Loader';
-import Notification from 'components/Notification';
+import { Login } from 'components/Auth';
+import { Loader, Notification } from 'components/Common';
 //Context
 import { userSingIn, useAuthDispatch, useAuthState } from 'context';
 

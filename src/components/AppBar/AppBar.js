@@ -1,7 +1,7 @@
 //Core
 import React from 'react';
 //Components
-import Logo from '../Logo';
+import { Logo } from '../Common';
 import AuthMenu from '../AuthMenu';
 import AdditionMovies from '../AdditionMovies';
 import Navigation from '../Navigation';

@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 //Components
-import Loader from 'components/Loader';
-import MoviesList from 'components/MoviesList';
-import Notification from 'components/Notification';
+import { Loader, Notification } from 'components/Common';
+import MoviesList from 'components/Movie/MoviesList';
 //Context
 import { useAuthState } from 'context';
 //API

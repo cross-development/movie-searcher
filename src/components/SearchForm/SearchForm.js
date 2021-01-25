@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 //Components
-import Notification from '../Notification';
+import Notification from '../Common/Notification';
 //Styles
 import styles from './SearchForm.module.css';
 

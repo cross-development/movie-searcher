@@ -1,4 +1,4 @@
-@value header-bg from '../../index.css';
+@value header-bg from '../../../index.css';
 
 .header {
 	display: grid;

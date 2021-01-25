@@ -1,4 +1,4 @@
-@value notification-bg from '../../index.css';
+@value notification-bg from '../../../index.css';
 
 .errorWrapper {
 	display: block;

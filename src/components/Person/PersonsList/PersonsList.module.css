@@ -1,5 +1,5 @@
-@value person-item-bg from '../../index.css';
-@value person-vote-bg from '../../index.css';
+@value person-item-bg from '../../../index.css';
+@value person-vote-bg from '../../../index.css';
 
 .personList {
 	display: grid;

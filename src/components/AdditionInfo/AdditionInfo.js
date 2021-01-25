@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, NavLink } from 'react-router-dom';
 //Component
-import Loader from 'components/Loader';
+import { Loader } from 'components/Common';
 //Services
 import asyncComponents from 'services/asyncComponents';
 //Styles

@@ -1,5 +1,5 @@
-@value movie-item-bg from '../../index.css';
-@value movie-vote-bg from '../../index.css';
+@value movie-item-bg from '../../../index.css';
+@value movie-vote-bg from '../../../index.css';
 
 .title {
 	text-transform: uppercase;

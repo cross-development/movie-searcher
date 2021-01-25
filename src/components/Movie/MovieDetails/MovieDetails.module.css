@@ -1,5 +1,5 @@
-@value fav-btn-bg from '../../index.css';
-@value fav-btn-text-color from '../../index.css';
+@value fav-btn-bg from '../../../index.css';
+@value fav-btn-text-color from '../../../index.css';
 
 .movieWrapper {
 	display: grid;

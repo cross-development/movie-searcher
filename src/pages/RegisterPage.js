@@ -1,9 +1,8 @@
 //Core
 import React, { useState } from 'react';
 //Components
-import Register from 'components/Register';
-import Loader from 'components/Loader';
-import Notification from 'components/Notification';
+import { Register } from 'components/Auth';
+import { Loader, Notification } from 'components/Common';
 //Context
 import { userSingUp, useAuthState, useAuthDispatch } from 'context';
 

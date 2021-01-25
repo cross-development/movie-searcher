@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
 import ReviewsList from 'components/ReviewsList';
-import Notification from 'components/Notification';
+import { Notification } from 'components/Common';
 //API
 import moviesAPI from 'api/movies';
 

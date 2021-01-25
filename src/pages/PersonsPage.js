@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 //Components
-import Loader from 'components/Loader';
-import PersonsList from 'components/PersonsList';
-import Notification from 'components/Notification';
+import { Loader, Notification } from 'components/Common';
+import PersonsList from 'components/Person/PersonsList';
 //API
 import actorsAPI from 'api/actors';
 //Utils
