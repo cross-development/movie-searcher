@@ -2,8 +2,8 @@
 import React from 'react';
 //Components
 import { Logo } from '../Common';
-import AuthMenu from '../AuthMenu';
-import AdditionMovies from '../AdditionMovies';
+import { AuthMenu } from '../Auth';
+import AdditionMovies from '../Additional/AdditionMovies';
 import Navigation from '../Navigation';
 //Context
 import { useAuthState } from 'context';

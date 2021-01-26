@@ -27,7 +27,7 @@ const MoviesList = ({ movies, location }) => (
 						alt={name || title}
 					/>
 				</Link>
-				<span className={styles.movieVote}>{vote_average}</span>
+				<span className={styles.movieVote}>{vote_average.toFixed(1)}</span>
 			</li>
 		))}
 

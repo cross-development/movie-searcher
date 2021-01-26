@@ -2,10 +2,10 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 //Components
-import AuthNav from '../../AuthNav';
-import UserMenu from '../../UserMenu';
 import MainTitle from '../MainTitle';
-import SearchForm from '../../SearchForm';
+import { AuthNav } from 'components/Auth';
+import UserMenu from 'components/UserMenu';
+import SearchForm from 'components/SearchForm';
 //Context
 import { useAuthState } from 'context';
 //Styles

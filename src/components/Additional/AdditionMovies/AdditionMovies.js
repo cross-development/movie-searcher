@@ -43,7 +43,7 @@ const AdditionMovies = () => {
 								/>
 							</Link>
 
-							<p className={styles.movieVote}>{vote_average}</p>
+							<p className={styles.movieVote}>{vote_average.toFixed(1)}</p>
 
 							<div className={styles.movieInfo}>
 								<h4 className={styles.movieTitle}>{title}</h4>

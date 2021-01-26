@@ -1,5 +1,5 @@
-@value add-link-color from '../../index.css';
-@value add-link-active-color from '../../index.css';
+@value add-link-color from '../../../index.css';
+@value add-link-active-color from '../../../index.css';
 
 .additionalTitle {
 	text-align: center;

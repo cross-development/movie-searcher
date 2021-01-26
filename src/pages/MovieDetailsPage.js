@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation, useRouteMatch } from 'react-router-dom';
 //Components
-import { Loader, Notification } from 'components/Common';
-import NotFound from 'components/NotFound';
+import { Loader, Notification, NotFound } from 'components/Common';
 import MovieDetails from 'components/Movie/MovieDetails';
-import AdditionInfo from 'components/AdditionInfo';
+import AdditionInfo from 'components/Additional/AdditionInfo';
 //Context
 import { useAuthState } from 'context';
 //API

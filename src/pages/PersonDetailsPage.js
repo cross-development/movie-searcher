@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
-import { Loader, Notification } from 'components/Common';
-import NotFound from 'components/NotFound';
+import { Loader, Notification, NotFound } from 'components/Common';
 import PersonDetails from 'components/Person/PersonDetails';
 //API
 import actorsAPI from 'api/actors';

@@ -1,4 +1,4 @@
-@value person-item-bg from '../../index.css';
+@value person-item-bg from '../../../index.css';
 
 .castsList {
 	display: grid;

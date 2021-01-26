@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 //Components
-import CastList from 'components/CastList';
+import CastList from 'components/Additional/CastList';
 import { Notification } from 'components/Common';
 //API
 import moviesAPI from 'api/movies';

@@ -40,7 +40,7 @@
 .title::before {
 	content: '';
 	display: inline-block;
-	background-image: url('../../assets/svg/group.svg');
+	background-image: url('../../../assets/svg/group.svg');
 	width: 20px;
 	height: 20px;
 	background-size: contain;

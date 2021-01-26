@@ -1,8 +1,10 @@
-.authNav {
-	grid-area: userMenu;
+.authMenu {
+	grid-area: authMenu;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-evenly;
-	align-items: center;
+	align-items: flex-start;
+	padding-left: 34px;
 }
 
 .link {
@@ -21,13 +23,13 @@
 	color: #fb5c00;
 }
 
-.register,
-.login {
+.settings,
+.logout {
 	composes: link;
 }
 
-.login::before,
-.register::before {
+.settings::before,
+.logout::before {
 	content: '';
 	display: inline-block;
 	width: 20px;
@@ -38,14 +40,10 @@
 	margin-right: 6px;
 }
 
-.login::before {
-	background-image: url('../../assets/svg/login.svg');
+.settings::before {
+	background-image: url('../../../assets/svg/settings.svg');
 }
 
-.register::before {
-	background-image: url('../../assets/svg/clipboard.svg');
-}
-
-.activeLink {
-	color: #fb5c00;
+.logout::before {
+	background-image: url('../../../assets/svg/logout.svg');
 }

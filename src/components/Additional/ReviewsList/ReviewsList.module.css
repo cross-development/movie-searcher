@@ -1,4 +1,4 @@
-@value review-item-bg from '../../index.css';
+@value review-item-bg from '../../../index.css';
 
 .reviewList {
 	list-style: none;
