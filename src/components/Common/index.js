@@ -8,3 +8,4 @@ export { default as DataSource } from './DataSource';
 export { default as Logo } from './Logo';
 export { default as MainTitle } from './MainTitle';
 export { default as NotFound } from './NotFound';
+export { default as Pagination } from './Pagination';
