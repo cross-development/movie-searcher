@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //Components
 import ReactPaginate from 'react-paginate';
 //Styles
-import './Pagination.module.css';
+import styles from './Pagination.module.css';
 
 const Pagination = ({ totalPages, onChangePaginate }) => (
 	<div>
@@ -18,9 +18,8 @@ const Pagination = ({ totalPages, onChangePaginate }) => (
 			marginPagesDisplayed={2}
 			pageRangeDisplayed={1}
 			onPageChange={onChangePaginate}
-			containerClassName={'pagination'}
-			subContainerClassName={'pages pagination'}
-			activeClassName={'active'}
+			containerClassName={styles.pagination}
+			activeClassName={styles.active}
 		/>
 	</div>
 );

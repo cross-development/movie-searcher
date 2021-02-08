@@ -14,10 +14,10 @@ const fetchTrendMovies = () => {
 		});
 };
 
-const fetchUpcomingMovies = () => {
+const fetchUpcomingMovies = currentPage => {
 	return axios
-		.get(`/movie/upcoming?api_key=${API_KEY}&page=1`)
-		.then(({ data: { results } }) => results)
+		.get(`/movie/upcoming?api_key=${API_KEY}&page=${currentPage}`)
+		.then(({ data }) => data)
 		.catch(error => {
 			throw error;
 		});

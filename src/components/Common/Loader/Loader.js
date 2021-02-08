@@ -15,7 +15,9 @@ const customCss = css`
 
 //Fixed
 const Loader = ({ onLoad }) => (
-	<PacmanLoader size={50} color={styles['loader-bg']} loading={onLoad} css={customCss} />
+	<div className={styles['container']}>
+		<PacmanLoader size={50} color={styles['loader-bg']} loading={onLoad} css={customCss} />
+	</div>
 );
 
 Loader.defaultProps = {

@@ -1,4 +1,5 @@
 .section {
 	padding-right: 20px;
 	grid-area: section;
+	position: relative;
 }
