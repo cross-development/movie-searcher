@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 //Components
 import { Loader, Notification } from 'components/Common';
 import MoviesList from 'components/Movie/MoviesList';
-import { Pagination } from 'components/Common';
 //API
 import moviesAPI from 'api/movies';
 
@@ -40,9 +39,14 @@ const HomePage = () => {
 
 			{loading && <Loader onLoad={loading} />}
 
-			{movies.length > 0 && <MoviesList movies={movies} location={location} />}
-
-			<Pagination totalPages={totalPages} onChangePaginate={handleChangePaginate} />
+			{movies.length > 0 && (
+				<MoviesList
+					movies={movies}
+					location={location}
+					totalPages={totalPages}
+					onChangePaginate={handleChangePaginate}
+				/>
+			)}
 		</>
 	);
 };

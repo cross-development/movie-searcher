@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 //Data
 import linkData from 'data/linkData.json';
 //Styles
 import styles from './Creator.module.css';
 
-library.add(fab, fas);
+library.add(fab);
 
 //Chang to react-icons/fa
 const Creator = ({ creator }) => (
@@ -30,7 +29,7 @@ const Creator = ({ creator }) => (
 			<span className={styles.heart}>
 				<FontAwesomeIcon icon="heart" size="lg" />
 			</span>{' '}
-			in Kiev
+			in Kyiv
 		</p>
 		<p className={styles.copyright}>
 			© 2019 {creator} | Education:{' '}
