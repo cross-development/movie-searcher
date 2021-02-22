@@ -2,8 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-//Components
-import { Pagination } from 'components/Common';
 //Utils
 import getPosterUrl from 'utils/getPosterUrl';
 //Assets
@@ -12,7 +10,7 @@ import getDefaultPoster from 'assets/default_poster.jpg';
 import styles from './MoviesList.module.css';
 
 //Fixed
-const MoviesList = ({ movies, location, totalPages, onChangePaginate }) => (
+const MoviesList = ({ movies, location }) => (
 	<ul className={styles.movieList}>
 		{movies.map(({ id, poster_path, name, title, vote_average }) => (
 			<li className={styles.movieItem} key={id}>
@@ -32,10 +30,6 @@ const MoviesList = ({ movies, location, totalPages, onChangePaginate }) => (
 				<span className={styles.movieVote}>{vote_average.toFixed(1)}</span>
 			</li>
 		))}
-
-		<li className={styles.pagination}>
-			<Pagination totalPages={totalPages} onChangePaginate={onChangePaginate} />
-		</li>
 	</ul>
 );
 

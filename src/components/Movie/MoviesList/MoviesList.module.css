@@ -65,34 +65,3 @@
 	width: 30px;
 	height: 30px;
 }
-
-.pagination {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-}
-
-.pagination .button {
-	background: #fb5c00;
-	border: none;
-	color: #fff;
-	padding: 16px 28px;
-	cursor: pointer;
-	transition: all 250ms linear;
-	box-shadow: 0 0 8px 0.2px #fb5c00;
-	outline: none;
-}
-
-.pagination .button:first-child {
-	border-bottom-left-radius: 50px;
-	border-top-left-radius: 50px;
-}
-
-.pagination .button:last-child {
-	border-bottom-right-radius: 50px;
-	border-top-right-radius: 50px;
-}
-
-.pagination .button:hover {
-	box-shadow: 0 0 14px #fb5c00;
-}

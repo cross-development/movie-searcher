@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 //Components
 import { Loader, Notification } from 'components/Common';
 import MoviesList from 'components/Movie/MoviesList';
+import { Pagination } from 'components/Common';
 //API
 import moviesAPI from 'api/movies';
 
@@ -16,7 +17,7 @@ const HomePage = () => {
 
 	const location = useLocation();
 
-	const fetchAllIngredients = useCallback(currentPage => {
+	const fetchMovies = useCallback(currentPage => {
 		setLoading(true);
 
 		moviesAPI
@@ -29,9 +30,9 @@ const HomePage = () => {
 			.finally(() => setLoading(false));
 	}, []);
 
-	useEffect(() => fetchAllIngredients(), [fetchAllIngredients]);
+	useEffect(() => fetchMovies(), [fetchMovies]);
 
-	const handleChangePaginate = ({ selected }) => fetchAllIngredients(selected + 1);
+	const handleChangePaginate = ({ selected }) => fetchMovies(selected + 1);
 
 	return (
 		<>
@@ -39,13 +40,10 @@ const HomePage = () => {
 
 			{loading && <Loader onLoad={loading} />}
 
+			{movies.length > 0 && <MoviesList movies={movies} location={location} />}
+
 			{movies.length > 0 && (
-				<MoviesList
-					movies={movies}
-					location={location}
-					totalPages={totalPages}
-					onChangePaginate={handleChangePaginate}
-				/>
+				<Pagination totalPages={totalPages} onChangePaginate={handleChangePaginate} />
 			)}
 		</>
 	);
