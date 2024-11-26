@@ -14,7 +14,7 @@
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
 		"axios": "^1.7.4",
-		"firebase": "^10.9.0",
+		"firebase": "^10.14.1",
 		"gh-pages": "^5.0.0",
 		"query-string": "^6.13.8",
 		"react": "^16.14.0",
